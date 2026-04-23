@@ -1,0 +1,19 @@
+{
+  "overview": "MKJC Scholarship Exam Portal — a bilingual (English/Tamil) student registration and exam management platform with an online form builder tool for designing web forms with live CSS editing and code export.",
+  "features": [
+    "Bilingual student registration and quiz system",
+    "Admin dashboard with question management, exam creation, and SMS integration",
+    "Online Form Builder — design forms with drag-and-drop controls, live CSS editor, and HTML export",
+    "Custom exam creation with auto-generated IDs",
+    "Fast2SMS integration for student credential delivery"
+  ],
+  "category": "education-productivity",
+  "tags": [
+    "exam-portal",
+    "form-builder",
+    "bilingual",
+    "admin-dashboard",
+    "sms-integration"
+  ],
+  "last_updated": "2026-04-09T09:07:27.743Z"
+}

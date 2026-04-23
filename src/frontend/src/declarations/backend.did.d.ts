@@ -59,32 +59,68 @@ export interface Registration {
   'school_name' : string,
 }
 export type RegistrationId = bigint;
-export interface UserProfile { 'name' : string }
+export interface StudentCredentials {
+  'password' : string,
+  'user_id' : string,
+  'contact_number' : string,
+  'is_active' : boolean,
+  'registration_id' : RegistrationId,
+}
+export interface TransformationInput {
+  'context' : Uint8Array,
+  'response' : http_request_result,
+}
+export interface TransformationOutput {
+  'status' : bigint,
+  'body' : Uint8Array,
+  'headers' : Array<http_header>,
+}
 export type UserRole = { 'admin' : null } |
   { 'user' : null } |
   { 'guest' : null };
+export interface http_header { 'value' : string, 'name' : string }
+export interface http_request_result {
+  'status' : bigint,
+  'body' : Uint8Array,
+  'headers' : Array<http_header>,
+}
 export interface _SERVICE {
-  '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  '_initializeAccessControl' : ActorMethod<[], undefined>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
   'createQuestion' : ActorMethod<[QuestionDTO], QuestionId>,
   'createRegistration' : ActorMethod<
     [string, string, string, string, string, string],
     RegistrationId
   >,
+  'deleteQuestionByTestKeyAndOrder' : ActorMethod<[string, bigint], undefined>,
   'deleteRegistration' : ActorMethod<[RegistrationId], undefined>,
+  'generateStudentCredentials' : ActorMethod<
+    [RegistrationId, string],
+    { 'password' : string, 'user_id' : string }
+  >,
   'getAllQuizResponses' : ActorMethod<[], Array<QuizResponse>>,
   'getAllRegistrations' : ActorMethod<[], Array<Registration>>,
-  'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
+  'getAllStudentCredentials' : ActorMethod<[], Array<StudentCredentials>>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getCredentialsByRegistrationId' : ActorMethod<
+    [RegistrationId],
+    [] | [StudentCredentials]
+  >,
+  'getFast2SmsApiKey' : ActorMethod<[], string>,
   'getQuestionsByTestKey' : ActorMethod<[string, boolean], Array<QuestionDTO>>,
   'getResponsesByRegistrationId' : ActorMethod<
     [RegistrationId],
     Array<QuizResponse>
   >,
+  'getSmsStats' : ActorMethod<
+    [],
+    { 'total_failed' : bigint, 'api_key_set' : boolean, 'total_sent' : bigint }
+  >,
   'getTopQuizScores' : ActorMethod<[bigint], Array<QuizResponse>>,
-  'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
+  'httpTransform' : ActorMethod<[TransformationInput], TransformationOutput>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
-  'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
+  'sendTestSms' : ActorMethod<[string, string], boolean>,
+  'setFast2SmsApiKey' : ActorMethod<[string], undefined>,
   'submitQuizResponse' : ActorMethod<
     [
       RegistrationId,
@@ -102,7 +138,10 @@ export interface _SERVICE {
   >,
   'toggleQuestionActive' : ActorMethod<[QuestionId], undefined>,
   'updateQuestion' : ActorMethod<[QuestionId, QuestionDTO], undefined>,
-  'deleteQuestionByTestKeyAndOrder' : ActorMethod<[string, bigint], undefined>,
+  'validateStudentLogin' : ActorMethod<
+    [string, string],
+    { 'test_key' : string, 'registration_id' : RegistrationId }
+  >,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

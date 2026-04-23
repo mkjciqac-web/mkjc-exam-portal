@@ -2,13 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
+import { useActor } from "@caffeineai/core-infrastructure";
 import { CheckCircle, Loader2, Trophy, XCircle } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { toast } from "sonner";
 import type { Lang, Page } from "../App";
+import { createActor } from "../backend";
 import type { QuizResponse } from "../backend.d";
-import { useActor } from "../hooks/useActor";
 
 interface ResultsPageProps {
   regId: bigint | null;
@@ -66,7 +67,7 @@ export default function ResultsPage({
   lang,
 }: ResultsPageProps) {
   const tx = t[lang];
-  const { actor } = useActor();
+  const { actor } = useActor(createActor);
   const [regIdInput, setRegIdInput] = useState(
     initialRegId ? initialRegId.toString() : "",
   );

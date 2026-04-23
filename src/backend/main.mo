@@ -3,42 +3,28 @@ import Order "mo:core/Order";
 import Runtime "mo:core/Runtime";
 import Time "mo:core/Time";
 import Nat "mo:core/Nat";
-import Text "mo:core/Text";
 import Int "mo:core/Int";
+import Text "mo:core/Text";
 import Principal "mo:core/Principal";
 
-import MixinAuthorization "authorization/MixinAuthorization";
-import AccessControl "authorization/access-control";
+import MixinAuthorization "mo:caffeineai-authorization/MixinAuthorization";
+import AccessControl "mo:caffeineai-authorization/access-control";
+import HttpOutcalls "mo:caffeineai-http-outcalls/outcall";
 
 actor {
+  // Keep these stable variables from the previous version to avoid upgrade compatibility errors.
   let accessControlState = AccessControl.initState();
   include MixinAuthorization(accessControlState);
 
   type UserProfile = { name : Text };
   let userProfiles = Map.empty<Principal, UserProfile>();
 
-  //-------------------- Exams ---------------------
-  type ExamId = Nat;
-  type Exam = {
-    id : ExamId;
-    exam_name : Text;
-    exam_date : Text;
-    exam_time : Text;
-    duration_minutes : Nat;
-    no_of_questions : Nat;
-    created_at : Int;
-  };
+  // SMS API key (set by admin via setFast2SmsApiKey)
+  var smsApiKey : Text = "";
 
-  // Separate stable state for exams to avoid upgrade compatibility issues
-  type ExamStateModel = {
-    var nextExamId : ExamId;
-    exams : Map.Map<ExamId, Exam>;
-  };
-
-  let examState : ExamStateModel = {
-    var nextExamId = 1;
-    exams = Map.empty<ExamId, Exam>();
-  };
+  // SMS tracking
+  var smsTotalSent : Nat = 0;
+  var smsTotalFailed : Nat = 0;
 
   //-------------------- Student Registration ---------------------
   type RegistrationId = Nat;
@@ -57,6 +43,171 @@ actor {
   module Registration {
     public func compare(r1 : Registration, r2 : Registration) : Order.Order {
       Nat.compare(r1.id, r2.id);
+    };
+  };
+
+  //----------------------------------------------------------------
+  //-------------------- Student Credentials -----------------------
+  //----------------------------------------------------------------
+  type StudentCredentials = {
+    registration_id : RegistrationId;
+    user_id : Text;
+    password : Text;
+    contact_number : Text;
+    is_active : Bool;
+  };
+
+  let credentials = Map.empty<Text, StudentCredentials>(); // keyed by user_id
+  let credentialsByRegId = Map.empty<RegistrationId, Text>(); // regId -> user_id
+
+  // Generate an 8-char alphanumeric password from a seed number
+  func generatePassword(seed : Nat) : Text {
+    let chars : [Char] = [
+      'A','B','C','D','E','F','G','H','J','K','L','M',
+      'N','P','Q','R','S','T','U','V','W','X','Y','Z',
+      '2','3','4','5','6','7','8','9'
+    ];
+    let len = chars.size();
+    var s = seed;
+    var result = "";
+    var i = 0;
+    while (i < 8) {
+      let idx = s % len;
+      result := result # Text.fromChar(chars[idx]);
+      s := (s / len + s * 7 + 13) % 9999991;
+      i += 1;
+    };
+    result;
+  };
+
+  // Generate user_id from registration_id (e.g. STU001001)
+  func generateUserId(regId : RegistrationId) : Text {
+    let padded = regId.toText();
+    var zeros = "";
+    var n : Nat = if (padded.size() >= 6) 0 else 6 - padded.size();
+    while (n > 0) { zeros := zeros # "0"; n -= 1; };
+    "STU" # zeros # padded;
+  };
+
+  // Transform function for HTTP outcalls (strips headers for consensus)
+  public query func httpTransform(input : HttpOutcalls.TransformationInput) : async HttpOutcalls.TransformationOutput {
+    HttpOutcalls.transform(input);
+  };
+
+  public shared func generateStudentCredentials(registration_id : RegistrationId, contact_number : Text) : async { user_id : Text; password : Text } {
+    // Return existing credentials if already generated
+    switch (credentialsByRegId.get(registration_id)) {
+      case (?existingUserId) {
+        switch (credentials.get(existingUserId)) {
+          case (?cred) {
+            return { user_id = cred.user_id; password = cred.password };
+          };
+          case null {};
+        };
+      };
+      case null {};
+    };
+
+    let user_id = generateUserId(registration_id);
+    let timeNow = Int.abs(Time.now());
+    let seed = registration_id + (timeNow % 999983);
+    let password = generatePassword(seed);
+
+    let cred : StudentCredentials = {
+      registration_id;
+      user_id;
+      password;
+      contact_number;
+      is_active = true;
+    };
+    credentials.add(user_id, cred);
+    credentialsByRegId.add(registration_id, user_id);
+
+    // Attempt SMS (best effort, ignore failures)
+    if (smsApiKey != "") {
+      let sent = await sendSmsInternal(contact_number, "Your MKJC Exam Portal credentials: User ID: " # user_id # " Password: " # password # ". Use these to login and take your exam.");
+      if (sent) {
+        smsTotalSent += 1;
+      } else {
+        smsTotalFailed += 1;
+      };
+    };
+
+    { user_id; password };
+  };
+
+  public shared func validateStudentLogin(user_id : Text, password : Text) : async { registration_id : RegistrationId; test_key : Text } {
+    switch (credentials.get(user_id)) {
+      case null { Runtime.trap("Invalid credentials") };
+      case (?cred) {
+        if (cred.password != password) {
+          Runtime.trap("Invalid credentials");
+        };
+        if (not cred.is_active) {
+          Runtime.trap("Account is inactive");
+        };
+        switch (state.registrations.get(cred.registration_id)) {
+          case null { Runtime.trap("Registration not found") };
+          case (?reg) {
+            { registration_id = reg.id; test_key = reg.test_key };
+          };
+        };
+      };
+    };
+  };
+
+  public query func getCredentialsByRegistrationId(registration_id : RegistrationId) : async ?StudentCredentials {
+    switch (credentialsByRegId.get(registration_id)) {
+      case null null;
+      case (?uid) credentials.get(uid);
+    };
+  };
+
+  public query func getAllStudentCredentials() : async [StudentCredentials] {
+    credentials.values().toArray();
+  };
+
+  //----------------------------------------------------------------
+  //---------------------- SMS via Fast2SMS ------------------------
+  //----------------------------------------------------------------
+  public shared func setFast2SmsApiKey(key : Text) : async () {
+    smsApiKey := key;
+  };
+
+  public query func getFast2SmsApiKey() : async Text {
+    smsApiKey;
+  };
+
+  public shared func sendTestSms(phone : Text, message : Text) : async Bool {
+    let result = await sendSmsInternal(phone, message);
+    if (result) {
+      smsTotalSent += 1;
+    } else {
+      smsTotalFailed += 1;
+    };
+    result;
+  };
+
+  public query func getSmsStats() : async { total_sent : Nat; total_failed : Nat; api_key_set : Bool } {
+    {
+      total_sent = smsTotalSent;
+      total_failed = smsTotalFailed;
+      api_key_set = smsApiKey != "";
+    };
+  };
+
+  func sendSmsInternal(phone : Text, message : Text) : async Bool {
+    let url = "https://www.fast2sms.com/dev/bulkV2";
+    let body = "{\"route\":\"q\",\"message\":\"" # message # "\",\"language\":\"english\",\"flash\":0,\"numbers\":\"" # phone # "\"}";
+    let headers : [HttpOutcalls.Header] = [
+      { name = "authorization"; value = smsApiKey },
+      { name = "Content-Type"; value = "application/json" },
+    ];
+    try {
+      ignore await HttpOutcalls.httpPostRequest(url, headers, body, httpTransform);
+      true;
+    } catch (_) {
+      false;
     };
   };
 
@@ -244,32 +395,6 @@ actor {
       question_order = question.question_order;
       is_active = question.is_active;
     };
-  };
-
-  //----------------------------------------------------------------
-  //---------------------- Exam Management -------------------------
-  //----------------------------------------------------------------
-  public shared func createExam(exam_name : Text, exam_date : Text, exam_time : Text, duration_minutes : Nat, no_of_questions : Nat) : async ExamId {
-    let exam : Exam = {
-      id = examState.nextExamId;
-      exam_name;
-      exam_date;
-      exam_time;
-      duration_minutes;
-      no_of_questions;
-      created_at = Time.now();
-    };
-    examState.exams.add(examState.nextExamId, exam);
-    examState.nextExamId += 1;
-    exam.id;
-  };
-
-  public query func getAllExams() : async [Exam] {
-    examState.exams.values().toArray().sort(func(a, b) { Nat.compare(a.id, b.id) });
-  };
-
-  public shared func deleteExam(exam_id : ExamId) : async () {
-    examState.exams.remove(exam_id);
   };
 
   //----------------------------------------------------------------

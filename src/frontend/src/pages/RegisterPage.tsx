@@ -8,12 +8,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useActor } from "@caffeineai/core-infrastructure";
 import { CheckCircle, Loader2 } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { toast } from "sonner";
 import type { Lang, Page } from "../App";
-import { useActor } from "../hooks/useActor";
+import { createActor } from "../backend";
 
 interface RegisterPageProps {
   setPage: (p: Page) => void;
@@ -66,7 +67,7 @@ const testKeys = ["Test1", "Test2", "Test3"];
 
 export default function RegisterPage({ setPage, lang }: RegisterPageProps) {
   const tx = t[lang];
-  const { actor } = useActor();
+  const { actor } = useActor(createActor);
   const [form, setForm] = useState({
     student_name: "",
     school_name: "",

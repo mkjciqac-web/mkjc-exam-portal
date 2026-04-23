@@ -25,38 +25,58 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useActor } from "@caffeineai/core-infrastructure";
 import {
+  CheckCircle2,
   Download,
   Edit,
+  ExternalLink,
+  Eye,
+  EyeOff,
   FileDown,
   FileUp,
   Image as ImageIcon,
   Loader2,
   LogIn,
   LogOut,
+  MessageSquare,
   Plus,
   Printer,
+  RefreshCw,
+  Search,
   ToggleLeft,
   ToggleRight,
   Trash2,
   Type,
+  Wrench,
+  XCircle,
 } from "lucide-react";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
+// @ts-ignore
 import * as XLSX from "xlsx";
 import type { Lang } from "../App";
+import { createActor } from "../backend";
 import type {
-  Exam,
+  backendInterface as BackendWithSms,
   QuestionDTO,
   QuizResponse,
   Registration,
 } from "../backend.d";
 import { QuestionTypeDTO } from "../backend.d";
-import { useActor } from "../hooks/useActor";
+
+type SmsStats = Awaited<ReturnType<BackendWithSms["getSmsStats"]>>;
+import {
+  type CustomExam,
+  addExam,
+  deleteExam,
+  getExams,
+} from "../utils/examsStore";
 
 interface AdminPageProps {
   lang: Lang;
+  setPage?: (page: string) => void;
 }
 
 const testKeys = ["Test1", "Test2", "Test3"];
@@ -280,8 +300,9 @@ function printQuestionPaper(questions: QuestionDTO[], testKey: string) {
 }
 
 // ── Component ──────────────────────────────────────────────────────────────────
-export default function AdminPage({ lang }: AdminPageProps) {
-  const { actor } = useActor();
+export default function AdminPage({ lang, setPage }: AdminPageProps) {
+  const { actor: _actor } = useActor(createActor);
+  const actor = _actor as BackendWithSms | null;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
@@ -291,22 +312,16 @@ export default function AdminPage({ lang }: AdminPageProps) {
   const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [questions, setQuestions] = useState<QuestionDTO[]>([]);
   const [responses, setResponses] = useState<QuizResponse[]>([]);
-  const [exams, setExams] = useState<Exam[]>([]);
-  const [examForm, setExamForm] = useState({
-    exam_name: "",
-    exam_date: "",
-    exam_time: "",
-    duration_minutes: "",
-    no_of_questions: "",
-  });
-  const [savingExam, setSavingExam] = useState(false);
-  const [regFilterName, setRegFilterName] = useState("");
-  const [regFilterSchool, setRegFilterSchool] = useState("");
-  const [regFilterTestKey, setRegFilterTestKey] = useState("all");
-  const [resultsFilterName, setResultsFilterName] = useState("");
-  const [resultsFilterTestKey, setResultsFilterTestKey] = useState("all");
   const [loadingData, setLoadingData] = useState(false);
   const [filterTestKey, setFilterTestKey] = useState("Test1");
+
+  // Search & filter for registrations
+  const [regSearch, setRegSearch] = useState("");
+  const [regFilterExam, setRegFilterExam] = useState("all");
+
+  // Search & filter for results
+  const [resSearch, setResSearch] = useState("");
+  const [resFilterExam, setResFilterExam] = useState("all");
 
   // Question dialog
   const [qDialogOpen, setQDialogOpen] = useState(false);
@@ -322,28 +337,120 @@ export default function AdminPage({ lang }: AdminPageProps) {
   const [importingCsv, setImportingCsv] = useState(false);
   const csvInputRef = useRef<HTMLInputElement>(null);
 
+  // Custom exams
+  const [customExams, setCustomExams] = useState<CustomExam[]>(() =>
+    getExams(),
+  );
+  const allTestKeys = [...testKeys, ...customExams.map((e) => e.id)];
+  const [examDialogOpen, setExamDialogOpen] = useState(false);
+  const [examForm, setExamForm] = useState({
+    exam_name: "",
+    exam_date: "",
+    exam_time: "",
+    duration: 60,
+    num_questions: 10,
+  });
+  const [savingExam, setSavingExam] = useState(false);
+
+  // SMS Settings state
+  const [smsApiKey, setSmsApiKey] = useState("");
+  const [showApiKey, setShowApiKey] = useState(false);
+  const [savingApiKey, setSavingApiKey] = useState(false);
+  const [testSmsPhone, setTestSmsPhone] = useState("");
+  const [sendingTestSms, setSendingTestSms] = useState(false);
+  const [smsStats, setSmsStats] = useState<SmsStats | null>(null);
+  const [loadingStats, setLoadingStats] = useState(false);
+
   useEffect(() => {
     if (!isAdmin || !actor) return;
     loadAllData();
+    loadSmsSettings();
   }, [isAdmin, actor]);
 
   async function loadAllData() {
     if (!actor) return;
     setLoadingData(true);
     try {
-      const [regs, resp, exmList] = await Promise.all([
+      const [regs, resp] = await Promise.all([
         actor.getAllRegistrations(),
         actor.getAllQuizResponses(),
-        (actor as any).getAllExams(),
       ]);
       setRegistrations(regs);
       setResponses(resp);
-      setExams(exmList);
     } catch (err) {
       console.error(err);
       toast.error("Failed to load data");
     } finally {
       setLoadingData(false);
+    }
+  }
+
+  async function loadSmsSettings() {
+    if (!actor) return;
+    try {
+      const [key, stats] = await Promise.all([
+        actor.getFast2SmsApiKey(),
+        actor.getSmsStats(),
+      ]);
+      setSmsApiKey(key);
+      setSmsStats(stats);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function loadSmsStats() {
+    if (!actor) return;
+    setLoadingStats(true);
+    try {
+      const stats = await actor.getSmsStats();
+      setSmsStats(stats);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to load SMS stats");
+    } finally {
+      setLoadingStats(false);
+    }
+  }
+
+  async function handleSaveApiKey() {
+    if (!actor) return;
+    setSavingApiKey(true);
+    try {
+      await actor.setFast2SmsApiKey(smsApiKey);
+      toast.success("API key saved successfully");
+      await loadSmsStats();
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to save API key");
+    } finally {
+      setSavingApiKey(false);
+    }
+  }
+
+  async function handleTestSms() {
+    if (!actor) return;
+    if (!testSmsPhone.trim()) {
+      toast.error("Please enter a phone number");
+      return;
+    }
+    setSendingTestSms(true);
+    try {
+      const success = await actor.sendTestSms(
+        testSmsPhone.trim(),
+        "MKJC Exam Portal: This is a test SMS from your Fast2SMS integration. If you received this, your SMS setup is working correctly.",
+      );
+      if (success) {
+        toast.success("Test SMS sent successfully!");
+      } else {
+        toast.error("SMS sending failed. Check your API key.");
+      }
+      await loadSmsStats();
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to send test SMS");
+    } finally {
+      setSendingTestSms(false);
     }
   }
 
@@ -512,50 +619,45 @@ export default function AdminPage({ lang }: AdminPageProps) {
     }
   }
 
-  async function handleCreateExam() {
-    if (!actor || !examForm.exam_name) return;
+  function getStudentName(regId: bigint) {
+    return (
+      registrations.find((r) => r.id === regId)?.student_name ??
+      regId.toString()
+    );
+  }
+
+  function handleSaveExam(e: React.FormEvent) {
+    e.preventDefault();
     setSavingExam(true);
     try {
-      await (actor as any).createExam(
-        examForm.exam_name,
-        examForm.exam_date,
-        examForm.exam_time,
-        BigInt(Number(examForm.duration_minutes) || 0),
-        BigInt(Number(examForm.no_of_questions) || 0),
-      );
-      toast.success("Exam created");
+      const newExam = addExam({
+        exam_name: examForm.exam_name,
+        exam_date: examForm.exam_date,
+        exam_time: examForm.exam_time,
+        duration: examForm.duration,
+        num_questions: examForm.num_questions,
+      });
+      setCustomExams(getExams());
+      setExamDialogOpen(false);
       setExamForm({
         exam_name: "",
         exam_date: "",
         exam_time: "",
-        duration_minutes: "",
-        no_of_questions: "",
+        duration: 60,
+        num_questions: 10,
       });
-      const updated = await (actor as any).getAllExams();
-      setExams(updated);
-    } catch (_err) {
+      toast.success(`Exam "${newExam.exam_name}" created (${newExam.id})`);
+    } catch {
       toast.error("Failed to create exam");
     } finally {
       setSavingExam(false);
     }
   }
 
-  async function handleDeleteExam(id: bigint) {
-    if (!actor) return;
-    try {
-      await (actor as any).deleteExam(id);
-      setExams((prev) => prev.filter((e) => e.id !== id));
-      toast.success("Exam deleted");
-    } catch (_err) {
-      toast.error("Failed to delete exam");
-    }
-  }
-
-  function getStudentName(regId: bigint) {
-    return (
-      registrations.find((r) => r.id === regId)?.student_name ??
-      regId.toString()
-    );
+  function handleDeleteExam(id: string) {
+    deleteExam(id);
+    setCustomExams(getExams());
+    toast.success("Exam deleted");
   }
 
   // Not logged in
@@ -639,31 +741,35 @@ export default function AdminPage({ lang }: AdminPageProps) {
     );
   }
 
-  const isCurrentQImage = editingQuestion && isImageType(editingQuestion.dto);
-
+  // Derived filtered registrations
   const filteredRegistrations = registrations.filter((reg) => {
-    const nameMatch =
-      !regFilterName ||
-      reg.student_name.toLowerCase().includes(regFilterName.toLowerCase());
-    const schoolMatch =
-      !regFilterSchool ||
-      reg.school_name.toLowerCase().includes(regFilterSchool.toLowerCase());
-    const testKeyMatch =
-      regFilterTestKey === "all" || reg.test_key === regFilterTestKey;
-    return nameMatch && schoolMatch && testKeyMatch;
+    const matchesSearch =
+      regSearch.trim() === "" ||
+      reg.student_name.toLowerCase().includes(regSearch.toLowerCase()) ||
+      reg.school_name.toLowerCase().includes(regSearch.toLowerCase()) ||
+      reg.contact_number.includes(regSearch);
+    const matchesExam =
+      regFilterExam === "all" || reg.test_key === regFilterExam;
+    return matchesSearch && matchesExam;
   });
 
+  // Derived filtered responses
   const filteredResponses = responses.filter((r) => {
     const studentName = getStudentName(r.registration_id).toLowerCase();
-    const nameMatch =
-      !resultsFilterName ||
-      studentName.includes(resultsFilterName.toLowerCase());
-    const reg = registrations.find((reg) => reg.id === r.registration_id);
-    const testKeyMatch =
-      resultsFilterTestKey === "all" ||
-      (reg && reg.test_key === resultsFilterTestKey);
-    return nameMatch && testKeyMatch;
+    const matchesSearch =
+      resSearch.trim() === "" ||
+      studentName.includes(resSearch.toLowerCase()) ||
+      r.question_text.toLowerCase().includes(resSearch.toLowerCase());
+    const matchesExam =
+      resFilterExam === "all" ||
+      (() => {
+        const reg = registrations.find((reg) => reg.id === r.registration_id);
+        return reg?.test_key === resFilterExam;
+      })();
+    return matchesSearch && matchesExam;
   });
+
+  const isCurrentQImage = editingQuestion && isImageType(editingQuestion.dto);
 
   return (
     <div className="py-10 px-4">
@@ -679,18 +785,31 @@ export default function AdminPage({ lang }: AdminPageProps) {
                 : "பதிவுகள், கேள்விகள் மற்றும் முடிவுகளை நிர்வகிக்கவும்"}
             </p>
           </div>
-          <Button
-            data-ocid="admin.logout.button"
-            variant="outline"
-            className="border-navy text-navy hover:bg-navy/5"
-            onClick={() => {
-              setIsAuthenticated(false);
-              setIsAdmin(false);
-            }}
-          >
-            <LogOut className="mr-2 h-4 w-4" />
-            {lang === "en" ? "Logout" : "வெளியேறு"}
-          </Button>
+          <div className="flex items-center gap-2">
+            {setPage && (
+              <Button
+                data-ocid="admin.builder.nav_button"
+                variant="outline"
+                className="border-gold text-gold hover:bg-gold/10 font-semibold"
+                onClick={() => setPage("builder")}
+              >
+                <Wrench className="mr-2 h-4 w-4" />
+                {lang === "en" ? "Form Builder" : "படிவ நிர்மாணி"}
+              </Button>
+            )}
+            <Button
+              data-ocid="admin.logout.button"
+              variant="outline"
+              className="border-navy text-navy hover:bg-navy/5"
+              onClick={() => {
+                setIsAuthenticated(false);
+                setIsAdmin(false);
+              }}
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              {lang === "en" ? "Logout" : "வெளியேறு"}
+            </Button>
+          </div>
         </div>
 
         {/* KPI row */}
@@ -738,50 +857,42 @@ export default function AdminPage({ lang }: AdminPageProps) {
             <TabsTrigger data-ocid="admin.exams.tab" value="exams">
               {lang === "en" ? "Exams" : "தேர்வுகள்"}
             </TabsTrigger>
+            <TabsTrigger data-ocid="admin.settings.tab" value="settings">
+              {lang === "en" ? "Settings" : "அமைப்புகள்"}
+            </TabsTrigger>
           </TabsList>
 
           {/* ── Registrations tab ── */}
           <TabsContent value="registrations">
-            <div className="flex flex-wrap gap-2 mb-4">
-              <Input
-                placeholder={
-                  lang === "en" ? "Filter by name..." : "பெயரால் வடிகட்டு..."
-                }
-                value={regFilterName}
-                onChange={(e) => setRegFilterName(e.target.value)}
-                className="w-48 h-9"
-                data-ocid="admin.reg_filter_name.input"
-              />
-              <Input
-                placeholder={
-                  lang === "en" ? "Filter by school..." : "பள்ளியால் வடிகட்டு..."
-                }
-                value={regFilterSchool}
-                onChange={(e) => setRegFilterSchool(e.target.value)}
-                className="w-48 h-9"
-                data-ocid="admin.reg_filter_school.input"
-              />
-              <Select
-                value={regFilterTestKey}
-                onValueChange={setRegFilterTestKey}
+            <div className="flex flex-wrap gap-2 mb-4 items-center">
+              <div className="relative flex-1 min-w-[200px]">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  placeholder={
+                    lang === "en"
+                      ? "Search by name, school, contact..."
+                      : "பெயர், பள்ளி, தொடர்பு..."
+                  }
+                  value={regSearch}
+                  onChange={(e) => setRegSearch(e.target.value)}
+                  className="w-full pl-9 pr-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-navy/30"
+                />
+              </div>
+              <select
+                value={regFilterExam}
+                onChange={(e) => setRegFilterExam(e.target.value)}
+                className="px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-navy/30"
               >
-                <SelectTrigger
-                  className="w-36 h-9"
-                  data-ocid="admin.reg_filter_test.select"
-                >
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">
-                    {lang === "en" ? "All Tests" : "அனைத்து தேர்வுகள்"}
-                  </SelectItem>
-                  {testKeys.map((k) => (
-                    <SelectItem key={k} value={k}>
-                      {k}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                <option value="all">
+                  {lang === "en" ? "All Exams" : "அனைத்து தேர்வுகள்"}
+                </option>
+                {allTestKeys.map((k) => (
+                  <option key={k} value={k}>
+                    {k}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="bg-card rounded-lg shadow-card overflow-hidden">
               {loadingData ? (
@@ -819,7 +930,7 @@ export default function AdminPage({ lang }: AdminPageProps) {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {registrations.length === 0 ? (
+                    {filteredRegistrations.length === 0 ? (
                       <TableRow>
                         <TableCell
                           colSpan={7}
@@ -894,7 +1005,7 @@ export default function AdminPage({ lang }: AdminPageProps) {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {testKeys.map((k) => (
+                  {allTestKeys.map((k) => (
                     <SelectItem key={k} value={k}>
                       {k}
                     </SelectItem>
@@ -1150,37 +1261,35 @@ export default function AdminPage({ lang }: AdminPageProps) {
 
           {/* ── Results tab ── */}
           <TabsContent value="results">
-            <div className="flex flex-wrap gap-2 mb-4">
-              <Input
-                placeholder={
-                  lang === "en" ? "Filter by student..." : "மாணவரால் வடிகட்டு..."
-                }
-                value={resultsFilterName}
-                onChange={(e) => setResultsFilterName(e.target.value)}
-                className="w-48 h-9"
-                data-ocid="admin.results_filter_name.input"
-              />
-              <Select
-                value={resultsFilterTestKey}
-                onValueChange={setResultsFilterTestKey}
+            <div className="flex flex-wrap gap-2 mb-4 items-center">
+              <div className="relative flex-1 min-w-[200px]">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  placeholder={
+                    lang === "en"
+                      ? "Search by student name or question..."
+                      : "மாணவர் பெயர் அல்லது கேள்வி..."
+                  }
+                  value={resSearch}
+                  onChange={(e) => setResSearch(e.target.value)}
+                  className="w-full pl-9 pr-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-navy/30"
+                />
+              </div>
+              <select
+                value={resFilterExam}
+                onChange={(e) => setResFilterExam(e.target.value)}
+                className="px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-navy/30"
               >
-                <SelectTrigger
-                  className="w-36 h-9"
-                  data-ocid="admin.results_filter_test.select"
-                >
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">
-                    {lang === "en" ? "All Tests" : "அனைத்து தேர்வுகள்"}
-                  </SelectItem>
-                  {testKeys.map((k) => (
-                    <SelectItem key={k} value={k}>
-                      {k}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                <option value="all">
+                  {lang === "en" ? "All Exams" : "அனைத்து தேர்வுகள்"}
+                </option>
+                {allTestKeys.map((k) => (
+                  <option key={k} value={k}>
+                    {k}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="bg-card rounded-lg shadow-card overflow-hidden">
               <Table data-ocid="admin.results.table">
@@ -1205,7 +1314,7 @@ export default function AdminPage({ lang }: AdminPageProps) {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {responses.length === 0 ? (
+                  {filteredResponses.length === 0 ? (
                     <TableRow>
                       <TableCell
                         colSpan={6}
@@ -1255,95 +1364,20 @@ export default function AdminPage({ lang }: AdminPageProps) {
 
           {/* ── Exams tab ── */}
           <TabsContent value="exams">
-            <div className="bg-card rounded-lg shadow-card p-6 mb-6">
-              <h3 className="font-semibold text-navy mb-4">
-                {lang === "en" ? "Create New Exam" : "புதிய தேர்வு உருவாக்கு"}
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="space-y-1.5">
-                  <Label>
-                    {lang === "en" ? "Exam Name *" : "தேர்வு பெயர் *"}
-                  </Label>
-                  <Input
-                    value={examForm.exam_name}
-                    onChange={(e) =>
-                      setExamForm((p) => ({ ...p, exam_name: e.target.value }))
-                    }
-                    placeholder="e.g. Mathematics Final"
-                    data-ocid="admin.exam_name.input"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <Label>{lang === "en" ? "Date" : "தேதி"}</Label>
-                  <Input
-                    type="date"
-                    value={examForm.exam_date}
-                    onChange={(e) =>
-                      setExamForm((p) => ({ ...p, exam_date: e.target.value }))
-                    }
-                    data-ocid="admin.exam_date.input"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <Label>{lang === "en" ? "Time" : "நேரம்"}</Label>
-                  <Input
-                    type="time"
-                    value={examForm.exam_time}
-                    onChange={(e) =>
-                      setExamForm((p) => ({ ...p, exam_time: e.target.value }))
-                    }
-                    data-ocid="admin.exam_time.input"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <Label>
-                    {lang === "en" ? "Duration (minutes)" : "காலம் (நிமிடங்கள்)"}
-                  </Label>
-                  <Input
-                    type="number"
-                    min="1"
-                    value={examForm.duration_minutes}
-                    onChange={(e) =>
-                      setExamForm((p) => ({
-                        ...p,
-                        duration_minutes: e.target.value,
-                      }))
-                    }
-                    placeholder="60"
-                    data-ocid="admin.exam_duration.input"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <Label>
-                    {lang === "en" ? "No. of Questions" : "கேள்விகளின் எண்ணிக்கை"}
-                  </Label>
-                  <Input
-                    type="number"
-                    min="1"
-                    value={examForm.no_of_questions}
-                    onChange={(e) =>
-                      setExamForm((p) => ({
-                        ...p,
-                        no_of_questions: e.target.value,
-                      }))
-                    }
-                    placeholder="30"
-                    data-ocid="admin.exam_questions.input"
-                  />
-                </div>
-              </div>
+            <div className="flex justify-between items-center mb-4">
+              <p className="text-sm text-muted-foreground">
+                {lang === "en"
+                  ? "Custom exams appear in the student registration dropdown."
+                  : "தனிப்பயன் தேர்வுகள் மாணவர் பதிவு படிவத்தில் தோன்றும்."}
+              </p>
               <Button
-                className="mt-4 bg-gold text-navy font-bold hover:bg-gold/90"
-                onClick={handleCreateExam}
-                disabled={savingExam || !examForm.exam_name}
-                data-ocid="admin.exam_create.button"
+                data-ocid="admin.exams.add.primary_button"
+                className="bg-gold text-navy font-bold hover:bg-gold/90"
+                size="sm"
+                onClick={() => setExamDialogOpen(true)}
               >
-                {savingExam ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <Plus className="mr-2 h-4 w-4" />
-                )}
-                {lang === "en" ? "Create Exam" : "தேர்வு உருவாக்கு"}
+                <Plus className="mr-1 h-4 w-4" />
+                {lang === "en" ? "New Exam" : "புதிய தேர்வு"}
               </Button>
             </div>
             <div className="bg-card rounded-lg shadow-card overflow-hidden">
@@ -1363,7 +1397,7 @@ export default function AdminPage({ lang }: AdminPageProps) {
                       {lang === "en" ? "Time" : "நேரம்"}
                     </TableHead>
                     <TableHead className="font-semibold text-navy">
-                      {lang === "en" ? "Duration" : "காலம்"}
+                      {lang === "en" ? "Duration (min)" : "கால அளவு (நிமிடம்)"}
                     </TableHead>
                     <TableHead className="font-semibold text-navy">
                       {lang === "en" ? "Questions" : "கேள்விகள்"}
@@ -1374,7 +1408,7 @@ export default function AdminPage({ lang }: AdminPageProps) {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {exams.length === 0 ? (
+                  {customExams.length === 0 ? (
                     <TableRow>
                       <TableCell
                         colSpan={7}
@@ -1382,35 +1416,35 @@ export default function AdminPage({ lang }: AdminPageProps) {
                         data-ocid="admin.exams.empty_state"
                       >
                         {lang === "en"
-                          ? "No custom exams created yet."
+                          ? "No custom exams yet. Click 'New Exam' to create one."
                           : "இன்னும் தனிப்பயன் தேர்வுகள் இல்லை."}
                       </TableCell>
                     </TableRow>
                   ) : (
-                    exams.map((exam, idx) => (
+                    customExams.map((exam, idx) => (
                       <TableRow
-                        key={exam.id.toString()}
+                        key={exam.id}
                         data-ocid={`admin.exam.item.${idx + 1}`}
                       >
-                        <TableCell className="font-mono text-sm">
-                          {exam.id.toString()}
+                        <TableCell>
+                          <Badge className="bg-navy/10 text-navy border-0 font-mono">
+                            {exam.id}
+                          </Badge>
                         </TableCell>
                         <TableCell className="font-medium">
                           {exam.exam_name}
                         </TableCell>
                         <TableCell>{exam.exam_date}</TableCell>
                         <TableCell>{exam.exam_time}</TableCell>
-                        <TableCell>
-                          {exam.duration_minutes.toString()} min
-                        </TableCell>
-                        <TableCell>{exam.no_of_questions.toString()}</TableCell>
+                        <TableCell>{exam.duration}</TableCell>
+                        <TableCell>{exam.num_questions}</TableCell>
                         <TableCell className="text-right">
                           <Button
+                            data-ocid={`admin.exam.delete_button.${idx + 1}`}
                             variant="ghost"
                             size="sm"
-                            className="text-destructive hover:bg-destructive/10"
+                            className="text-red-500 hover:text-red-700 hover:bg-red-50"
                             onClick={() => handleDeleteExam(exam.id)}
-                            data-ocid={`admin.exam.delete_button.${idx + 1}`}
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
@@ -1420,6 +1454,296 @@ export default function AdminPage({ lang }: AdminPageProps) {
                   )}
                 </TableBody>
               </Table>
+            </div>
+          </TabsContent>
+
+          {/* ── Settings tab ── */}
+          <TabsContent value="settings">
+            <div className="space-y-6">
+              {/* SMS API Key Card */}
+              <div className="bg-card rounded-lg shadow-card p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2 rounded-full bg-primary/10">
+                    <MessageSquare className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {lang === "en" ? "Fast2SMS API Key" : "Fast2SMS API கீ"}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {lang === "en"
+                        ? "Configure your Fast2SMS API key to send SMS notifications to students"
+                        : "மாணவர்களுக்கு SMS அனுப்ப உங்கள் Fast2SMS API கீயை உள்ளிடவும்"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <Label
+                      htmlFor="smsApiKeyInput"
+                      className="text-sm font-medium mb-1 block"
+                    >
+                      {lang === "en" ? "API Key" : "API கீ"}
+                    </Label>
+                    <div className="flex gap-2">
+                      <div className="relative flex-1">
+                        <Input
+                          id="smsApiKeyInput"
+                          data-ocid="admin.settings.input"
+                          type={showApiKey ? "text" : "password"}
+                          value={smsApiKey}
+                          onChange={(e) => setSmsApiKey(e.target.value)}
+                          placeholder={
+                            lang === "en"
+                              ? "Enter your Fast2SMS API key..."
+                              : "Fast2SMS API கீயை உள்ளிடவும்..."
+                          }
+                          className="pr-10 font-mono text-sm"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowApiKey((v) => !v)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                          data-ocid="admin.settings.toggle"
+                        >
+                          {showApiKey ? (
+                            <EyeOff className="h-4 w-4" />
+                          ) : (
+                            <Eye className="h-4 w-4" />
+                          )}
+                        </button>
+                      </div>
+                      <Button
+                        data-ocid="admin.settings.save_button"
+                        onClick={handleSaveApiKey}
+                        disabled={savingApiKey || !smsApiKey.trim()}
+                        className="bg-primary text-primary-foreground"
+                      >
+                        {savingApiKey ? (
+                          <Loader2 className="h-4 w-4 animate-spin mr-1" />
+                        ) : null}
+                        {lang === "en" ? "Save Key" : "சேமி"}
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="border-t pt-4">
+                    <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+                      <MessageSquare className="h-4 w-4 text-primary" />
+                      {lang === "en" ? "Test SMS" : "சோதனை SMS"}
+                    </h4>
+                    <div className="flex gap-2">
+                      <Input
+                        data-ocid="admin.settings.search_input"
+                        type="tel"
+                        value={testSmsPhone}
+                        onChange={(e) => setTestSmsPhone(e.target.value)}
+                        placeholder={
+                          lang === "en"
+                            ? "Enter 10-digit mobile number..."
+                            : "10 இலக்க மொபைல் எண்..."
+                        }
+                        className="max-w-xs"
+                        maxLength={10}
+                      />
+                      <Button
+                        data-ocid="admin.settings.secondary_button"
+                        variant="outline"
+                        onClick={handleTestSms}
+                        disabled={
+                          sendingTestSms ||
+                          !testSmsPhone.trim() ||
+                          !smsApiKey.trim()
+                        }
+                      >
+                        {sendingTestSms ? (
+                          <Loader2 className="h-4 w-4 animate-spin mr-1" />
+                        ) : (
+                          <MessageSquare className="h-4 w-4 mr-1" />
+                        )}
+                        {lang === "en" ? "Send Test SMS" : "சோதனை அனுப்பு"}
+                      </Button>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      {lang === "en"
+                        ? "A test message will be sent to verify your API key is working correctly."
+                        : "உங்கள் API கீ சரியாக வேலை செய்கிறதா என்பதை சரிபார்க்க சோதனை செய்தி அனுப்பப்படும்."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* SMS Stats Card */}
+              <div className="bg-card rounded-lg shadow-card p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-full bg-primary/10">
+                      <MessageSquare className="h-5 w-5 text-primary" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {lang === "en"
+                        ? "SMS Statistics & Cost"
+                        : "SMS புள்ளிவிவரங்கள் & செலவு"}
+                    </h3>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={loadSmsStats}
+                    disabled={loadingStats}
+                    data-ocid="admin.settings.primary_button"
+                  >
+                    {loadingStats ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <RefreshCw className="h-4 w-4" />
+                    )}
+                    <span className="ml-1 hidden sm:inline">
+                      {lang === "en" ? "Refresh" : "புதுப்பி"}
+                    </span>
+                  </Button>
+                </div>
+
+                {loadingStats && !smsStats ? (
+                  <div
+                    data-ocid="admin.settings.loading_state"
+                    className="flex items-center justify-center py-8 text-muted-foreground"
+                  >
+                    <Loader2 className="h-6 w-6 animate-spin mr-2" />
+                    {lang === "en" ? "Loading stats..." : "ஏற்றுகிறது..."}
+                  </div>
+                ) : smsStats ? (
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    {/* Total Sent */}
+                    <div className="bg-muted/50 rounded-lg p-4 text-center">
+                      <div className="text-3xl font-bold text-primary">
+                        {Number(smsStats.total_sent).toLocaleString()}
+                      </div>
+                      <div className="text-xs text-muted-foreground mt-1 font-medium uppercase tracking-wide">
+                        {lang === "en" ? "Total SMS Sent" : "மொத்த SMS"}
+                      </div>
+                    </div>
+
+                    {/* Failed */}
+                    <div className="bg-muted/50 rounded-lg p-4 text-center">
+                      <div className="text-3xl font-bold text-destructive">
+                        {Number(smsStats.total_failed).toLocaleString()}
+                      </div>
+                      <div className="text-xs text-muted-foreground mt-1 font-medium uppercase tracking-wide">
+                        {lang === "en" ? "Failed SMS" : "தோல்வி SMS"}
+                      </div>
+                    </div>
+
+                    {/* API Key Status */}
+                    <div className="bg-muted/50 rounded-lg p-4 text-center">
+                      <div className="flex justify-center">
+                        {smsStats.api_key_set ? (
+                          <CheckCircle2 className="h-8 w-8 text-green-500" />
+                        ) : (
+                          <XCircle className="h-8 w-8 text-destructive" />
+                        )}
+                      </div>
+                      <div
+                        className={`text-sm font-semibold mt-1 ${smsStats.api_key_set ? "text-green-600" : "text-destructive"}`}
+                      >
+                        {smsStats.api_key_set
+                          ? lang === "en"
+                            ? "Configured ✓"
+                            : "அமைக்கப்பட்டது ✓"
+                          : lang === "en"
+                            ? "Not Set ✗"
+                            : "அமைக்கப்படவில்லை ✗"}
+                      </div>
+                      <div className="text-xs text-muted-foreground mt-0.5 uppercase tracking-wide">
+                        {lang === "en" ? "API Key Status" : "API கீ நிலை"}
+                      </div>
+                    </div>
+
+                    {/* Estimated Cost */}
+                    <div className="bg-muted/50 rounded-lg p-4 text-center">
+                      <div className="text-3xl font-bold text-amber-600">
+                        ₹{(Number(smsStats.total_sent) * 0.18).toFixed(2)}
+                      </div>
+                      <div className="text-xs text-muted-foreground mt-1 font-medium uppercase tracking-wide">
+                        {lang === "en" ? "Est. Cost" : "மதிப்பீட்டு செலவு"}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    data-ocid="admin.settings.error_state"
+                    className="text-center py-8 text-muted-foreground text-sm"
+                  >
+                    {lang === "en"
+                      ? "No stats available. Save your API key first."
+                      : "புள்ளிவிவரங்கள் இல்லை. முதலில் API கீயை சேமிக்கவும்."}
+                  </div>
+                )}
+
+                <p className="text-xs text-muted-foreground mt-4 border-t pt-3">
+                  💡{" "}
+                  {lang === "en"
+                    ? "Cost estimate based on Fast2SMS Quick SMS rate (₹0.18/SMS). Actual charges may vary."
+                    : "செலவு மதிப்பீடு Fast2SMS Quick SMS விகிதத்தின் அடிப்படையில் (₹0.18/SMS). உண்மையான கட்டணங்கள் மாறுபடலாம்."}
+                </p>
+              </div>
+
+              {/* Recharge Card */}
+              <div className="bg-card rounded-lg shadow-card p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2 rounded-full bg-amber-500/10">
+                    <ExternalLink className="h-5 w-5 text-amber-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {lang === "en"
+                        ? "Recharge Fast2SMS Account"
+                        : "Fast2SMS கணக்கை நிரப்பவும்"}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {lang === "en"
+                        ? "Click below to visit Fast2SMS and recharge your SMS balance."
+                        : "Fast2SMS-ஐ பார்வையிட்டு உங்கள் SMS இருப்பை நிரப்பவும்."}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-3">
+                  <Button
+                    data-ocid="admin.settings.primary_button"
+                    className="bg-amber-600 hover:bg-amber-700 text-white font-semibold"
+                    onClick={() =>
+                      window.open(
+                        "https://www.fast2sms.com/dashboard/wallet",
+                        "_blank",
+                        "noopener,noreferrer",
+                      )
+                    }
+                  >
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    {lang === "en"
+                      ? "Go to Fast2SMS Recharge →"
+                      : "Fast2SMS நிரப்பலுக்கு செல்லவும் →"}
+                  </Button>
+                  <Button
+                    data-ocid="admin.settings.secondary_button"
+                    variant="outline"
+                    onClick={() =>
+                      window.open(
+                        "https://www.fast2sms.com/plans",
+                        "_blank",
+                        "noopener,noreferrer",
+                      )
+                    }
+                  >
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    {lang === "en"
+                      ? "View Fast2SMS Pricing →"
+                      : "Fast2SMS விலை நிர்ணயம் →"}
+                  </Button>
+                </div>
+              </div>
             </div>
           </TabsContent>
         </Tabs>
@@ -1467,7 +1791,7 @@ export default function AdminPage({ lang }: AdminPageProps) {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      {testKeys.map((k) => (
+                      {allTestKeys.map((k) => (
                         <SelectItem key={k} value={k}>
                           {k}
                         </SelectItem>
@@ -1742,6 +2066,128 @@ export default function AdminPage({ lang }: AdminPageProps) {
               )}
             </Button>
           </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* ── New Exam Dialog ── */}
+      <Dialog
+        open={examDialogOpen}
+        onOpenChange={(open) => {
+          setExamDialogOpen(open);
+          if (!open)
+            setExamForm({
+              exam_name: "",
+              exam_date: "",
+              exam_time: "",
+              duration: 60,
+              num_questions: 10,
+            });
+        }}
+      >
+        <DialogContent className="max-w-md" data-ocid="admin.exam.dialog">
+          <DialogHeader>
+            <DialogTitle className="text-navy font-display">
+              {lang === "en" ? "Create New Exam" : "புதிய தேர்வு உருவாக்கு"}
+            </DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleSaveExam} className="space-y-4 py-2">
+            <div className="space-y-1.5">
+              <Label>{lang === "en" ? "Exam Name *" : "தேர்வு பெயர் *"}</Label>
+              <Input
+                data-ocid="admin.exam.name.input"
+                required
+                placeholder={
+                  lang === "en"
+                    ? "e.g. Mathematics Scholarship 2026"
+                    : "எ.கா. கணிதம் 2026"
+                }
+                value={examForm.exam_name}
+                onChange={(e) =>
+                  setExamForm((p) => ({ ...p, exam_name: e.target.value }))
+                }
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <Label>{lang === "en" ? "Date" : "தேதி"}</Label>
+                <Input
+                  data-ocid="admin.exam.date.input"
+                  type="date"
+                  value={examForm.exam_date}
+                  onChange={(e) =>
+                    setExamForm((p) => ({ ...p, exam_date: e.target.value }))
+                  }
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label>{lang === "en" ? "Time" : "நேரம்"}</Label>
+                <Input
+                  data-ocid="admin.exam.time.input"
+                  type="time"
+                  value={examForm.exam_time}
+                  onChange={(e) =>
+                    setExamForm((p) => ({ ...p, exam_time: e.target.value }))
+                  }
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <Label>
+                  {lang === "en" ? "Duration (minutes)" : "கால அளவு (நிமிடம்)"}
+                </Label>
+                <Input
+                  data-ocid="admin.exam.duration.input"
+                  type="number"
+                  min={1}
+                  value={examForm.duration}
+                  onChange={(e) =>
+                    setExamForm((p) => ({
+                      ...p,
+                      duration: Number(e.target.value),
+                    }))
+                  }
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label>
+                  {lang === "en" ? "No. of Questions" : "கேள்விகள் எண்ணிக்கை"}
+                </Label>
+                <Input
+                  data-ocid="admin.exam.num_questions.input"
+                  type="number"
+                  min={1}
+                  value={examForm.num_questions}
+                  onChange={(e) =>
+                    setExamForm((p) => ({
+                      ...p,
+                      num_questions: Number(e.target.value),
+                    }))
+                  }
+                />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setExamDialogOpen(false)}
+              >
+                {lang === "en" ? "Cancel" : "ரத்து"}
+              </Button>
+              <Button
+                data-ocid="admin.exam.save_button"
+                type="submit"
+                className="bg-gold text-navy font-bold hover:bg-gold/90"
+                disabled={savingExam}
+              >
+                {savingExam ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : null}
+                {lang === "en" ? "Create Exam" : "தேர்வு உருவாக்கு"}
+              </Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </div>

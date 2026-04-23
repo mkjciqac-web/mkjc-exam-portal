@@ -26,6 +26,9 @@
     --gold: 0.62 0.12 78;
     /* Light gray #F2F4F6 → oklch(0.96 0.005 240) */
     --light-gray: 0.96 0.005 240;
+    /* Canvas white + subtle grid bg */
+    --canvas-bg: 1 0 0;
+    --canvas-grid: 0.98 0.003 240;
 
     --background: 0.96 0.005 240;
     --foreground: 0.15 0.02 260;

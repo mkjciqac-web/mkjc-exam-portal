@@ -7,17 +7,35 @@ export interface None {
     __kind__: "None";
 }
 export type Option<T> = Some<T> | None;
-export type ExamId = bigint;
-export interface Exam {
-    id: ExamId;
-    exam_name: string;
-    exam_date: string;
-    exam_time: string;
-    duration_minutes: bigint;
-    no_of_questions: bigint;
-    created_at: bigint;
+export interface http_request_result {
+    status: bigint;
+    body: Uint8Array;
+    headers: Array<http_header>;
+}
+export interface QuizResponse {
+    id: QuizResponseId;
+    question_text: string;
+    is_correct: boolean;
+    correct_answer: string;
+    time_taken: bigint;
+    score: bigint;
+    question_index: bigint;
+    student_answer: string;
+    registration_id: RegistrationId;
+    total_questions: bigint;
+    percentage: number;
+    submitted_at: bigint;
+}
+export interface TransformationOutput {
+    status: bigint;
+    body: Uint8Array;
+    headers: Array<http_header>;
 }
 export type QuizResponseId = bigint;
+export interface TransformationInput {
+    context: Uint8Array;
+    response: http_request_result;
+}
 export interface Registration {
     id: RegistrationId;
     student_name: string;
@@ -50,22 +68,16 @@ export interface QuestionDTO {
     correct_answer_en: string;
     correct_answer_ta: string;
 }
-export interface UserProfile {
+export interface http_header {
+    value: string;
     name: string;
 }
-export interface QuizResponse {
-    id: QuizResponseId;
-    question_text: string;
-    is_correct: boolean;
-    correct_answer: string;
-    time_taken: bigint;
-    score: bigint;
-    question_index: bigint;
-    student_answer: string;
+export interface StudentCredentials {
+    password: string;
+    user_id: string;
+    contact_number: string;
+    is_active: boolean;
     registration_id: RegistrationId;
-    total_questions: bigint;
-    percentage: number;
-    submitted_at: bigint;
 }
 export enum QuestionTypeDTO {
     text = "text",
@@ -78,24 +90,37 @@ export enum UserRole {
 }
 export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
-    createExam(exam_name: string, exam_date: string, exam_time: string, duration_minutes: bigint, no_of_questions: bigint): Promise<ExamId>;
-    getAllExams(): Promise<Array<Exam>>;
-    deleteExam(exam_id: ExamId): Promise<void>;
     createQuestion(dto: QuestionDTO): Promise<QuestionId>;
     createRegistration(student_name: string, school_name: string, contact_number: string, whatsapp_number: string, exam_group: string, test_key: string): Promise<RegistrationId>;
+    deleteQuestionByTestKeyAndOrder(test_key: string, question_order: bigint): Promise<void>;
     deleteRegistration(registration_id: RegistrationId): Promise<void>;
+    generateStudentCredentials(registration_id: RegistrationId, contact_number: string): Promise<{
+        password: string;
+        user_id: string;
+    }>;
     getAllQuizResponses(): Promise<Array<QuizResponse>>;
     getAllRegistrations(): Promise<Array<Registration>>;
-    getCallerUserProfile(): Promise<UserProfile | null>;
+    getAllStudentCredentials(): Promise<Array<StudentCredentials>>;
     getCallerUserRole(): Promise<UserRole>;
+    getCredentialsByRegistrationId(registration_id: RegistrationId): Promise<StudentCredentials | null>;
+    getFast2SmsApiKey(): Promise<string>;
     getQuestionsByTestKey(test_key: string, activeOnly: boolean): Promise<Array<QuestionDTO>>;
     getResponsesByRegistrationId(registration_id: RegistrationId): Promise<Array<QuizResponse>>;
+    getSmsStats(): Promise<{
+        total_failed: bigint;
+        api_key_set: boolean;
+        total_sent: bigint;
+    }>;
     getTopQuizScores(limit: bigint): Promise<Array<QuizResponse>>;
-    getUserProfile(user: Principal): Promise<UserProfile | null>;
+    httpTransform(input: TransformationInput): Promise<TransformationOutput>;
     isCallerAdmin(): Promise<boolean>;
-    saveCallerUserProfile(profile: UserProfile): Promise<void>;
+    sendTestSms(phone: string, message: string): Promise<boolean>;
+    setFast2SmsApiKey(key: string): Promise<void>;
     submitQuizResponse(registration_id: RegistrationId, question_index: bigint, question_text: string, student_answer: string, correct_answer: string, is_correct: boolean, score: bigint, total_questions: bigint, percentage: number, time_taken: bigint): Promise<QuizResponseId>;
     toggleQuestionActive(question_id: QuestionId): Promise<void>;
     updateQuestion(question_id: QuestionId, dto: QuestionDTO): Promise<void>;
-    deleteQuestionByTestKeyAndOrder(test_key: string, question_order: bigint): Promise<void>;
+    validateStudentLogin(user_id: string, password: string): Promise<{
+        test_key: string;
+        registration_id: RegistrationId;
+    }>;
 }

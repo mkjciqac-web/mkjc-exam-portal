@@ -1,0 +1,140 @@
+type http_request_result = 
+ record {
+   body: blob;
+   headers: vec http_header;
+   status: nat;
+ };
+type http_header = 
+ record {
+   name: text;
+   value: text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type TransformationOutput = 
+ record {
+   body: blob;
+   headers: vec http_header;
+   status: nat;
+ };
+type TransformationInput = 
+ record {
+   context: blob;
+   response: http_request_result;
+ };
+type StudentCredentials = 
+ record {
+   contact_number: text;
+   is_active: bool;
+   password: text;
+   registration_id: RegistrationId;
+   user_id: text;
+ };
+type RegistrationId = nat;
+type Registration = 
+ record {
+   contact_number: text;
+   exam_group: text;
+   id: RegistrationId;
+   registration_date: int;
+   school_name: text;
+   student_name: text;
+   test_key: text;
+   whatsapp_number: text;
+ };
+type QuizResponseId = nat;
+type QuizResponse = 
+ record {
+   correct_answer: text;
+   id: QuizResponseId;
+   is_correct: bool;
+   percentage: float64;
+   question_index: nat;
+   question_text: text;
+   registration_id: RegistrationId;
+   score: nat;
+   student_answer: text;
+   submitted_at: int;
+   time_taken: nat;
+   total_questions: nat;
+ };
+type QuestionTypeDTO = 
+ variant {
+   image;
+   "text";
+ };
+type QuestionId = nat;
+type QuestionDTO = 
+ record {
+   correct_answer_en: text;
+   correct_answer_ta: text;
+   is_active: bool;
+   option_a_en: text;
+   option_a_ta: text;
+   option_b_en: text;
+   option_b_ta: text;
+   option_c_en: text;
+   option_c_ta: text;
+   option_d_en: text;
+   option_d_ta: text;
+   question_image_en: blob;
+   question_image_ta: blob;
+   question_order: nat;
+   question_text_en: text;
+   question_text_ta: text;
+   question_type: QuestionTypeDTO;
+   test_key: text;
+ };
+service : {
+  _initializeAccessControl: () -> ();
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  createQuestion: (dto: QuestionDTO) -> (QuestionId);
+  createRegistration: (student_name: text, school_name: text, contact_number:
+   text, whatsapp_number: text, exam_group: text, test_key: text) ->
+   (RegistrationId);
+  deleteQuestionByTestKeyAndOrder: (test_key: text, question_order: nat) ->
+   ();
+  deleteRegistration: (registration_id: RegistrationId) -> ();
+  generateStudentCredentials: (registration_id: RegistrationId,
+   contact_number: text) -> (record {
+                               password: text;
+                               user_id: text;
+                             });
+  getAllQuizResponses: () -> (vec QuizResponse) query;
+  getAllRegistrations: () -> (vec Registration) query;
+  getAllStudentCredentials: () -> (vec StudentCredentials) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getCredentialsByRegistrationId: (registration_id: RegistrationId) ->
+   (opt StudentCredentials) query;
+  getFast2SmsApiKey: () -> (text) query;
+  getQuestionsByTestKey: (test_key: text, activeOnly: bool) ->
+   (vec QuestionDTO) query;
+  getResponsesByRegistrationId: (registration_id: RegistrationId) ->
+   (vec QuizResponse) query;
+  getSmsStats: () ->
+   (record {
+      api_key_set: bool;
+      total_failed: nat;
+      total_sent: nat;
+    }) query;
+  getTopQuizScores: (limit: nat) -> (vec QuizResponse) query;
+  httpTransform: (input: TransformationInput) -> (TransformationOutput) query;
+  isCallerAdmin: () -> (bool) query;
+  sendTestSms: (phone: text, message: text) -> (bool);
+  setFast2SmsApiKey: (key: text) -> ();
+  submitQuizResponse: (registration_id: RegistrationId, question_index: 
+   nat, question_text: text, student_answer: text, correct_answer: text,
+   is_correct: bool, score: nat, total_questions: nat, percentage: float64,
+   time_taken: nat) -> (QuizResponseId);
+  toggleQuestionActive: (question_id: QuestionId) -> ();
+  updateQuestion: (question_id: QuestionId, dto: QuestionDTO) -> ();
+  validateStudentLogin: (user_id: text, password: text) ->
+   (record {
+      registration_id: RegistrationId;
+      test_key: text;
+    });
+}

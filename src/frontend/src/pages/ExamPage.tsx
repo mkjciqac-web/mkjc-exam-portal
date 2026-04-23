@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { useActor } from "@caffeineai/core-infrastructure";
 import {
   CheckCircle,
   ChevronLeft,
@@ -11,8 +12,8 @@ import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import type { Lang, Page } from "../App";
+import { createActor } from "../backend";
 import type { QuestionDTO } from "../backend.d";
-import { useActor } from "../hooks/useActor";
 
 interface ExamPageProps {
   setPage: (p: Page) => void;
@@ -67,7 +68,7 @@ export default function ExamPage({
   initialTestKey,
 }: ExamPageProps) {
   const tx = t[lang];
-  const { actor } = useActor();
+  const { actor } = useActor(createActor);
   const [regId] = useState<bigint | null>(initialRegId ?? null);
   const [questions, setQuestions] = useState<QuestionDTO[]>([]);
   const [loadingQ, setLoadingQ] = useState(true);
