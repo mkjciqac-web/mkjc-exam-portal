@@ -95,7 +95,7 @@ export default function RegisterPage({ setPage, lang }: RegisterPageProps) {
     }
     setLoading(true);
     try {
-      const id = await actor.createRegistration(
+      const id = await actor.addRegistration(
         form.student_name,
         form.school_name,
         form.contact_number,

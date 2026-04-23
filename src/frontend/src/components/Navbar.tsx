@@ -11,7 +11,6 @@ interface NavbarProps {
 
 const navLinks: { label: string; labelTa: string; page: Page }[] = [
   { label: "Home", labelTa: "முகப்பு", page: "home" },
-
   { label: "Take Exam", labelTa: "தேர்வு", page: "exam" },
   { label: "Results", labelTa: "முடிவு", page: "results" },
   { label: "Admin", labelTa: "நிர்வாகி", page: "admin" },
@@ -21,7 +20,7 @@ export default function Navbar({ page, setPage, lang, setLang }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b-2 border-gold shadow-xs">
+    <header className="sticky top-0 z-50 bg-card border-b-2 border-gold shadow-subtle">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -29,7 +28,7 @@ export default function Navbar({ page, setPage, lang, setLang }: NavbarProps) {
             type="button"
             data-ocid="nav.home.link"
             onClick={() => setPage("home")}
-            className="flex items-center gap-2 focus:outline-none"
+            className="flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
           >
             <GraduationCap className="h-7 w-7 text-navy" />
             <span className="font-display font-bold text-xl">
@@ -46,7 +45,7 @@ export default function Navbar({ page, setPage, lang, setLang }: NavbarProps) {
                 key={link.page}
                 data-ocid={`nav.${link.page}.link`}
                 onClick={() => setPage(link.page)}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-smooth ${
                   page === link.page
                     ? "text-gold font-semibold"
                     : "text-foreground hover:text-navy"
@@ -62,7 +61,7 @@ export default function Navbar({ page, setPage, lang, setLang }: NavbarProps) {
                 type="button"
                 data-ocid="nav.lang.en.toggle"
                 onClick={() => setLang("en")}
-                className={`px-3 py-1 transition-colors ${
+                className={`px-3 py-1 transition-smooth ${
                   lang === "en"
                     ? "bg-navy text-white"
                     : "text-navy hover:bg-background"
@@ -74,7 +73,7 @@ export default function Navbar({ page, setPage, lang, setLang }: NavbarProps) {
                 type="button"
                 data-ocid="nav.lang.ta.toggle"
                 onClick={() => setLang("ta")}
-                className={`px-3 py-1 transition-colors ${
+                className={`px-3 py-1 transition-smooth ${
                   lang === "ta"
                     ? "bg-navy text-white"
                     : "text-navy hover:bg-background"
@@ -103,7 +102,7 @@ export default function Navbar({ page, setPage, lang, setLang }: NavbarProps) {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-border px-4 py-3 space-y-1">
+        <div className="md:hidden bg-card border-t border-border px-4 py-3 space-y-1">
           {navLinks.map((link) => (
             <button
               type="button"

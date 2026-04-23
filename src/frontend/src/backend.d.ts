@@ -57,7 +57,7 @@ export interface QuestionDTO {
     option_c_ta: string;
     option_d_en: string;
     option_d_ta: string;
-    question_type: QuestionTypeDTO;
+    question_type: QuestionType;
     question_order: bigint;
     test_key: string;
     question_text_en: string;
@@ -79,7 +79,7 @@ export interface StudentCredentials {
     is_active: boolean;
     registration_id: RegistrationId;
 }
-export enum QuestionTypeDTO {
+export enum QuestionType {
     text = "text",
     image = "image"
 }
@@ -89,23 +89,23 @@ export enum UserRole {
     guest = "guest"
 }
 export interface backendInterface {
+    addQuestion(dto: QuestionDTO): Promise<QuestionId>;
+    addRegistration(student_name: string, school_name: string, contact_number: string, whatsapp_number: string, exam_group: string, test_key: string): Promise<RegistrationId>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
-    createQuestion(dto: QuestionDTO): Promise<QuestionId>;
-    createRegistration(student_name: string, school_name: string, contact_number: string, whatsapp_number: string, exam_group: string, test_key: string): Promise<RegistrationId>;
-    deleteQuestionByTestKeyAndOrder(test_key: string, question_order: bigint): Promise<void>;
-    deleteRegistration(registration_id: RegistrationId): Promise<void>;
+    deleteQuestion(question_id: QuestionId): Promise<void>;
+    deleteRegistration(id: RegistrationId): Promise<void>;
+    filterQuizResponses(registration_id: RegistrationId): Promise<Array<QuizResponse>>;
     generateStudentCredentials(registration_id: RegistrationId, contact_number: string): Promise<{
         password: string;
         user_id: string;
     }>;
-    getAllQuizResponses(): Promise<Array<QuizResponse>>;
-    getAllRegistrations(): Promise<Array<Registration>>;
     getAllStudentCredentials(): Promise<Array<StudentCredentials>>;
     getCallerUserRole(): Promise<UserRole>;
     getCredentialsByRegistrationId(registration_id: RegistrationId): Promise<StudentCredentials | null>;
     getFast2SmsApiKey(): Promise<string>;
-    getQuestionsByTestKey(test_key: string, activeOnly: boolean): Promise<Array<QuestionDTO>>;
-    getResponsesByRegistrationId(registration_id: RegistrationId): Promise<Array<QuizResponse>>;
+    getQuestion(question_id: QuestionId): Promise<QuestionDTO | null>;
+    getQuizResponse(id: QuizResponseId): Promise<QuizResponse | null>;
+    getRegistration(id: RegistrationId): Promise<Registration | null>;
     getSmsStats(): Promise<{
         total_failed: bigint;
         api_key_set: boolean;
@@ -114,6 +114,9 @@ export interface backendInterface {
     getTopQuizScores(limit: bigint): Promise<Array<QuizResponse>>;
     httpTransform(input: TransformationInput): Promise<TransformationOutput>;
     isCallerAdmin(): Promise<boolean>;
+    listQuestions(test_key: string, activeOnly: boolean): Promise<Array<QuestionDTO>>;
+    listQuizResponses(): Promise<Array<QuizResponse>>;
+    listRegistrations(): Promise<Array<Registration>>;
     sendTestSms(phone: string, message: string): Promise<boolean>;
     setFast2SmsApiKey(key: string): Promise<void>;
     submitQuizResponse(registration_id: RegistrationId, question_index: bigint, question_text: string, student_answer: string, correct_answer: string, is_correct: boolean, score: bigint, total_questions: bigint, percentage: number, time_taken: bigint): Promise<QuizResponseId>;

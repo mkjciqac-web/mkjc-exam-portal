@@ -18,7 +18,7 @@ export type Lang = "en" | "ta";
 
 export default function App() {
   const [page, setPage] = useState<Page>("home");
-  const [lang] = useState<Lang>("en");
+  const [lang, setLang] = useState<Lang>("en");
   const [resultRegId, setResultRegId] = useState<bigint | null>(null);
   const [examRegId, setExamRegId] = useState<bigint | null>(null);
   const [examTestKey, setExamTestKey] = useState<string | null>(null);
@@ -48,7 +48,12 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-background">
       <main className="flex-1">
         {page === "home" && (
-          <HomePage startExam={startExam} setPage={setPage} lang={lang} />
+          <HomePage
+            startExam={startExam}
+            setPage={setPage}
+            lang={lang}
+            setLang={setLang}
+          />
         )}
         {page === "student-login" && (
           <StudentLoginPage

@@ -12,13 +12,14 @@ type Nat__490723111 = Nat__920180692;
 type Nat__920180692 = Nat;
 type Node__46230540<K, V> =
   {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
-type QuestionId__937200071 = Nat;
-type QuestionType__433468977 = {#image; #text};
-type Question__879138514 =
+type QuestionId__77764146 = Nat;
+type QuestionId__82229554 = QuestionId__77764146;
+type QuestionType__152178236 = {#image; #text};
+type Question__191755947 =
   {
     correct_answer_en : Text;
     correct_answer_ta : Text;
-    id : QuestionId__937200071;
+    id : QuestionId__82229554;
     is_active : Bool;
     option_a_en : Text;
     option_a_ta : Text;
@@ -33,46 +34,48 @@ type Question__879138514 =
     question_order : Nat;
     question_text_en : Text;
     question_text_ta : Text;
-    question_type : QuestionType__433468977;
+    question_type : QuestionType__152178236;
     test_key : Text
   };
-type QuizResponseId__6638341 = Nat;
-type QuizResponse__1038517591 =
+type QuizResponseId__368894200 = QuizResponseId__543497386;
+type QuizResponseId__543497386 = Nat;
+type QuizResponse__334066082 =
   {
     correct_answer : Text;
-    id : QuizResponseId__6638341;
+    id : QuizResponseId__368894200;
     is_correct : Bool;
     percentage : Float;
     question_index : Nat;
     question_text : Text;
-    registration_id : RegistrationId__974885105;
+    registration_id : RegistrationId__420771716;
     score : Nat;
     student_answer : Text;
     submitted_at : Int;
     time_taken : Nat;
     total_questions : Nat
   };
-type RegistrationId__974885105 = Nat;
-type Registration__525232183 =
+type RegistrationId__420771716 = RegistrationId__98818712;
+type RegistrationId__650491335 = RegistrationId__98818712;
+type RegistrationId__98818712 = Nat;
+type Registration__282286680 =
   {
     contact_number : Text;
     exam_group : Text;
-    id : RegistrationId__974885105;
+    id : RegistrationId__650491335;
     registration_date : Int;
     school_name : Text;
     student_name : Text;
     test_key : Text;
     whatsapp_number : Text
   };
-type StudentCredentials__246778310 =
+type StudentCredentials__470585221 =
   {
     contact_number : Text;
     is_active : Bool;
     password : Text;
-    registration_id : RegistrationId__974885105;
+    registration_id : RegistrationId__650491335;
     user_id : Text
   };
-type UserProfile__491224006 = {name : Text};
 type UserRole__1054455867 = {#admin; #guest; #user};
 actor {
   stable accessControlState :
@@ -82,31 +85,35 @@ actor {
     };
   stable credentials :
     {
-      var root : Node__46230540<Text, StudentCredentials__246778310>;
+      var root : Node__46230540<Text, StudentCredentials__470585221>;
       var size : Nat__490723111
     };
   stable credentialsByRegId :
     {
-      var root : Node__46230540<RegistrationId__974885105, Text>;
+      var root : Node__46230540<RegistrationId__650491335, Text>;
       var size : Nat__490723111
     };
-  stable var smsApiKey : Text;
-  stable var smsTotalFailed : Nat;
-  stable var smsTotalSent : Nat;
-  stable state :
+  stable nextQuestionId : {var val : QuestionId__82229554};
+  stable nextQuizResponseId : {var val : QuizResponseId__368894200};
+  stable nextRegistrationId : {var val : RegistrationId__650491335};
+  stable questions :
     {
-      var nextQuestionId : QuestionId__937200071;
-      var nextQuizResponseId : QuizResponseId__6638341;
-      var nextRegistrationId : RegistrationId__974885105;
-      questions : Map__605269027<QuestionId__937200071, Question__879138514>;
-      quizResponses :
-        Map__605269027<QuizResponseId__6638341, QuizResponse__1038517591>;
-      registrations :
-        Map__605269027<RegistrationId__974885105, Registration__525232183>
-    };
-  stable userProfiles :
-    {
-      var root : Node__46230540<Principal, UserProfile__491224006>;
+      var root : Node__46230540<QuestionId__82229554, Question__191755947>;
       var size : Nat__490723111
-    }
+    };
+  stable quizResponses :
+    {
+      var root :
+        Node__46230540<QuizResponseId__368894200, QuizResponse__334066082>;
+      var size : Nat__490723111
+    };
+  stable registrations :
+    {
+      var root :
+        Node__46230540<RegistrationId__650491335, Registration__282286680>;
+      var size : Nat__490723111
+    };
+  stable smsApiKey : {var val : Text};
+  stable smsTotalFailed : {var val : Nat};
+  stable smsTotalSent : {var val : Nat}
 };

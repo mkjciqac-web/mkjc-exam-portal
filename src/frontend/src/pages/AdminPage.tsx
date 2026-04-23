@@ -64,7 +64,7 @@ import type {
   QuizResponse,
   Registration,
 } from "../backend.d";
-import { QuestionTypeDTO } from "../backend.d";
+import { QuestionType } from "../backend.d";
 
 type SmsStats = Awaited<ReturnType<BackendWithSms["getSmsStats"]>>;
 import {
@@ -86,7 +86,7 @@ const ADMIN_PASSWORD = "staff@318";
 
 const emptyQuestion = (): QuestionDTO => ({
   test_key: "Test1",
-  question_type: QuestionTypeDTO.text,
+  question_type: QuestionType.text,
   question_text_en: "",
   question_image_en: new Uint8Array(),
   option_a_en: "",
@@ -136,10 +136,7 @@ function questionsToCsv(questions: QuestionDTO[]): string {
     [
       Number(q.question_order),
       q.test_key,
-      "question_type" in q &&
-      JSON.stringify(q.question_type) === '{"image":null}'
-        ? "image"
-        : "text",
+      isImageType(q) ? "image" : "text",
       q.question_text_en,
       q.option_a_en,
       q.option_b_en,
@@ -218,8 +215,7 @@ function parseCsvToQuestions(csvText: string): QuestionDTO[] {
     return {
       question_order: BigInt(order || "0"),
       test_key: test_key || "Test1",
-      question_type:
-        qtype === "image" ? QuestionTypeDTO.image : QuestionTypeDTO.text,
+      question_type: qtype === "image" ? QuestionType.image : QuestionType.text,
       question_text_en: question_text_en || "",
       option_a_en: option_a_en || "",
       option_b_en: option_b_en || "",
@@ -240,7 +236,10 @@ function parseCsvToQuestions(csvText: string): QuestionDTO[] {
 }
 
 function isImageType(q: QuestionDTO) {
-  return JSON.stringify(q.question_type) === '{"image":null}';
+  return (
+    q.question_type === QuestionType.image ||
+    JSON.stringify(q.question_type) === '{"image":null}'
+  );
 }
 
 // ── Print helper ───────────────────────────────────────────────────────────────
@@ -372,8 +371,8 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
     setLoadingData(true);
     try {
       const [regs, resp] = await Promise.all([
-        actor.getAllRegistrations(),
-        actor.getAllQuizResponses(),
+        actor.listRegistrations(),
+        actor.listQuizResponses(),
       ]);
       setRegistrations(regs);
       setResponses(resp);
@@ -457,7 +456,7 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
   const loadQuestions = useCallback(async () => {
     if (!actor) return;
     try {
-      const qs = await actor.getQuestionsByTestKey(filterTestKey, false);
+      const qs = await actor.listQuestions(filterTestKey, false);
       setQuestions(
         qs.sort((a, b) => Number(a.question_order - b.question_order)),
       );
@@ -500,7 +499,8 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
   async function handleDeleteQuestion(testKey: string, questionOrder: bigint) {
     if (!actor) return;
     try {
-      await actor.deleteQuestionByTestKeyAndOrder(testKey, questionOrder);
+      // Use question_order as the question ID (best available key from listQuestions)
+      await actor.deleteQuestion(questionOrder);
       setQuestions((prev) =>
         prev.filter(
           (q) =>
@@ -522,7 +522,7 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
         await actor.updateQuestion(editingQuestion.id, editingQuestion.dto);
         toast.success("Question updated");
       } else {
-        await actor.createQuestion(editingQuestion.dto);
+        await actor.addQuestion(editingQuestion.dto);
         toast.success("Question created");
       }
       setQDialogOpen(false);
@@ -599,7 +599,7 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
         let created = 0;
         for (const q of parsed) {
           try {
-            await actor.createQuestion(q);
+            await actor.addQuestion(q);
             created++;
           } catch (err) {
             console.error("Failed to import question:", err);
@@ -1818,8 +1818,8 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
                       updateQField(
                         "question_type",
                         v === "image"
-                          ? (QuestionTypeDTO.image as unknown as string)
-                          : (QuestionTypeDTO.text as unknown as string),
+                          ? (QuestionType.image as unknown as string)
+                          : (QuestionType.text as unknown as string),
                       )
                     }
                   >

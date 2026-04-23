@@ -19,7 +19,7 @@ export interface QuestionDTO {
   'option_c_ta' : string,
   'option_d_en' : string,
   'option_d_ta' : string,
-  'question_type' : QuestionTypeDTO,
+  'question_type' : QuestionType,
   'question_order' : bigint,
   'test_key' : string,
   'question_text_en' : string,
@@ -31,7 +31,7 @@ export interface QuestionDTO {
   'correct_answer_ta' : string,
 }
 export type QuestionId = bigint;
-export type QuestionTypeDTO = { 'text' : null } |
+export type QuestionType = { 'text' : null } |
   { 'image' : null };
 export interface QuizResponse {
   'id' : QuizResponseId,
@@ -86,20 +86,19 @@ export interface http_request_result {
 }
 export interface _SERVICE {
   '_initializeAccessControl' : ActorMethod<[], undefined>,
-  'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
-  'createQuestion' : ActorMethod<[QuestionDTO], QuestionId>,
-  'createRegistration' : ActorMethod<
+  'addQuestion' : ActorMethod<[QuestionDTO], QuestionId>,
+  'addRegistration' : ActorMethod<
     [string, string, string, string, string, string],
     RegistrationId
   >,
-  'deleteQuestionByTestKeyAndOrder' : ActorMethod<[string, bigint], undefined>,
+  'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
+  'deleteQuestion' : ActorMethod<[QuestionId], undefined>,
   'deleteRegistration' : ActorMethod<[RegistrationId], undefined>,
+  'filterQuizResponses' : ActorMethod<[RegistrationId], Array<QuizResponse>>,
   'generateStudentCredentials' : ActorMethod<
     [RegistrationId, string],
     { 'password' : string, 'user_id' : string }
   >,
-  'getAllQuizResponses' : ActorMethod<[], Array<QuizResponse>>,
-  'getAllRegistrations' : ActorMethod<[], Array<Registration>>,
   'getAllStudentCredentials' : ActorMethod<[], Array<StudentCredentials>>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
   'getCredentialsByRegistrationId' : ActorMethod<
@@ -107,11 +106,9 @@ export interface _SERVICE {
     [] | [StudentCredentials]
   >,
   'getFast2SmsApiKey' : ActorMethod<[], string>,
-  'getQuestionsByTestKey' : ActorMethod<[string, boolean], Array<QuestionDTO>>,
-  'getResponsesByRegistrationId' : ActorMethod<
-    [RegistrationId],
-    Array<QuizResponse>
-  >,
+  'getQuestion' : ActorMethod<[QuestionId], [] | [QuestionDTO]>,
+  'getQuizResponse' : ActorMethod<[QuizResponseId], [] | [QuizResponse]>,
+  'getRegistration' : ActorMethod<[RegistrationId], [] | [Registration]>,
   'getSmsStats' : ActorMethod<
     [],
     { 'total_failed' : bigint, 'api_key_set' : boolean, 'total_sent' : bigint }
@@ -119,6 +116,9 @@ export interface _SERVICE {
   'getTopQuizScores' : ActorMethod<[bigint], Array<QuizResponse>>,
   'httpTransform' : ActorMethod<[TransformationInput], TransformationOutput>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
+  'listQuestions' : ActorMethod<[string, boolean], Array<QuestionDTO>>,
+  'listQuizResponses' : ActorMethod<[], Array<QuizResponse>>,
+  'listRegistrations' : ActorMethod<[], Array<Registration>>,
   'sendTestSms' : ActorMethod<[string, string], boolean>,
   'setFast2SmsApiKey' : ActorMethod<[string], undefined>,
   'submitQuizResponse' : ActorMethod<

@@ -21,19 +21,19 @@ export default function Footer() {
             <div className="flex gap-3 mt-4">
               <span
                 aria-label="Facebook"
-                className="text-white/60 cursor-pointer hover:text-gold transition-colors"
+                className="text-white/60 cursor-pointer hover:text-gold transition-smooth"
               >
                 <Facebook className="h-5 w-5" />
               </span>
               <span
                 aria-label="Twitter"
-                className="text-white/60 cursor-pointer hover:text-gold transition-colors"
+                className="text-white/60 cursor-pointer hover:text-gold transition-smooth"
               >
                 <Twitter className="h-5 w-5" />
               </span>
               <span
                 aria-label="YouTube"
-                className="text-white/60 cursor-pointer hover:text-gold transition-colors"
+                className="text-white/60 cursor-pointer hover:text-gold transition-smooth"
               >
                 <Youtube className="h-5 w-5" />
               </span>
@@ -45,22 +45,22 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li>
-                <span className="hover:text-gold transition-colors cursor-pointer">
+                <span className="hover:text-gold transition-smooth cursor-pointer">
                   Home
                 </span>
               </li>
               <li>
-                <span className="hover:text-gold transition-colors cursor-pointer">
+                <span className="hover:text-gold transition-smooth cursor-pointer">
                   Register
                 </span>
               </li>
               <li>
-                <span className="hover:text-gold transition-colors cursor-pointer">
+                <span className="hover:text-gold transition-smooth cursor-pointer">
                   Take Exam
                 </span>
               </li>
               <li>
-                <span className="hover:text-gold transition-colors cursor-pointer">
+                <span className="hover:text-gold transition-smooth cursor-pointer">
                   Results
                 </span>
               </li>

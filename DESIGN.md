@@ -1,52 +1,47 @@
-# Design Brief: Form Builder Tool
+# Design Brief: MKJC Scholarship Exam Portal (Duplicated Instance)
 
-**Tone & Purpose:** Tool-first minimalism. Productivity interface for stateless form control authoring. Zero decoration; every pixel serves clarity.
+**Tone & Purpose:** Minimal, distraction-free exam interface. Navy/Gold MKJC institutional branding. Centered card-based homepage registration, admin dashboard with sidebar navigation, bilingual support (English/Tamil). Zero decoration; exam focus only.
 
 ## Palette
 
-| Token | Light OKLCH | Use |
-|-------|----------|-----|
-| Navy | 0.23 0.07 240 | Sidebar, navigation, text |
-| Gold | 0.62 0.12 78 | CTAs, active states, highlights |
-| White | 1 0 0 | Canvas background |
-| Light Gray | 0.96 0.005 240 | Backgrounds, borders |
-| Canvas Grid | 0.98 0.003 240 | Subtle grid lines on live preview |
+| Token | OKLCH | Use |
+|-------|--------|-----|
+| Navy Primary | 0.23 0.07 240 | Sidebar, buttons, text, branding |
+| Gold Accent | 0.62 0.12 78 | CTAs, highlights, active states |
+| White | 1 0 0 | Cards, form backgrounds |
+| Light Gray | 0.96 0.005 240 | Page backgrounds, borders |
+| Destructive | 0.577 0.245 27.325 | Delete actions (trash icons) |
 
 ## Typography
 
 | Role | Font | Size | Weight |
 |------|------|------|--------|
-| Display | Bricolage Grotesque | 1.5rem | 600 |
-| Body | Plus Jakarta Sans | 0.875rem | 400–500 |
-| Code | Monospace (system) | 0.75rem | 400 |
+| Display | Bricolage Grotesque | 1.25–1.5rem | 600–700 |
+| Body | Plus Jakarta Sans | 0.875–1rem | 400–500 |
+| Tamil | Noto Sans Tamil | 0.875rem | 400 |
 
 ## Structural Zones
 
 | Zone | Treatment |
 |------|-----------|
-| Header | Navy bar, white text, gold CTAs |
-| Left Sidebar | Navy #0B2B4B, white text, gold hover/active |
-| Right Canvas | White bg, subtle grid, bordered preview area |
-| Bottom CSS Editor | Bordered panel with monospace |
+| Homepage | Centered white card, no navbar/footer, gold buttons |
+| Admin Sidebar | Navy bg, white text, gold hover, collapsible |
+| Admin Content | Light gray bg, white card containers, gold accents |
+| Form Fields | White inputs, navy text, gold focus rings |
+| Question Grid | Numbered status (green/gray), pagination controls |
 
-## Spacing & Density
+## Motion & Interaction
 
-Compact: 0.5rem gutters in sidebar, 1rem in canvas. Two-column split (left:right ≈ 30:70 on desktop, stacked on mobile).
+Smooth 0.2s transitions on hover. Gold highlight on active tabs. Button states: navy hover, gold active. Question status pulse (answered=green, unanswered=gray).
 
-## Motion
+## Features
 
-Hover: gold accent appears on sidebar items (smooth 0.2s transition). No bounce animations. Pulse on active control (subtle, 2s cycle).
-
-## Component Patterns
-
-- **Palette Cards:** Grid of draggable form controls (text, select, checkbox, etc.) — navy bg, gold border on hover
-- **Property Editor:** Stacked input fields, minimal labels, real-time preview
-- **CSS Editor:** Monospace, line numbers, syntax color (optional)
-- **Canvas:** Live form preview with grid background, bordered box for visual clarity
+Homepage: Registration form (name, school, group, contact, exam selection), Start Now (gold), Staff Login (navy). Admin: Questions (text/image, bilingual), Registrations (filters), Results (filters), Exams (auto-ID), Settings (SMS API). Quiz: 5q/page, bilingual toggle, status grid, previous/next nav.
 
 ## Constraints
 
-- No animations beyond hover transitions and subtle pulse
-- No gradients or decorative elements
-- Sidebar always visible on desktop (lg:), drawer on mobile
-- All color values via OKLCH tokens; no raw hex
+- Navy #0B2B4B primary, Gold #B88D2A accent only
+- Noto Sans Tamil required for Tamil text rendering
+- No animations beyond state transitions
+- Homepage card-only, no navbar/footer
+- All tokens via OKLCH; no hex or RGB literals

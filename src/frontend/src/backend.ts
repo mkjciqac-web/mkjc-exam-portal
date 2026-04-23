@@ -139,7 +139,7 @@ export interface QuestionDTO {
     option_c_ta: string;
     option_d_en: string;
     option_d_ta: string;
-    question_type: QuestionTypeDTO;
+    question_type: QuestionType;
     question_order: bigint;
     test_key: string;
     question_text_en: string;
@@ -161,7 +161,7 @@ export interface StudentCredentials {
     is_active: boolean;
     registration_id: RegistrationId;
 }
-export enum QuestionTypeDTO {
+export enum QuestionType {
     text = "text",
     image = "image"
 }
@@ -172,23 +172,23 @@ export enum UserRole {
 }
 export interface backendInterface {
     _initializeAccessControl(): Promise<void>;
+    addQuestion(dto: QuestionDTO): Promise<QuestionId>;
+    addRegistration(student_name: string, school_name: string, contact_number: string, whatsapp_number: string, exam_group: string, test_key: string): Promise<RegistrationId>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
-    createQuestion(dto: QuestionDTO): Promise<QuestionId>;
-    createRegistration(student_name: string, school_name: string, contact_number: string, whatsapp_number: string, exam_group: string, test_key: string): Promise<RegistrationId>;
-    deleteQuestionByTestKeyAndOrder(test_key: string, question_order: bigint): Promise<void>;
-    deleteRegistration(registration_id: RegistrationId): Promise<void>;
+    deleteQuestion(question_id: QuestionId): Promise<void>;
+    deleteRegistration(id: RegistrationId): Promise<void>;
+    filterQuizResponses(registration_id: RegistrationId): Promise<Array<QuizResponse>>;
     generateStudentCredentials(registration_id: RegistrationId, contact_number: string): Promise<{
         password: string;
         user_id: string;
     }>;
-    getAllQuizResponses(): Promise<Array<QuizResponse>>;
-    getAllRegistrations(): Promise<Array<Registration>>;
     getAllStudentCredentials(): Promise<Array<StudentCredentials>>;
     getCallerUserRole(): Promise<UserRole>;
     getCredentialsByRegistrationId(registration_id: RegistrationId): Promise<StudentCredentials | null>;
     getFast2SmsApiKey(): Promise<string>;
-    getQuestionsByTestKey(test_key: string, activeOnly: boolean): Promise<Array<QuestionDTO>>;
-    getResponsesByRegistrationId(registration_id: RegistrationId): Promise<Array<QuizResponse>>;
+    getQuestion(question_id: QuestionId): Promise<QuestionDTO | null>;
+    getQuizResponse(id: QuizResponseId): Promise<QuizResponse | null>;
+    getRegistration(id: RegistrationId): Promise<Registration | null>;
     getSmsStats(): Promise<{
         total_failed: bigint;
         api_key_set: boolean;
@@ -197,6 +197,9 @@ export interface backendInterface {
     getTopQuizScores(limit: bigint): Promise<Array<QuizResponse>>;
     httpTransform(input: TransformationInput): Promise<TransformationOutput>;
     isCallerAdmin(): Promise<boolean>;
+    listQuestions(test_key: string, activeOnly: boolean): Promise<Array<QuestionDTO>>;
+    listQuizResponses(): Promise<Array<QuizResponse>>;
+    listRegistrations(): Promise<Array<Registration>>;
     sendTestSms(phone: string, message: string): Promise<boolean>;
     setFast2SmsApiKey(key: string): Promise<void>;
     submitQuizResponse(registration_id: RegistrationId, question_index: bigint, question_text: string, student_answer: string, correct_answer: string, is_correct: boolean, score: bigint, total_questions: bigint, percentage: number, time_taken: bigint): Promise<QuizResponseId>;
@@ -207,7 +210,7 @@ export interface backendInterface {
         registration_id: RegistrationId;
     }>;
 }
-import type { QuestionDTO as _QuestionDTO, QuestionTypeDTO as _QuestionTypeDTO, StudentCredentials as _StudentCredentials, UserRole as _UserRole } from "./declarations/backend.did.d.ts";
+import type { QuestionDTO as _QuestionDTO, QuestionType as _QuestionType, QuizResponse as _QuizResponse, Registration as _Registration, StudentCredentials as _StudentCredentials, UserRole as _UserRole } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
     async _initializeAccessControl(): Promise<void> {
@@ -224,59 +227,59 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async addQuestion(arg0: QuestionDTO): Promise<QuestionId> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addQuestion(to_candid_QuestionDTO_n1(this._uploadFile, this._downloadFile, arg0));
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addQuestion(to_candid_QuestionDTO_n1(this._uploadFile, this._downloadFile, arg0));
+            return result;
+        }
+    }
+    async addRegistration(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string, arg5: string): Promise<RegistrationId> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addRegistration(arg0, arg1, arg2, arg3, arg4, arg5);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addRegistration(arg0, arg1, arg2, arg3, arg4, arg5);
+            return result;
+        }
+    }
     async assignCallerUserRole(arg0: Principal, arg1: UserRole): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n1(this._uploadFile, this._downloadFile, arg1));
+                const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n5(this._uploadFile, this._downloadFile, arg1));
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n1(this._uploadFile, this._downloadFile, arg1));
+            const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n5(this._uploadFile, this._downloadFile, arg1));
             return result;
         }
     }
-    async createQuestion(arg0: QuestionDTO): Promise<QuestionId> {
+    async deleteQuestion(arg0: QuestionId): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.createQuestion(to_candid_QuestionDTO_n3(this._uploadFile, this._downloadFile, arg0));
+                const result = await this.actor.deleteQuestion(arg0);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.createQuestion(to_candid_QuestionDTO_n3(this._uploadFile, this._downloadFile, arg0));
-            return result;
-        }
-    }
-    async createRegistration(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string, arg5: string): Promise<RegistrationId> {
-        if (this.processError) {
-            try {
-                const result = await this.actor.createRegistration(arg0, arg1, arg2, arg3, arg4, arg5);
-                return result;
-            } catch (e) {
-                this.processError(e);
-                throw new Error("unreachable");
-            }
-        } else {
-            const result = await this.actor.createRegistration(arg0, arg1, arg2, arg3, arg4, arg5);
-            return result;
-        }
-    }
-    async deleteQuestionByTestKeyAndOrder(arg0: string, arg1: bigint): Promise<void> {
-        if (this.processError) {
-            try {
-                const result = await this.actor.deleteQuestionByTestKeyAndOrder(arg0, arg1);
-                return result;
-            } catch (e) {
-                this.processError(e);
-                throw new Error("unreachable");
-            }
-        } else {
-            const result = await this.actor.deleteQuestionByTestKeyAndOrder(arg0, arg1);
+            const result = await this.actor.deleteQuestion(arg0);
             return result;
         }
     }
@@ -294,6 +297,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async filterQuizResponses(arg0: RegistrationId): Promise<Array<QuizResponse>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.filterQuizResponses(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.filterQuizResponses(arg0);
+            return result;
+        }
+    }
     async generateStudentCredentials(arg0: RegistrationId, arg1: string): Promise<{
         password: string;
         user_id: string;
@@ -308,34 +325,6 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.generateStudentCredentials(arg0, arg1);
-            return result;
-        }
-    }
-    async getAllQuizResponses(): Promise<Array<QuizResponse>> {
-        if (this.processError) {
-            try {
-                const result = await this.actor.getAllQuizResponses();
-                return result;
-            } catch (e) {
-                this.processError(e);
-                throw new Error("unreachable");
-            }
-        } else {
-            const result = await this.actor.getAllQuizResponses();
-            return result;
-        }
-    }
-    async getAllRegistrations(): Promise<Array<Registration>> {
-        if (this.processError) {
-            try {
-                const result = await this.actor.getAllRegistrations();
-                return result;
-            } catch (e) {
-                this.processError(e);
-                throw new Error("unreachable");
-            }
-        } else {
-            const result = await this.actor.getAllRegistrations();
             return result;
         }
     }
@@ -395,32 +384,46 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async getQuestionsByTestKey(arg0: string, arg1: boolean): Promise<Array<QuestionDTO>> {
+    async getQuestion(arg0: QuestionId): Promise<QuestionDTO | null> {
         if (this.processError) {
             try {
-                const result = await this.actor.getQuestionsByTestKey(arg0, arg1);
-                return from_candid_vec_n10(this._uploadFile, this._downloadFile, result);
+                const result = await this.actor.getQuestion(arg0);
+                return from_candid_opt_n10(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.getQuestionsByTestKey(arg0, arg1);
-            return from_candid_vec_n10(this._uploadFile, this._downloadFile, result);
+            const result = await this.actor.getQuestion(arg0);
+            return from_candid_opt_n10(this._uploadFile, this._downloadFile, result);
         }
     }
-    async getResponsesByRegistrationId(arg0: RegistrationId): Promise<Array<QuizResponse>> {
+    async getQuizResponse(arg0: QuizResponseId): Promise<QuizResponse | null> {
         if (this.processError) {
             try {
-                const result = await this.actor.getResponsesByRegistrationId(arg0);
-                return result;
+                const result = await this.actor.getQuizResponse(arg0);
+                return from_candid_opt_n15(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.getResponsesByRegistrationId(arg0);
-            return result;
+            const result = await this.actor.getQuizResponse(arg0);
+            return from_candid_opt_n15(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getRegistration(arg0: RegistrationId): Promise<Registration | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getRegistration(arg0);
+                return from_candid_opt_n16(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getRegistration(arg0);
+            return from_candid_opt_n16(this._uploadFile, this._downloadFile, result);
         }
     }
     async getSmsStats(): Promise<{
@@ -483,6 +486,48 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async listQuestions(arg0: string, arg1: boolean): Promise<Array<QuestionDTO>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.listQuestions(arg0, arg1);
+                return from_candid_vec_n17(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.listQuestions(arg0, arg1);
+            return from_candid_vec_n17(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async listQuizResponses(): Promise<Array<QuizResponse>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.listQuizResponses();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.listQuizResponses();
+            return result;
+        }
+    }
+    async listRegistrations(): Promise<Array<Registration>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.listRegistrations();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.listRegistrations();
+            return result;
+        }
+    }
     async sendTestSms(arg0: string, arg1: string): Promise<boolean> {
         if (this.processError) {
             try {
@@ -542,14 +587,14 @@ export class Backend implements backendInterface {
     async updateQuestion(arg0: QuestionId, arg1: QuestionDTO): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.updateQuestion(arg0, to_candid_QuestionDTO_n3(this._uploadFile, this._downloadFile, arg1));
+                const result = await this.actor.updateQuestion(arg0, to_candid_QuestionDTO_n1(this._uploadFile, this._downloadFile, arg1));
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.updateQuestion(arg0, to_candid_QuestionDTO_n3(this._uploadFile, this._downloadFile, arg1));
+            const result = await this.actor.updateQuestion(arg0, to_candid_QuestionDTO_n1(this._uploadFile, this._downloadFile, arg1));
             return result;
         }
     }
@@ -574,11 +619,20 @@ export class Backend implements backendInterface {
 function from_candid_QuestionDTO_n11(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _QuestionDTO): QuestionDTO {
     return from_candid_record_n12(_uploadFile, _downloadFile, value);
 }
-function from_candid_QuestionTypeDTO_n13(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _QuestionTypeDTO): QuestionTypeDTO {
+function from_candid_QuestionType_n13(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _QuestionType): QuestionType {
     return from_candid_variant_n14(_uploadFile, _downloadFile, value);
 }
 function from_candid_UserRole_n7(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _UserRole): UserRole {
     return from_candid_variant_n8(_uploadFile, _downloadFile, value);
+}
+function from_candid_opt_n10(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_QuestionDTO]): QuestionDTO | null {
+    return value.length === 0 ? null : from_candid_QuestionDTO_n11(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_opt_n15(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_QuizResponse]): QuizResponse | null {
+    return value.length === 0 ? null : value[0];
+}
+function from_candid_opt_n16(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_Registration]): Registration | null {
+    return value.length === 0 ? null : value[0];
 }
 function from_candid_opt_n9(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_StudentCredentials]): StudentCredentials | null {
     return value.length === 0 ? null : value[0];
@@ -592,7 +646,7 @@ function from_candid_record_n12(_uploadFile: (file: ExternalBlob) => Promise<Uin
     option_c_ta: string;
     option_d_en: string;
     option_d_ta: string;
-    question_type: _QuestionTypeDTO;
+    question_type: _QuestionType;
     question_order: bigint;
     test_key: string;
     question_text_en: string;
@@ -611,7 +665,7 @@ function from_candid_record_n12(_uploadFile: (file: ExternalBlob) => Promise<Uin
     option_c_ta: string;
     option_d_en: string;
     option_d_ta: string;
-    question_type: QuestionTypeDTO;
+    question_type: QuestionType;
     question_order: bigint;
     test_key: string;
     question_text_en: string;
@@ -631,7 +685,7 @@ function from_candid_record_n12(_uploadFile: (file: ExternalBlob) => Promise<Uin
         option_c_ta: value.option_c_ta,
         option_d_en: value.option_d_en,
         option_d_ta: value.option_d_ta,
-        question_type: from_candid_QuestionTypeDTO_n13(_uploadFile, _downloadFile, value.question_type),
+        question_type: from_candid_QuestionType_n13(_uploadFile, _downloadFile, value.question_type),
         question_order: value.question_order,
         test_key: value.test_key,
         question_text_en: value.question_text_en,
@@ -647,8 +701,8 @@ function from_candid_variant_n14(_uploadFile: (file: ExternalBlob) => Promise<Ui
     text: null;
 } | {
     image: null;
-}): QuestionTypeDTO {
-    return "text" in value ? QuestionTypeDTO.text : "image" in value ? QuestionTypeDTO.image : value;
+}): QuestionType {
+    return "text" in value ? QuestionType.text : "image" in value ? QuestionType.image : value;
 }
 function from_candid_variant_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     admin: null;
@@ -659,19 +713,19 @@ function from_candid_variant_n8(_uploadFile: (file: ExternalBlob) => Promise<Uin
 }): UserRole {
     return "admin" in value ? UserRole.admin : "user" in value ? UserRole.user : "guest" in value ? UserRole.guest : value;
 }
-function from_candid_vec_n10(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_QuestionDTO>): Array<QuestionDTO> {
+function from_candid_vec_n17(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_QuestionDTO>): Array<QuestionDTO> {
     return value.map((x)=>from_candid_QuestionDTO_n11(_uploadFile, _downloadFile, x));
 }
-function to_candid_QuestionDTO_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: QuestionDTO): _QuestionDTO {
-    return to_candid_record_n4(_uploadFile, _downloadFile, value);
+function to_candid_QuestionDTO_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: QuestionDTO): _QuestionDTO {
+    return to_candid_record_n2(_uploadFile, _downloadFile, value);
 }
-function to_candid_QuestionTypeDTO_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: QuestionTypeDTO): _QuestionTypeDTO {
+function to_candid_QuestionType_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: QuestionType): _QuestionType {
+    return to_candid_variant_n4(_uploadFile, _downloadFile, value);
+}
+function to_candid_UserRole_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): _UserRole {
     return to_candid_variant_n6(_uploadFile, _downloadFile, value);
 }
-function to_candid_UserRole_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): _UserRole {
-    return to_candid_variant_n2(_uploadFile, _downloadFile, value);
-}
-function to_candid_record_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+function to_candid_record_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     option_a_en: string;
     option_a_ta: string;
     option_b_en: string;
@@ -680,7 +734,7 @@ function to_candid_record_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8A
     option_c_ta: string;
     option_d_en: string;
     option_d_ta: string;
-    question_type: QuestionTypeDTO;
+    question_type: QuestionType;
     question_order: bigint;
     test_key: string;
     question_text_en: string;
@@ -699,7 +753,7 @@ function to_candid_record_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8A
     option_c_ta: string;
     option_d_en: string;
     option_d_ta: string;
-    question_type: _QuestionTypeDTO;
+    question_type: _QuestionType;
     question_order: bigint;
     test_key: string;
     question_text_en: string;
@@ -719,7 +773,7 @@ function to_candid_record_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8A
         option_c_ta: value.option_c_ta,
         option_d_en: value.option_d_en,
         option_d_ta: value.option_d_ta,
-        question_type: to_candid_QuestionTypeDTO_n5(_uploadFile, _downloadFile, value.question_type),
+        question_type: to_candid_QuestionType_n3(_uploadFile, _downloadFile, value.question_type),
         question_order: value.question_order,
         test_key: value.test_key,
         question_text_en: value.question_text_en,
@@ -731,7 +785,18 @@ function to_candid_record_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8A
         correct_answer_ta: value.correct_answer_ta
     };
 }
-function to_candid_variant_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): {
+function to_candid_variant_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: QuestionType): {
+    text: null;
+} | {
+    image: null;
+} {
+    return value == QuestionType.text ? {
+        text: null
+    } : value == QuestionType.image ? {
+        image: null
+    } : value;
+}
+function to_candid_variant_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): {
     admin: null;
 } | {
     user: null;
@@ -744,17 +809,6 @@ function to_candid_variant_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8
         user: null
     } : value == UserRole.guest ? {
         guest: null
-    } : value;
-}
-function to_candid_variant_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: QuestionTypeDTO): {
-    text: null;
-} | {
-    image: null;
-} {
-    return value == QuestionTypeDTO.text ? {
-        text: null
-    } : value == QuestionTypeDTO.image ? {
-        image: null
     } : value;
 }
 export interface CreateActorOptions {

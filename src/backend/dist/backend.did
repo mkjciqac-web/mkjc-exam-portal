@@ -62,7 +62,7 @@ type QuizResponse =
    time_taken: nat;
    total_questions: nat;
  };
-type QuestionTypeDTO = 
+type QuestionType = 
  variant {
    image;
    "text";
@@ -86,35 +86,33 @@ type QuestionDTO =
    question_order: nat;
    question_text_en: text;
    question_text_ta: text;
-   question_type: QuestionTypeDTO;
+   question_type: QuestionType;
    test_key: text;
  };
 service : {
   _initializeAccessControl: () -> ();
-  assignCallerUserRole: (user: principal, role: UserRole) -> ();
-  createQuestion: (dto: QuestionDTO) -> (QuestionId);
-  createRegistration: (student_name: text, school_name: text, contact_number:
+  addQuestion: (dto: QuestionDTO) -> (QuestionId);
+  addRegistration: (student_name: text, school_name: text, contact_number:
    text, whatsapp_number: text, exam_group: text, test_key: text) ->
    (RegistrationId);
-  deleteQuestionByTestKeyAndOrder: (test_key: text, question_order: nat) ->
-   ();
-  deleteRegistration: (registration_id: RegistrationId) -> ();
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  deleteQuestion: (question_id: QuestionId) -> ();
+  deleteRegistration: (id: RegistrationId) -> ();
+  filterQuizResponses: (registration_id: RegistrationId) ->
+   (vec QuizResponse) query;
   generateStudentCredentials: (registration_id: RegistrationId,
    contact_number: text) -> (record {
                                password: text;
                                user_id: text;
                              });
-  getAllQuizResponses: () -> (vec QuizResponse) query;
-  getAllRegistrations: () -> (vec Registration) query;
   getAllStudentCredentials: () -> (vec StudentCredentials) query;
   getCallerUserRole: () -> (UserRole) query;
   getCredentialsByRegistrationId: (registration_id: RegistrationId) ->
    (opt StudentCredentials) query;
   getFast2SmsApiKey: () -> (text) query;
-  getQuestionsByTestKey: (test_key: text, activeOnly: bool) ->
-   (vec QuestionDTO) query;
-  getResponsesByRegistrationId: (registration_id: RegistrationId) ->
-   (vec QuizResponse) query;
+  getQuestion: (question_id: QuestionId) -> (opt QuestionDTO) query;
+  getQuizResponse: (id: QuizResponseId) -> (opt QuizResponse) query;
+  getRegistration: (id: RegistrationId) -> (opt Registration) query;
   getSmsStats: () ->
    (record {
       api_key_set: bool;
@@ -124,6 +122,10 @@ service : {
   getTopQuizScores: (limit: nat) -> (vec QuizResponse) query;
   httpTransform: (input: TransformationInput) -> (TransformationOutput) query;
   isCallerAdmin: () -> (bool) query;
+  listQuestions: (test_key: text, activeOnly: bool) ->
+   (vec QuestionDTO) query;
+  listQuizResponses: () -> (vec QuizResponse) query;
+  listRegistrations: () -> (vec Registration) query;
   sendTestSms: (phone: text, message: text) -> (bool);
   setFast2SmsApiKey: (key: text) -> ();
   submitQuizResponse: (registration_id: RegistrationId, question_index: 

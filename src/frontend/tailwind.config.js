@@ -16,8 +16,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'sans-serif'],
-        display: ['Bricolage Grotesque', 'sans-serif'],
+        sans: ["Plus Jakarta Sans", "Noto Sans Tamil", "sans-serif"],
+        display: ["Bricolage Grotesque", "sans-serif"],
+        tamil: ["Noto Sans Tamil", "sans-serif"],
       },
       colors: {
         navy: "oklch(var(--navy) / <alpha-value>)",
@@ -81,6 +82,7 @@ export default {
       boxShadow: {
         card: "0 8px 24px rgba(0,0,0,0.10)",
         xs: "0 1px 2px 0 rgba(0,0,0,0.05)",
+        subtle: "0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04)",
         "builder-divider": "inset -1px 0 0 oklch(var(--border))",
       },
       keyframes: {

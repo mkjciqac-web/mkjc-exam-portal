@@ -9,9 +9,11 @@ import {
   CheckSquare,
   ChevronDown,
   Circle,
+  Copy,
   Download,
   FileInput,
   MousePointer,
+  Plus,
   RotateCcw,
   Text,
   Trash2,
@@ -40,49 +42,55 @@ interface FormControl {
   buttonText: string;
 }
 
+interface FormSnapshot {
+  id: string;
+  name: string;
+  controls: FormControl[];
+  css: string;
+  js: string;
+  formTitle: string;
+  createdAt: number;
+}
+
 interface BuilderPageProps {
   setPage: (page: string) => void;
 }
 
-// ── Palette definition ─────────────────────────────────────────────────────────
+// ── Palette ────────────────────────────────────────────────────────────────────
 const PALETTE: { type: ControlType; label: string; icon: React.ReactNode }[] = [
-  { type: "text", label: "Text Input", icon: <Type className="h-6 w-6" /> },
-  { type: "textarea", label: "Textarea", icon: <Text className="h-6 w-6" /> },
+  { type: "text", label: "Text Input", icon: <Type className="h-5 w-5" /> },
+  { type: "textarea", label: "Textarea", icon: <Text className="h-5 w-5" /> },
   {
     type: "select",
-    label: "Select Dropdown",
-    icon: <ChevronDown className="h-6 w-6" />,
+    label: "Dropdown",
+    icon: <ChevronDown className="h-5 w-5" />,
   },
   {
     type: "checkbox",
-    label: "Checkbox Group",
-    icon: <CheckSquare className="h-6 w-6" />,
+    label: "Checkboxes",
+    icon: <CheckSquare className="h-5 w-5" />,
   },
-  {
-    type: "radio",
-    label: "Radio Buttons",
-    icon: <Circle className="h-6 w-6" />,
-  },
+  { type: "radio", label: "Radio Group", icon: <Circle className="h-5 w-5" /> },
   {
     type: "button",
     label: "Button",
-    icon: <MousePointer className="h-6 w-6" />,
+    icon: <MousePointer className="h-5 w-5" />,
   },
   {
     type: "date",
     label: "Date Picker",
-    icon: <Calendar className="h-6 w-6" />,
+    icon: <Calendar className="h-5 w-5" />,
   },
   {
     type: "file",
     label: "File Upload",
-    icon: <FileInput className="h-6 w-6" />,
+    icon: <FileInput className="h-5 w-5" />,
   },
 ];
 
-// ── Preset CSS themes ──────────────────────────────────────────────────────────
+// ── Themes ─────────────────────────────────────────────────────────────────────
 const THEMES: Record<string, string> = {
-  Default: `body { font-family: Arial, sans-serif; background: #f5f7fa; padding: 24px; }
+  Light: `body { font-family: Arial, sans-serif; background: #f5f7fa; padding: 24px; }
 form { background: white; padding: 32px; border-radius: 8px; max-width: 540px; margin: 0 auto; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
 .form-title { font-size: 22px; font-weight: 700; color: #0B2B4B; margin-bottom: 24px; }
 .field-group { margin-bottom: 18px; }
@@ -147,7 +155,7 @@ button[type=submit]:hover, .form-btn:hover { background: #333; }
 .radio-option, .checkbox-option { display: flex; align-items: center; gap: 10px; font-size: 14px; }`,
 };
 
-// ── Default JS template ────────────────────────────────────────────────────────
+// ── Default JS ─────────────────────────────────────────────────────────────────
 const DEFAULT_JS = `document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('builderForm');
   if (!form) return;
@@ -192,8 +200,10 @@ const DEFAULT_JS = `document.addEventListener('DOMContentLoaded', function() {
 });`;
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
+let _idCounter = 0;
 function uid() {
-  return Math.random().toString(36).slice(2, 10);
+  _idCounter++;
+  return `c${Date.now().toString(36)}${_idCounter}`;
 }
 
 function defaultControl(type: ControlType): FormControl {
@@ -298,8 +308,7 @@ function buildIframeDoc(
   selectedId: string | null,
 ): string {
   const selectionScript = selectedId
-    ? `
-<script>
+    ? `<script>
 document.addEventListener('DOMContentLoaded', function() {
   var el = document.querySelector('[data-ctrl-id="${selectedId}"]');
   if (el) {
@@ -311,8 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>`
     : "";
 
-  const clickScript = `
-<script>
+  const clickScript = `<script>
 document.addEventListener('click', function(e) {
   var ctrl = e.target.closest('[data-ctrl-id]');
   if (ctrl) {
@@ -321,10 +329,9 @@ document.addEventListener('click', function(e) {
 });
 </script>`;
 
-  const wrappedControls = controls.map((c) => {
-    const html = renderControlHtml(c);
-    return `<div data-ctrl-id="${c.id}">${html}</div>`;
-  });
+  const wrappedControls = controls.map(
+    (c) => `<div data-ctrl-id="${c.id}">${renderControlHtml(c)}</div>`,
+  );
 
   return `<!DOCTYPE html>
 <html>
@@ -343,9 +350,7 @@ ${wrappedControls.join("\n")}
 </form>
 ${selectionScript}
 ${clickScript}
-<script>
-${js}
-</script>
+<script>${js}</script>
 </body>
 </html>`;
 }
@@ -379,29 +384,48 @@ ${js}
 </html>`;
 }
 
-// ── Component ──────────────────────────────────────────────────────────────────
+const INITIAL_CONTROLS: FormControl[] = [
+  {
+    id: uid(),
+    type: "text",
+    label: "Full Name",
+    placeholder: "Enter your full name",
+    required: true,
+    options: "",
+    buttonText: "",
+  },
+  {
+    id: uid(),
+    type: "text",
+    label: "Email Address",
+    placeholder: "you@example.com",
+    required: true,
+    options: "",
+    buttonText: "",
+  },
+  {
+    id: uid(),
+    type: "button",
+    label: "",
+    placeholder: "",
+    required: false,
+    options: "",
+    buttonText: "Submit Form",
+  },
+];
+
+// ── Main Component ─────────────────────────────────────────────────────────────
 export default function BuilderPage({ setPage }: BuilderPageProps) {
-  const [controls, setControls] = useState<FormControl[]>([
-    {
-      ...defaultControl("text"),
-      label: "Full Name",
-      placeholder: "Enter your full name",
-    },
-    {
-      ...defaultControl("text"),
-      id: uid(),
-      label: "Email Address",
-      placeholder: "you@example.com",
-    },
-    { ...defaultControl("button"), id: uid() },
-  ]);
+  const [controls, setControls] = useState<FormControl[]>(INITIAL_CONTROLS);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [formTitle, setFormTitle] = useState("Registration Form");
-  const [css, setCss] = useState(THEMES.Default);
+  const [css, setCss] = useState(THEMES.Light);
   const [js, setJs] = useState(DEFAULT_JS);
   const [activeTab, setActiveTab] = useState<
     "controls" | "properties" | "css" | "js"
   >("controls");
+  const [snapshots, setSnapshots] = useState<FormSnapshot[]>([]);
+  const [showSnapshots, setShowSnapshots] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const selected = controls.find((c) => c.id === selectedId) ?? null;
@@ -410,7 +434,7 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
   useEffect(() => {
     function onMessage(e: MessageEvent) {
       if (e.data?.type === "selectControl") {
-        setSelectedId(e.data.id);
+        setSelectedId(e.data.id as string);
         setActiveTab("properties");
       }
     }
@@ -418,12 +442,15 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
     return () => window.removeEventListener("message", onMessage);
   }, []);
 
-  // Rebuild iframe on any change
   const rebuildIframe = useCallback(() => {
     if (!iframeRef.current) return;
-    const doc = buildIframeDoc(controls, css, js, formTitle, selectedId);
-    const iframe = iframeRef.current;
-    iframe.srcdoc = doc;
+    iframeRef.current.srcdoc = buildIframeDoc(
+      controls,
+      css,
+      js,
+      formTitle,
+      selectedId,
+    );
   }, [controls, css, js, formTitle, selectedId]);
 
   useEffect(() => {
@@ -442,6 +469,19 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
     setControls((prev) =>
       prev.map((c) => (c.id === selectedId ? { ...c, [field]: value } : c)),
     );
+  }
+
+  function duplicateControl(id: string) {
+    const ctrl = controls.find((c) => c.id === id);
+    if (!ctrl) return;
+    const newCtrl: FormControl = { ...ctrl, id: uid() };
+    setControls((prev) => {
+      const idx = prev.findIndex((c) => c.id === id);
+      const next = [...prev];
+      next.splice(idx + 1, 0, newCtrl);
+      return next;
+    });
+    setSelectedId(newCtrl.id);
   }
 
   function deleteControl(id: string) {
@@ -465,13 +505,39 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
     setCss(THEMES[name]);
   }
 
+  function saveSnapshot() {
+    const snap: FormSnapshot = {
+      id: uid(),
+      name: formTitle || `Form ${snapshots.length + 1}`,
+      controls: JSON.parse(JSON.stringify(controls)) as FormControl[],
+      css,
+      js,
+      formTitle,
+      createdAt: Date.now(),
+    };
+    setSnapshots((prev) => [snap, ...prev]);
+  }
+
+  function loadSnapshot(snap: FormSnapshot) {
+    setControls(snap.controls);
+    setCss(snap.css);
+    setJs(snap.js);
+    setFormTitle(snap.formTitle);
+    setSelectedId(null);
+    setShowSnapshots(false);
+  }
+
+  function deleteSnapshot(id: string) {
+    setSnapshots((prev) => prev.filter((s) => s.id !== id));
+  }
+
   function handleExport() {
     const html = buildExportDoc(controls, css, js, formTitle);
     const blob = new Blob([html], { type: "text/html;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "form_builder_export.html";
+    a.download = `${formTitle.replace(/\s+/g, "_").toLowerCase() || "form"}_export.html`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -481,58 +547,156 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
     setSelectedId(null);
   }
 
-  const sidebarTabClass = (tab: string) =>
-    `flex-1 py-2 text-xs font-semibold transition-colors ${
+  const tabClass = (tab: string) =>
+    `flex-1 py-2 text-xs font-semibold transition-colors border-b-2 ${
       activeTab === tab
-        ? "text-amber-400 border-b-2 border-amber-400"
-        : "text-white/60 hover:text-white border-b-2 border-transparent"
+        ? "text-amber-400 border-amber-400"
+        : "text-white/50 hover:text-white/80 border-transparent"
     }`;
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-slate-100">
-      {/* ── Top toolbar ─────────────────────────────────────────── */}
-      <header className="flex items-center gap-3 px-4 py-2.5 border-b border-white/10 bg-[#0B2B4B]">
+    <div
+      className="flex flex-col h-screen overflow-hidden"
+      style={{ background: "#0f172a" }}
+    >
+      {/* ── Top toolbar ──────────────────────────────────────────────────────── */}
+      <header
+        className="flex items-center gap-3 px-4 py-2.5 border-b shrink-0"
+        style={{ background: "#0B2B4B", borderColor: "rgba(255,255,255,0.1)" }}
+      >
         <button
           type="button"
           data-ocid="builder.back.button"
           onClick={() => setPage("admin")}
-          className="flex items-center gap-1.5 text-sm font-medium text-white/80 hover:text-amber-400 transition-colors"
+          className="flex items-center gap-1.5 text-sm font-medium text-white/70 hover:text-amber-400 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Admin
+          Admin
         </button>
 
-        <div className="w-px h-5 bg-white/20 mx-1" />
+        <div
+          className="w-px h-5 mx-1"
+          style={{ background: "rgba(255,255,255,0.15)" }}
+        />
 
-        <span className="font-display font-bold text-white text-base tracking-wide">
+        <span className="font-bold text-white text-sm tracking-wide hidden sm:block">
           MKJC Form Builder
         </span>
 
         <div className="flex-1" />
 
+        {/* Form title */}
         <Input
           data-ocid="builder.form_title.input"
           value={formTitle}
           onChange={(e) => setFormTitle(e.target.value)}
           placeholder="Form title..."
-          className="w-52 h-8 text-sm bg-white/10 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-amber-400"
+          className="w-44 h-8 text-sm border-white/20 text-white placeholder:text-white/40"
+          style={{ background: "rgba(255,255,255,0.08)" }}
         />
+
+        {/* Saved instances */}
+        <div className="relative">
+          <button
+            type="button"
+            data-ocid="builder.snapshots.button"
+            onClick={() => setShowSnapshots((v) => !v)}
+            className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded border text-white/70 hover:text-white transition-colors"
+            style={{
+              borderColor: "rgba(255,255,255,0.2)",
+              background: "rgba(255,255,255,0.05)",
+            }}
+          >
+            <Copy className="h-3.5 w-3.5" />
+            Saved ({snapshots.length})
+          </button>
+          {showSnapshots && (
+            <div
+              className="absolute right-0 top-10 w-72 z-50 rounded-lg border shadow-2xl overflow-hidden"
+              style={{
+                background: "#1e3a5f",
+                borderColor: "rgba(255,255,255,0.15)",
+              }}
+            >
+              <div
+                className="flex items-center justify-between px-3 py-2 border-b"
+                style={{ borderColor: "rgba(255,255,255,0.1)" }}
+              >
+                <span className="text-xs font-semibold text-white/70 uppercase tracking-wider">
+                  Saved Instances
+                </span>
+                <button
+                  type="button"
+                  data-ocid="builder.save_instance.button"
+                  onClick={saveSnapshot}
+                  className="flex items-center gap-1 text-xs font-bold px-2 py-1 rounded text-amber-400 hover:bg-amber-400/10 transition-colors"
+                >
+                  <Plus className="h-3 w-3" /> Save Current
+                </button>
+              </div>
+              {snapshots.length === 0 ? (
+                <div className="px-3 py-6 text-center text-xs text-white/40">
+                  No saved instances yet.
+                  <br />
+                  Click "Save Current" to save.
+                </div>
+              ) : (
+                <div className="max-h-60 overflow-y-auto">
+                  {snapshots.map((snap) => (
+                    <div
+                      key={snap.id}
+                      data-ocid="builder.snapshot.item"
+                      className="flex items-center gap-2 px-3 py-2 border-b hover:bg-white/5 transition-colors"
+                      style={{ borderColor: "rgba(255,255,255,0.06)" }}
+                    >
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-medium text-white truncate">
+                          {snap.name}
+                        </p>
+                        <p className="text-xs text-white/40">
+                          {snap.controls.length} fields ·{" "}
+                          {new Date(snap.createdAt).toLocaleTimeString()}
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => loadSnapshot(snap)}
+                        className="text-xs text-amber-400 hover:text-amber-300 font-medium transition-colors"
+                      >
+                        Load
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => deleteSnapshot(snap.id)}
+                        className="text-white/30 hover:text-red-400 transition-colors"
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
         <button
           type="button"
           data-ocid="builder.clear.button"
           onClick={clearAll}
-          className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded border text-white/70 border-white/20 hover:bg-white/10 transition-colors"
+          className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded border text-white/60 hover:text-white transition-colors"
+          style={{ borderColor: "rgba(255,255,255,0.2)" }}
         >
           <RotateCcw className="h-3.5 w-3.5" />
-          Clear All
+          Clear
         </button>
 
         <button
           type="button"
           data-ocid="builder.export.button"
           onClick={handleExport}
-          className="flex items-center gap-1.5 text-xs font-bold px-4 py-1.5 rounded bg-amber-500 hover:bg-amber-400 text-[#0B2B4B] transition-colors"
+          className="flex items-center gap-1.5 text-xs font-bold px-4 py-1.5 rounded transition-colors"
+          style={{ background: "#B88D2A", color: "#0B2B4B" }}
         >
           <Download className="h-3.5 w-3.5" />
           Export HTML
@@ -540,20 +704,29 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
       </header>
 
       <div className="flex flex-1 overflow-hidden">
-        {/* ── Left sidebar ─────────────────────────────────────── */}
-        <aside className="flex flex-col w-64 shrink-0 overflow-hidden border-r border-white/10 bg-[#0B2B4B]">
+        {/* ── Left sidebar ─────────────────────────────────────────────────── */}
+        <aside
+          className="flex flex-col w-64 shrink-0 overflow-hidden border-r"
+          style={{
+            background: "#0B2B4B",
+            borderColor: "rgba(255,255,255,0.08)",
+          }}
+        >
           {/* Tab strip */}
-          <div className="flex border-b border-white/10 shrink-0">
+          <div
+            className="flex border-b shrink-0"
+            style={{ borderColor: "rgba(255,255,255,0.08)" }}
+          >
             {(["controls", "properties", "css", "js"] as const).map((t) => (
               <button
                 type="button"
                 key={t}
                 data-ocid={`builder.sidebar.${t}.tab`}
-                className={sidebarTabClass(t)}
+                className={tabClass(t)}
                 onClick={() => setActiveTab(t)}
               >
                 {t === "controls"
-                  ? "Controls"
+                  ? "Fields"
                   : t === "properties"
                     ? "Props"
                     : t === "css"
@@ -563,35 +736,53 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
             ))}
           </div>
 
-          <div className="flex-1 overflow-y-auto p-3 space-y-3">
-            {/* ── Controls palette ── */}
+          <div className="flex-1 overflow-y-auto p-3 space-y-4">
+            {/* ── Controls palette ─────────────────────────────── */}
             {activeTab === "controls" && (
               <>
-                <p className="text-xs text-white/50 uppercase tracking-widest font-semibold px-1 mb-1">
-                  Click to Add
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  {PALETTE.map((item) => (
-                    <button
-                      type="button"
-                      key={item.type}
-                      data-ocid={`builder.palette.${item.type}`}
-                      onClick={() => addControl(item.type)}
-                      className="flex flex-col items-center justify-center gap-2 p-3 rounded-lg text-xs font-medium text-white/80 border border-white/10 transition-all hover:border-amber-400 hover:text-white hover:bg-white/5"
-                    >
-                      <span className="text-white/60">{item.icon}</span>
-                      <span className="text-center leading-tight">
-                        {item.label}
-                      </span>
-                    </button>
-                  ))}
+                <div>
+                  <p className="text-xs text-white/40 uppercase tracking-widest font-semibold px-1 mb-2">
+                    Add Field
+                  </p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {PALETTE.map((item) => (
+                      <button
+                        type="button"
+                        key={item.type}
+                        data-ocid={`builder.palette.${item.type}`}
+                        onClick={() => addControl(item.type)}
+                        className="flex flex-col items-center justify-center gap-2 p-3 rounded-lg text-xs font-medium border transition-all"
+                        style={{
+                          color: "rgba(255,255,255,0.75)",
+                          borderColor: "rgba(255,255,255,0.1)",
+                          background: "rgba(255,255,255,0.03)",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.borderColor = "#B88D2A";
+                          e.currentTarget.style.color = "white";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.borderColor =
+                            "rgba(255,255,255,0.1)";
+                          e.currentTarget.style.color =
+                            "rgba(255,255,255,0.75)";
+                        }}
+                      >
+                        <span style={{ color: "rgba(255,255,255,0.5)" }}>
+                          {item.icon}
+                        </span>
+                        <span className="text-center leading-tight">
+                          {item.label}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Controls list */}
                 {controls.length > 0 && (
-                  <>
-                    <p className="text-xs text-white/50 uppercase tracking-widest font-semibold px-1 mt-4 mb-1">
-                      Form Fields
+                  <div>
+                    <p className="text-xs text-white/40 uppercase tracking-widest font-semibold px-1 mb-2">
+                      Form Fields ({controls.length})
                     </p>
                     <div className="space-y-1">
                       {controls.map((ctrl, idx) => (
@@ -599,11 +790,17 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                           type="button"
                           key={ctrl.id}
                           data-ocid={`builder.field.item.${idx + 1}`}
-                          className={`w-full flex items-center gap-1 px-2 py-1.5 rounded-md cursor-pointer transition-all group text-left border ${
-                            selectedId === ctrl.id
-                              ? "bg-amber-400/15 border-amber-400/40"
-                              : "bg-white/[0.04] border-transparent"
-                          }`}
+                          className="w-full flex items-center gap-1 px-2 py-1.5 rounded-md cursor-pointer transition-all group text-left border"
+                          style={{
+                            background:
+                              selectedId === ctrl.id
+                                ? "rgba(184,141,42,0.12)"
+                                : "rgba(255,255,255,0.03)",
+                            borderColor:
+                              selectedId === ctrl.id
+                                ? "rgba(184,141,42,0.4)"
+                                : "transparent",
+                          }}
                           onClick={() => {
                             setSelectedId(ctrl.id);
                             setActiveTab("properties");
@@ -614,74 +811,97 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                               ? ctrl.buttonText
                               : ctrl.label}
                           </span>
-                          <span className="text-white/30 text-xs font-mono">
+                          <span className="text-white/25 text-xs font-mono">
                             {ctrl.type}
                           </span>
-                          <button
-                            type="button"
-                            className="opacity-0 group-hover:opacity-100 text-white/40 hover:text-red-400 ml-1"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              moveControl(ctrl.id, -1);
-                            }}
-                            disabled={idx === 0}
-                            title="Move up"
-                          >
-                            <ArrowUp className="h-3 w-3" />
-                          </button>
-                          <button
-                            type="button"
-                            className="opacity-0 group-hover:opacity-100 text-white/40 hover:text-red-400"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              moveControl(ctrl.id, 1);
-                            }}
-                            disabled={idx === controls.length - 1}
-                            title="Move down"
-                          >
-                            <ArrowDown className="h-3 w-3" />
-                          </button>
-                          <button
-                            type="button"
-                            className="opacity-0 group-hover:opacity-100 text-white/40 hover:text-red-400"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              deleteControl(ctrl.id);
-                            }}
-                            title="Delete"
-                          >
-                            <Trash2 className="h-3 w-3" />
-                          </button>
+                          <div className="opacity-0 group-hover:opacity-100 flex items-center gap-0.5">
+                            <button
+                              type="button"
+                              className="text-white/40 hover:text-amber-400 transition-colors"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                moveControl(ctrl.id, -1);
+                              }}
+                              disabled={idx === 0}
+                              title="Move up"
+                            >
+                              <ArrowUp className="h-3 w-3" />
+                            </button>
+                            <button
+                              type="button"
+                              className="text-white/40 hover:text-amber-400 transition-colors"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                moveControl(ctrl.id, 1);
+                              }}
+                              disabled={idx === controls.length - 1}
+                              title="Move down"
+                            >
+                              <ArrowDown className="h-3 w-3" />
+                            </button>
+                            <button
+                              type="button"
+                              className="text-white/40 hover:text-blue-400 transition-colors"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                duplicateControl(ctrl.id);
+                              }}
+                              title="Duplicate"
+                            >
+                              <Copy className="h-3 w-3" />
+                            </button>
+                            <button
+                              type="button"
+                              className="text-white/40 hover:text-red-400 transition-colors"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                deleteControl(ctrl.id);
+                              }}
+                              title="Delete"
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </button>
+                          </div>
                         </button>
                       ))}
                     </div>
-                  </>
+                  </div>
                 )}
               </>
             )}
 
-            {/* ── Property editor ── */}
+            {/* ── Property editor ──────────────────────────────── */}
             {activeTab === "properties" &&
               (selected ? (
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs text-white/50 uppercase tracking-widest font-semibold">
-                      {selected.type} field
+                    <p className="text-xs text-white/40 uppercase tracking-widest font-semibold">
+                      {selected.type}
                     </p>
-                    <button
-                      type="button"
-                      data-ocid="builder.field.delete_button"
-                      onClick={() => deleteControl(selected.id)}
-                      className="text-red-400 hover:text-red-300 transition-colors"
-                      title="Delete control"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => duplicateControl(selected.id)}
+                        className="text-white/40 hover:text-blue-400 transition-colors"
+                        title="Duplicate field"
+                      >
+                        <Copy className="h-4 w-4" />
+                      </button>
+                      <button
+                        type="button"
+                        data-ocid="builder.field.delete_button"
+                        onClick={() => deleteControl(selected.id)}
+                        className="text-white/40 hover:text-red-400 transition-colors"
+                        title="Delete"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
                   </div>
 
                   {selected.type !== "button" && (
                     <div className="space-y-1.5">
-                      <Label className="text-xs text-white/60">
+                      <Label className="text-xs text-white/50">
                         Label Text
                       </Label>
                       <input
@@ -691,14 +911,18 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                         onChange={(e) =>
                           updateSelected("label", e.target.value)
                         }
-                        className="w-full px-3 py-1.5 text-sm rounded bg-white/10 border border-white/15 text-white placeholder:text-white/30 focus:outline-none focus:border-amber-400"
+                        className="w-full px-3 py-1.5 text-sm rounded border text-white placeholder:text-white/30 focus:outline-none"
+                        style={{
+                          background: "rgba(255,255,255,0.08)",
+                          borderColor: "rgba(255,255,255,0.12)",
+                        }}
                       />
                     </div>
                   )}
 
                   {selected.type === "button" && (
                     <div className="space-y-1.5">
-                      <Label className="text-xs text-white/60">
+                      <Label className="text-xs text-white/50">
                         Button Text
                       </Label>
                       <input
@@ -708,7 +932,11 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                         onChange={(e) =>
                           updateSelected("buttonText", e.target.value)
                         }
-                        className="w-full px-3 py-1.5 text-sm rounded bg-white/10 border border-white/15 text-white focus:outline-none focus:border-amber-400"
+                        className="w-full px-3 py-1.5 text-sm rounded border text-white focus:outline-none"
+                        style={{
+                          background: "rgba(255,255,255,0.08)",
+                          borderColor: "rgba(255,255,255,0.12)",
+                        }}
                       />
                     </div>
                   )}
@@ -716,7 +944,7 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                   {(selected.type === "text" ||
                     selected.type === "textarea") && (
                     <div className="space-y-1.5">
-                      <Label className="text-xs text-white/60">
+                      <Label className="text-xs text-white/50">
                         Placeholder
                       </Label>
                       <input
@@ -726,7 +954,11 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                         onChange={(e) =>
                           updateSelected("placeholder", e.target.value)
                         }
-                        className="w-full px-3 py-1.5 text-sm rounded bg-white/10 border border-white/15 text-white placeholder:text-white/30 focus:outline-none focus:border-amber-400"
+                        className="w-full px-3 py-1.5 text-sm rounded border text-white placeholder:text-white/30 focus:outline-none"
+                        style={{
+                          background: "rgba(255,255,255,0.08)",
+                          borderColor: "rgba(255,255,255,0.12)",
+                        }}
                         placeholder="Placeholder text..."
                       />
                     </div>
@@ -736,7 +968,7 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                     selected.type === "radio" ||
                     selected.type === "checkbox") && (
                     <div className="space-y-1.5">
-                      <Label className="text-xs text-white/60">
+                      <Label className="text-xs text-white/50">
                         Options (comma-separated)
                       </Label>
                       <textarea
@@ -745,7 +977,11 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                         onChange={(e) =>
                           updateSelected("options", e.target.value)
                         }
-                        className="w-full px-3 py-1.5 text-sm rounded bg-white/10 border border-white/15 text-white placeholder:text-white/30 focus:outline-none focus:border-amber-400 resize-none"
+                        className="w-full px-3 py-1.5 text-sm rounded border text-white placeholder:text-white/30 focus:outline-none resize-none"
+                        style={{
+                          background: "rgba(255,255,255,0.08)",
+                          borderColor: "rgba(255,255,255,0.12)",
+                        }}
                         rows={3}
                         placeholder="Option 1,Option 2,Option 3"
                       />
@@ -754,46 +990,56 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
 
                   {selected.type !== "button" && (
                     <div className="flex items-center justify-between py-2 px-1">
-                      <Label className="text-xs text-white/60">
-                        Required Field
-                      </Label>
+                      <Label className="text-xs text-white/50">Required</Label>
                       <button
                         type="button"
                         data-ocid="builder.props.required.toggle"
                         onClick={() =>
                           updateSelected("required", !selected.required)
                         }
-                        className={`w-10 h-5 rounded-full relative transition-colors ${selected.required ? "bg-amber-400" : "bg-white/20"}`}
+                        className="w-10 h-5 rounded-full relative transition-colors"
+                        style={{
+                          background: selected.required
+                            ? "#B88D2A"
+                            : "rgba(255,255,255,0.2)",
+                        }}
                       >
                         <span
-                          className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all ${selected.required ? "left-5" : "left-0.5"}`}
+                          className="absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all"
+                          style={{
+                            left: selected.required ? "1.25rem" : "0.125rem",
+                          }}
                         />
                       </button>
                     </div>
                   )}
 
-                  {/* Reorder */}
                   <div className="flex gap-2 pt-1">
                     <button
                       type="button"
-                      className="flex-1 flex items-center justify-center gap-1 py-1.5 text-xs text-white/60 border border-white/15 rounded hover:border-white/30 transition-colors"
+                      className="flex-1 flex items-center justify-center gap-1 py-1.5 text-xs text-white/50 rounded border hover:border-white/30 transition-colors"
+                      style={{ borderColor: "rgba(255,255,255,0.12)" }}
                       onClick={() => moveControl(selected.id, -1)}
                     >
-                      <ArrowUp className="h-3 w-3" /> Move Up
+                      <ArrowUp className="h-3 w-3" /> Up
                     </button>
                     <button
                       type="button"
-                      className="flex-1 flex items-center justify-center gap-1 py-1.5 text-xs text-white/60 border border-white/15 rounded hover:border-white/30 transition-colors"
+                      className="flex-1 flex items-center justify-center gap-1 py-1.5 text-xs text-white/50 rounded border hover:border-white/30 transition-colors"
+                      style={{ borderColor: "rgba(255,255,255,0.12)" }}
                       onClick={() => moveControl(selected.id, 1)}
                     >
-                      <ArrowDown className="h-3 w-3" /> Move Down
+                      <ArrowDown className="h-3 w-3" /> Down
                     </button>
                   </div>
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center h-40 text-center">
-                  <MousePointer className="h-8 w-8 text-white/20 mb-2" />
-                  <p className="text-xs text-white/40">
+                  <MousePointer
+                    className="h-8 w-8 mb-2"
+                    style={{ color: "rgba(255,255,255,0.15)" }}
+                  />
+                  <p className="text-xs text-white/30">
                     Click a field in the preview
                     <br />
                     to edit its properties
@@ -801,12 +1047,12 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                 </div>
               ))}
 
-            {/* ── CSS editor ── */}
+            {/* ── CSS editor ───────────────────────────────────── */}
             {activeTab === "css" && (
               <div className="space-y-3">
                 <div>
-                  <p className="text-xs text-white/50 uppercase tracking-widest font-semibold mb-2">
-                    Preset Themes
+                  <p className="text-xs text-white/40 uppercase tracking-widest font-semibold mb-2">
+                    Theme Presets
                   </p>
                   <div className="grid grid-cols-2 gap-2">
                     {Object.keys(THEMES).map((name) => (
@@ -815,7 +1061,15 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                         key={name}
                         data-ocid={`builder.theme.${name.toLowerCase()}.button`}
                         onClick={() => applyTheme(name)}
-                        className="py-1.5 text-xs font-medium rounded border transition-all text-white/70 border-white/15 hover:border-amber-400 hover:text-white"
+                        className="py-1.5 text-xs font-medium rounded border transition-all text-white/60 hover:text-white"
+                        style={{ borderColor: "rgba(255,255,255,0.12)" }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.borderColor = "#B88D2A";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.borderColor =
+                            "rgba(255,255,255,0.12)";
+                        }}
                       >
                         {name}
                       </button>
@@ -823,42 +1077,52 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                   </div>
                 </div>
                 <div>
-                  <p className="text-xs text-white/50 uppercase tracking-widest font-semibold mb-2">
+                  <p className="text-xs text-white/40 uppercase tracking-widest font-semibold mb-2">
                     Custom CSS
                   </p>
                   <textarea
                     data-ocid="builder.css.editor"
                     value={css}
                     onChange={(e) => setCss(e.target.value)}
-                    className="w-full text-xs font-mono rounded bg-black/30 border border-white/15 text-green-300 p-2 focus:outline-none focus:border-amber-400 resize-none"
-                    rows={20}
+                    className="w-full text-xs font-mono rounded border p-2 focus:outline-none resize-none"
+                    style={{
+                      background: "rgba(0,0,0,0.4)",
+                      borderColor: "rgba(255,255,255,0.12)",
+                      color: "#86efac",
+                    }}
+                    rows={22}
                     spellCheck={false}
                   />
                 </div>
               </div>
             )}
 
-            {/* ── JS editor ── */}
+            {/* ── JS editor ────────────────────────────────────── */}
             {activeTab === "js" && (
               <div className="space-y-3">
-                <p className="text-xs text-white/50 uppercase tracking-widest font-semibold mb-2">
+                <p className="text-xs text-white/40 uppercase tracking-widest font-semibold mb-1">
                   JavaScript Code
                 </p>
-                <p className="text-xs text-white/40 leading-relaxed">
-                  Runs inside the exported form. Includes DOMContentLoaded,
-                  submit handler, and validation stubs.
+                <p className="text-xs text-white/30 leading-relaxed">
+                  Runs inside the exported HTML file. Edit submit logic below.
                 </p>
                 <textarea
                   data-ocid="builder.js.editor"
                   value={js}
                   onChange={(e) => setJs(e.target.value)}
-                  className="w-full text-xs font-mono rounded bg-black/30 border border-white/15 text-yellow-200 p-2 focus:outline-none focus:border-amber-400 resize-none"
+                  className="w-full text-xs font-mono rounded border p-2 focus:outline-none resize-none"
+                  style={{
+                    background: "rgba(0,0,0,0.4)",
+                    borderColor: "rgba(255,255,255,0.12)",
+                    color: "#fde68a",
+                  }}
                   rows={24}
                   spellCheck={false}
                 />
                 <button
                   type="button"
-                  className="w-full py-1.5 text-xs text-white/50 border border-white/15 rounded hover:border-white/30 transition-colors"
+                  className="w-full py-1.5 text-xs rounded border transition-colors text-white/40 hover:text-white/60"
+                  style={{ borderColor: "rgba(255,255,255,0.1)" }}
                   onClick={() => setJs(DEFAULT_JS)}
                 >
                   Reset to Default Template
@@ -868,9 +1132,9 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
           </div>
         </aside>
 
-        {/* ── Right canvas (live preview) ──────────────────────── */}
-        <main className="flex-1 flex flex-col overflow-hidden bg-slate-100">
-          <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-card">
+        {/* ── Canvas (live preview) ───────────────────────────────────────── */}
+        <main className="flex-1 flex flex-col overflow-hidden bg-muted/30">
+          <div className="flex items-center justify-between px-4 py-2 border-b bg-card shrink-0">
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Live Preview
             </span>
@@ -881,7 +1145,7 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
               {selectedId && (
                 <>
                   <span>·</span>
-                  <span className="text-amber-500">
+                  <span style={{ color: "#B88D2A" }}>
                     {selected?.type === "button"
                       ? selected.buttonText
                       : selected?.label}{" "}
@@ -889,7 +1153,7 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                   </span>
                   <button
                     type="button"
-                    className="text-muted-foreground hover:text-destructive transition-colors"
+                    className="text-muted-foreground hover:text-destructive transition-colors text-base leading-none"
                     onClick={() => setSelectedId(null)}
                   >
                     ×
@@ -911,8 +1175,17 @@ export default function BuilderPage({ setPage }: BuilderPageProps) {
                 Your form is empty
               </p>
               <p className="text-sm text-muted-foreground/70">
-                Click a control in the left panel to add it here
+                Click any field in the left panel to add it here
               </p>
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-4"
+                onClick={() => setActiveTab("controls")}
+              >
+                <Plus className="h-3.5 w-3.5 mr-1.5" />
+                Add First Field
+              </Button>
             </div>
           ) : (
             <iframe
