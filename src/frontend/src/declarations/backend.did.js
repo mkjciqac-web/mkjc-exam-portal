@@ -33,6 +33,24 @@ export const QuestionDTO = IDL.Record({
   'correct_answer_ta' : IDL.Text,
 });
 export const QuestionId = IDL.Nat;
+export const RegistrationInput = IDL.Record({
+  'student_name' : IDL.Text,
+  'mother_name' : IDL.Text,
+  'test_key' : IDL.Text,
+  'aadhaar' : IDL.Text,
+  'parent_mobile' : IDL.Text,
+  'email' : IDL.Text,
+  'district' : IDL.Text,
+  'contact_number' : IDL.Text,
+  'whatsapp_number' : IDL.Text,
+  'exam_group' : IDL.Text,
+  'date_of_birth' : IDL.Text,
+  'choice1' : IDL.Text,
+  'choice2' : IDL.Text,
+  'choice3' : IDL.Text,
+  'school_name' : IDL.Text,
+  'father_name' : IDL.Text,
+});
 export const RegistrationId = IDL.Nat;
 export const UserRole = IDL.Variant({
   'admin' : IDL.Null,
@@ -64,12 +82,22 @@ export const StudentCredentials = IDL.Record({
 export const Registration = IDL.Record({
   'id' : RegistrationId,
   'student_name' : IDL.Text,
+  'mother_name' : IDL.Text,
   'registration_date' : IDL.Int,
   'test_key' : IDL.Text,
+  'aadhaar' : IDL.Text,
+  'parent_mobile' : IDL.Text,
+  'email' : IDL.Text,
+  'district' : IDL.Text,
   'contact_number' : IDL.Text,
   'whatsapp_number' : IDL.Text,
   'exam_group' : IDL.Text,
+  'date_of_birth' : IDL.Text,
+  'choice1' : IDL.Text,
+  'choice2' : IDL.Text,
+  'choice3' : IDL.Text,
   'school_name' : IDL.Text,
+  'father_name' : IDL.Text,
 });
 export const http_header = IDL.Record({
   'value' : IDL.Text,
@@ -93,11 +121,7 @@ export const TransformationOutput = IDL.Record({
 export const idlService = IDL.Service({
   '_initializeAccessControl' : IDL.Func([], [], []),
   'addQuestion' : IDL.Func([QuestionDTO], [QuestionId], []),
-  'addRegistration' : IDL.Func(
-      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
-      [RegistrationId],
-      [],
-    ),
+  'addRegistration' : IDL.Func([RegistrationInput], [RegistrationId], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
   'deleteQuestion' : IDL.Func([QuestionId], [], []),
   'deleteRegistration' : IDL.Func([RegistrationId], [], []),
@@ -159,7 +183,8 @@ export const idlService = IDL.Service({
     ),
   'listQuizResponses' : IDL.Func([], [IDL.Vec(QuizResponse)], ['query']),
   'listRegistrations' : IDL.Func([], [IDL.Vec(Registration)], ['query']),
-  'sendTestSms' : IDL.Func([IDL.Text, IDL.Text], [IDL.Bool], []),
+  'sendSmsCredentials' : IDL.Func([IDL.Text, IDL.Text], [IDL.Bool], []),
+  'sendTestSms' : IDL.Func([IDL.Text, IDL.Text], [IDL.Bool, IDL.Text], []),
   'setFast2SmsApiKey' : IDL.Func([IDL.Text], [], []),
   'submitQuizResponse' : IDL.Func(
       [
@@ -216,6 +241,24 @@ export const idlFactory = ({ IDL }) => {
     'correct_answer_ta' : IDL.Text,
   });
   const QuestionId = IDL.Nat;
+  const RegistrationInput = IDL.Record({
+    'student_name' : IDL.Text,
+    'mother_name' : IDL.Text,
+    'test_key' : IDL.Text,
+    'aadhaar' : IDL.Text,
+    'parent_mobile' : IDL.Text,
+    'email' : IDL.Text,
+    'district' : IDL.Text,
+    'contact_number' : IDL.Text,
+    'whatsapp_number' : IDL.Text,
+    'exam_group' : IDL.Text,
+    'date_of_birth' : IDL.Text,
+    'choice1' : IDL.Text,
+    'choice2' : IDL.Text,
+    'choice3' : IDL.Text,
+    'school_name' : IDL.Text,
+    'father_name' : IDL.Text,
+  });
   const RegistrationId = IDL.Nat;
   const UserRole = IDL.Variant({
     'admin' : IDL.Null,
@@ -247,12 +290,22 @@ export const idlFactory = ({ IDL }) => {
   const Registration = IDL.Record({
     'id' : RegistrationId,
     'student_name' : IDL.Text,
+    'mother_name' : IDL.Text,
     'registration_date' : IDL.Int,
     'test_key' : IDL.Text,
+    'aadhaar' : IDL.Text,
+    'parent_mobile' : IDL.Text,
+    'email' : IDL.Text,
+    'district' : IDL.Text,
     'contact_number' : IDL.Text,
     'whatsapp_number' : IDL.Text,
     'exam_group' : IDL.Text,
+    'date_of_birth' : IDL.Text,
+    'choice1' : IDL.Text,
+    'choice2' : IDL.Text,
+    'choice3' : IDL.Text,
     'school_name' : IDL.Text,
+    'father_name' : IDL.Text,
   });
   const http_header = IDL.Record({ 'value' : IDL.Text, 'name' : IDL.Text });
   const http_request_result = IDL.Record({
@@ -273,11 +326,7 @@ export const idlFactory = ({ IDL }) => {
   return IDL.Service({
     '_initializeAccessControl' : IDL.Func([], [], []),
     'addQuestion' : IDL.Func([QuestionDTO], [QuestionId], []),
-    'addRegistration' : IDL.Func(
-        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
-        [RegistrationId],
-        [],
-      ),
+    'addRegistration' : IDL.Func([RegistrationInput], [RegistrationId], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
     'deleteQuestion' : IDL.Func([QuestionId], [], []),
     'deleteRegistration' : IDL.Func([RegistrationId], [], []),
@@ -343,7 +392,8 @@ export const idlFactory = ({ IDL }) => {
       ),
     'listQuizResponses' : IDL.Func([], [IDL.Vec(QuizResponse)], ['query']),
     'listRegistrations' : IDL.Func([], [IDL.Vec(Registration)], ['query']),
-    'sendTestSms' : IDL.Func([IDL.Text, IDL.Text], [IDL.Bool], []),
+    'sendSmsCredentials' : IDL.Func([IDL.Text, IDL.Text], [IDL.Bool], []),
+    'sendTestSms' : IDL.Func([IDL.Text, IDL.Text], [IDL.Bool, IDL.Text], []),
     'setFast2SmsApiKey' : IDL.Func([IDL.Text], [], []),
     'submitQuizResponse' : IDL.Func(
         [

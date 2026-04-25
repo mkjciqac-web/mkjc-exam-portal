@@ -1,14 +1,11 @@
 import Map "mo:core/Map";
-import Iter "mo:core/Iter";
-import Nat "mo:core/Nat";
-import Int "mo:core/Int";
 import Text "mo:core/Text";
 import Time "mo:core/Time";
-import Order "mo:core/Order";
 import Types "../types/registration";
 
 module {
   public type Registration = Types.Registration;
+  public type RegistrationInput = Types.RegistrationInput;
   public type StudentCredentials = Types.StudentCredentials;
   public type RegistrationId = Types.RegistrationId;
 
@@ -17,22 +14,27 @@ module {
   public func add(
     registrations : Map.Map<RegistrationId, Registration>,
     nextId : { var val : RegistrationId },
-    student_name : Text,
-    school_name : Text,
-    contact_number : Text,
-    whatsapp_number : Text,
-    exam_group : Text,
-    test_key : Text,
+    input : RegistrationInput,
   ) : RegistrationId {
     let id = nextId.val;
     let reg : Registration = {
       id;
-      student_name;
-      school_name;
-      contact_number;
-      whatsapp_number;
-      exam_group;
-      test_key;
+      student_name = input.student_name;
+      date_of_birth = input.date_of_birth;
+      aadhaar = input.aadhaar;
+      email = input.email;
+      contact_number = input.contact_number;
+      whatsapp_number = input.whatsapp_number;
+      father_name = input.father_name;
+      parent_mobile = input.parent_mobile;
+      mother_name = input.mother_name;
+      school_name = input.school_name;
+      district = input.district;
+      exam_group = input.exam_group;
+      choice1 = input.choice1;
+      choice2 = input.choice2;
+      choice3 = input.choice3;
+      test_key = input.test_key;
       registration_date = Time.now();
     };
     registrations.add(id, reg);
@@ -82,7 +84,6 @@ module {
     while (i < 8) {
       s := (s * 6364136223846793005 + 1442695040888963407) % 4294967296;
       let idx = s % len;
-      // get character at index
       var j = 0;
       for (c in chars.toIter()) {
         if (j == idx) { pwd #= Text.fromChar(c) };

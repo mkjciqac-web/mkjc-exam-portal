@@ -32377,40 +32377,40 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$K = [
+const __iconNode$E = [
   ["path", { d: "M12 5v14", key: "s699le" }],
   ["path", { d: "m19 12-7 7-7-7", key: "1idqje" }]
 ];
-const ArrowDown = createLucideIcon("arrow-down", __iconNode$K);
+const ArrowDown = createLucideIcon("arrow-down", __iconNode$E);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$J = [
+const __iconNode$D = [
   ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
   ["path", { d: "M19 12H5", key: "x3x0zl" }]
 ];
-const ArrowLeft = createLucideIcon("arrow-left", __iconNode$J);
+const ArrowLeft = createLucideIcon("arrow-left", __iconNode$D);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$I = [
+const __iconNode$C = [
   ["path", { d: "m5 12 7-7 7 7", key: "hav0vg" }],
   ["path", { d: "M12 19V5", key: "x0mq9r" }]
 ];
-const ArrowUp = createLucideIcon("arrow-up", __iconNode$I);
+const ArrowUp = createLucideIcon("arrow-up", __iconNode$C);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$H = [
+const __iconNode$B = [
   [
     "path",
     {
@@ -32420,60 +32420,7 @@ const __iconNode$H = [
   ],
   ["circle", { cx: "12", cy: "8", r: "6", key: "1vp47v" }]
 ];
-const Award = createLucideIcon("award", __iconNode$H);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$G = [
-  ["path", { d: "M8 2v4", key: "1cmpym" }],
-  ["path", { d: "M16 2v4", key: "4m81vk" }],
-  ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
-  ["path", { d: "M3 10h18", key: "8toen8" }]
-];
-const Calendar = createLucideIcon("calendar", __iconNode$G);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$F = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$F);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$E = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$E);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$D = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
-const ChevronLeft = createLucideIcon("chevron-left", __iconNode$D);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$C = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
-const ChevronRight = createLucideIcon("chevron-right", __iconNode$C);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$B = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$B);
+const Award = createLucideIcon("award", __iconNode$B);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32481,66 +32428,52 @@ const ChevronUp = createLucideIcon("chevron-up", __iconNode$B);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$A = [
-  ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
-  ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
+  ["path", { d: "M8 2v4", key: "1cmpym" }],
+  ["path", { d: "M16 2v4", key: "4m81vk" }],
+  ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
+  ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const CircleCheckBig = createLucideIcon("circle-check-big", __iconNode$A);
+const Calendar = createLucideIcon("calendar", __iconNode$A);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$z = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
-];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$z);
+const __iconNode$z = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$z);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$y = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
-  ["path", { d: "m9 9 6 6", key: "z0biqf" }]
-];
-const CircleX = createLucideIcon("circle-x", __iconNode$y);
+const __iconNode$y = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$y);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$x = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
-const Circle = createLucideIcon("circle", __iconNode$x);
+const __iconNode$x = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
+const ChevronLeft = createLucideIcon("chevron-left", __iconNode$x);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$w = [
-  ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
-  ["path", { d: "M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2", key: "4jdomd" }],
-  ["path", { d: "M16 4h2a2 2 0 0 1 2 2v4", key: "3hqy98" }],
-  ["path", { d: "M21 14H11", key: "1bme5i" }],
-  ["path", { d: "m15 10-4 4 4 4", key: "5dvupr" }]
-];
-const ClipboardCopy = createLucideIcon("clipboard-copy", __iconNode$w);
+const __iconNode$w = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
+const ChevronRight = createLucideIcon("chevron-right", __iconNode$w);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$v = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
-];
-const Clock = createLucideIcon("clock", __iconNode$v);
+const __iconNode$v = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$v);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32548,10 +32481,10 @@ const Clock = createLucideIcon("clock", __iconNode$v);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$u = [
-  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
-  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+  ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
+  ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
 ];
-const Copy = createLucideIcon("copy", __iconNode$u);
+const CircleCheckBig = createLucideIcon("circle-check-big", __iconNode$u);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32559,23 +32492,19 @@ const Copy = createLucideIcon("copy", __iconNode$u);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$t = [
-  ["path", { d: "M12 15V3", key: "m9g1x1" }],
-  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
-  ["path", { d: "m7 10 5 5 5-5", key: "brsn70" }]
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
+  ["path", { d: "m9 9 6 6", key: "z0biqf" }]
 ];
-const Download = createLucideIcon("download", __iconNode$t);
+const CircleX = createLucideIcon("circle-x", __iconNode$t);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$s = [
-  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
-  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
-  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
-];
-const ExternalLink = createLucideIcon("external-link", __iconNode$s);
+const __iconNode$s = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
+const Circle = createLucideIcon("circle", __iconNode$s);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32583,6 +32512,40 @@ const ExternalLink = createLucideIcon("external-link", __iconNode$s);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$r = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
+];
+const Clock = createLucideIcon("clock", __iconNode$r);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$q = [
+  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
+  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+];
+const Copy = createLucideIcon("copy", __iconNode$q);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$p = [
+  ["path", { d: "M12 15V3", key: "m9g1x1" }],
+  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
+  ["path", { d: "m7 10 5 5 5-5", key: "brsn70" }]
+];
+const Download = createLucideIcon("download", __iconNode$p);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$o = [
   [
     "path",
     {
@@ -32600,14 +32563,14 @@ const __iconNode$r = [
   ],
   ["path", { d: "m2 2 20 20", key: "1ooewy" }]
 ];
-const EyeOff = createLucideIcon("eye-off", __iconNode$r);
+const EyeOff = createLucideIcon("eye-off", __iconNode$o);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$q = [
+const __iconNode$n = [
   [
     "path",
     {
@@ -32617,46 +32580,7 @@ const __iconNode$q = [
   ],
   ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
 ];
-const Eye = createLucideIcon("eye", __iconNode$q);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$p = [
-  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
-  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-  ["path", { d: "M12 18v-6", key: "17g6i2" }],
-  ["path", { d: "m9 15 3 3 3-3", key: "1npd3o" }]
-];
-const FileDown = createLucideIcon("file-down", __iconNode$p);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$o = [
-  ["path", { d: "M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4", key: "1pf5j1" }],
-  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-  ["path", { d: "M2 15h10", key: "jfw4w8" }],
-  ["path", { d: "m9 18 3-3-3-3", key: "112psh" }]
-];
-const FileInput = createLucideIcon("file-input", __iconNode$o);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$n = [
-  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
-  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-  ["path", { d: "M12 12v6", key: "3ahymv" }],
-  ["path", { d: "m15 15-3-3-3 3", key: "15xj92" }]
-];
-const FileUp = createLucideIcon("file-up", __iconNode$n);
+const Eye = createLucideIcon("eye", __iconNode$n);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32664,11 +32588,12 @@ const FileUp = createLucideIcon("file-up", __iconNode$n);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$m = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20", key: "13o1zl" }],
-  ["path", { d: "M2 12h20", key: "9i4pu4" }]
+  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
+  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
+  ["path", { d: "M12 18v-6", key: "17g6i2" }],
+  ["path", { d: "m9 15 3 3 3-3", key: "1npd3o" }]
 ];
-const Globe = createLucideIcon("globe", __iconNode$m);
+const FileDown = createLucideIcon("file-down", __iconNode$m);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32676,6 +32601,32 @@ const Globe = createLucideIcon("globe", __iconNode$m);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$l = [
+  ["path", { d: "M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4", key: "1pf5j1" }],
+  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
+  ["path", { d: "M2 15h10", key: "jfw4w8" }],
+  ["path", { d: "m9 18 3-3-3-3", key: "112psh" }]
+];
+const FileInput = createLucideIcon("file-input", __iconNode$l);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$k = [
+  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
+  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
+  ["path", { d: "M12 12v6", key: "3ahymv" }],
+  ["path", { d: "m15 15-3-3-3 3", key: "15xj92" }]
+];
+const FileUp = createLucideIcon("file-up", __iconNode$k);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$j = [
   [
     "path",
     {
@@ -32686,27 +32637,7 @@ const __iconNode$l = [
   ["path", { d: "M22 10v6", key: "1lu8f3" }],
   ["path", { d: "M6 12.5V16a6 3 0 0 0 12 0v-3.5", key: "1r8lef" }]
 ];
-const GraduationCap = createLucideIcon("graduation-cap", __iconNode$l);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$k = [
-  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
-  ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
-  ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
-];
-const Image = createLucideIcon("image", __iconNode$k);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$j = [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]];
-const LoaderCircle = createLucideIcon("loader-circle", __iconNode$j);
+const GraduationCap = createLucideIcon("graduation-cap", __iconNode$j);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32714,23 +32645,19 @@ const LoaderCircle = createLucideIcon("loader-circle", __iconNode$j);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$i = [
-  ["path", { d: "m10 17 5-5-5-5", key: "1bsop3" }],
-  ["path", { d: "M15 12H3", key: "6jk70r" }],
-  ["path", { d: "M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4", key: "u53s6r" }]
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
+  ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
+  ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
 ];
-const LogIn = createLucideIcon("log-in", __iconNode$i);
+const Image = createLucideIcon("image", __iconNode$i);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$h = [
-  ["path", { d: "m16 17 5-5-5-5", key: "1bji2h" }],
-  ["path", { d: "M21 12H9", key: "dn1m92" }],
-  ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }]
-];
-const LogOut = createLucideIcon("log-out", __iconNode$h);
+const __iconNode$h = [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]];
+const LoaderCircle = createLucideIcon("loader-circle", __iconNode$h);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32738,9 +32665,11 @@ const LogOut = createLucideIcon("log-out", __iconNode$h);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$g = [
-  ["path", { d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z", key: "1lielz" }]
+  ["path", { d: "m10 17 5-5-5-5", key: "1bsop3" }],
+  ["path", { d: "M15 12H3", key: "6jk70r" }],
+  ["path", { d: "M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4", key: "u53s6r" }]
 ];
-const MessageSquare = createLucideIcon("message-square", __iconNode$g);
+const LogIn = createLucideIcon("log-in", __iconNode$g);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32748,6 +32677,18 @@ const MessageSquare = createLucideIcon("message-square", __iconNode$g);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$f = [
+  ["path", { d: "m16 17 5-5-5-5", key: "1bji2h" }],
+  ["path", { d: "M21 12H9", key: "dn1m92" }],
+  ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }]
+];
+const LogOut = createLucideIcon("log-out", __iconNode$f);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$e = [
   ["path", { d: "M12.586 12.586 19 19", key: "ea5xo7" }],
   [
     "path",
@@ -32757,18 +32698,7 @@ const __iconNode$f = [
     }
   ]
 ];
-const MousePointer = createLucideIcon("mouse-pointer", __iconNode$f);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$e = [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "M12 5v14", key: "s699le" }]
-];
-const Plus = createLucideIcon("plus", __iconNode$e);
+const MousePointer = createLucideIcon("mouse-pointer", __iconNode$e);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32776,6 +32706,17 @@ const Plus = createLucideIcon("plus", __iconNode$e);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$d = [
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "M12 5v14", key: "s699le" }]
+];
+const Plus = createLucideIcon("plus", __iconNode$d);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$c = [
   [
     "path",
     {
@@ -32786,20 +32727,7 @@ const __iconNode$d = [
   ["path", { d: "M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6", key: "1itne7" }],
   ["rect", { x: "6", y: "14", width: "12", height: "8", rx: "1", key: "1ue0tg" }]
 ];
-const Printer = createLucideIcon("printer", __iconNode$d);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$c = [
-  ["path", { d: "M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8", key: "v9h5vc" }],
-  ["path", { d: "M21 3v5h-5", key: "1q7to0" }],
-  ["path", { d: "M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16", key: "3uifl3" }],
-  ["path", { d: "M8 16H3v5", key: "1cv678" }]
-];
-const RefreshCw = createLucideIcon("refresh-cw", __iconNode$c);
+const Printer = createLucideIcon("printer", __iconNode$c);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -71382,6 +71310,24 @@ const QuestionDTO = Record({
   "correct_answer_ta": Text$1
 });
 const QuestionId = Nat;
+const RegistrationInput = Record({
+  "student_name": Text$1,
+  "mother_name": Text$1,
+  "test_key": Text$1,
+  "aadhaar": Text$1,
+  "parent_mobile": Text$1,
+  "email": Text$1,
+  "district": Text$1,
+  "contact_number": Text$1,
+  "whatsapp_number": Text$1,
+  "exam_group": Text$1,
+  "date_of_birth": Text$1,
+  "choice1": Text$1,
+  "choice2": Text$1,
+  "choice3": Text$1,
+  "school_name": Text$1,
+  "father_name": Text$1
+});
 const RegistrationId = Nat;
 const UserRole = Variant({
   "admin": Null,
@@ -71413,12 +71359,22 @@ const StudentCredentials = Record({
 const Registration = Record({
   "id": RegistrationId,
   "student_name": Text$1,
+  "mother_name": Text$1,
   "registration_date": Int,
   "test_key": Text$1,
+  "aadhaar": Text$1,
+  "parent_mobile": Text$1,
+  "email": Text$1,
+  "district": Text$1,
   "contact_number": Text$1,
   "whatsapp_number": Text$1,
   "exam_group": Text$1,
-  "school_name": Text$1
+  "date_of_birth": Text$1,
+  "choice1": Text$1,
+  "choice2": Text$1,
+  "choice3": Text$1,
+  "school_name": Text$1,
+  "father_name": Text$1
 });
 const http_header = Record({
   "value": Text$1,
@@ -71441,11 +71397,7 @@ const TransformationOutput = Record({
 Service({
   "_initializeAccessControl": Func([], [], []),
   "addQuestion": Func([QuestionDTO], [QuestionId], []),
-  "addRegistration": Func(
-    [Text$1, Text$1, Text$1, Text$1, Text$1, Text$1],
-    [RegistrationId],
-    []
-  ),
+  "addRegistration": Func([RegistrationInput], [RegistrationId], []),
   "assignCallerUserRole": Func([Principal2, UserRole], [], []),
   "deleteQuestion": Func([QuestionId], [], []),
   "deleteRegistration": Func([RegistrationId], [], []),
@@ -71507,7 +71459,8 @@ Service({
   ),
   "listQuizResponses": Func([], [Vec(QuizResponse)], ["query"]),
   "listRegistrations": Func([], [Vec(Registration)], ["query"]),
-  "sendTestSms": Func([Text$1, Text$1], [Bool], []),
+  "sendSmsCredentials": Func([Text$1, Text$1], [Bool], []),
+  "sendTestSms": Func([Text$1, Text$1], [Bool, Text$1], []),
   "setFast2SmsApiKey": Func([Text$1], [], []),
   "submitQuizResponse": Func(
     [
@@ -71561,6 +71514,24 @@ const idlFactory = ({ IDL: IDL2 }) => {
     "correct_answer_ta": IDL2.Text
   });
   const QuestionId2 = IDL2.Nat;
+  const RegistrationInput2 = IDL2.Record({
+    "student_name": IDL2.Text,
+    "mother_name": IDL2.Text,
+    "test_key": IDL2.Text,
+    "aadhaar": IDL2.Text,
+    "parent_mobile": IDL2.Text,
+    "email": IDL2.Text,
+    "district": IDL2.Text,
+    "contact_number": IDL2.Text,
+    "whatsapp_number": IDL2.Text,
+    "exam_group": IDL2.Text,
+    "date_of_birth": IDL2.Text,
+    "choice1": IDL2.Text,
+    "choice2": IDL2.Text,
+    "choice3": IDL2.Text,
+    "school_name": IDL2.Text,
+    "father_name": IDL2.Text
+  });
   const RegistrationId2 = IDL2.Nat;
   const UserRole2 = IDL2.Variant({
     "admin": IDL2.Null,
@@ -71592,12 +71563,22 @@ const idlFactory = ({ IDL: IDL2 }) => {
   const Registration2 = IDL2.Record({
     "id": RegistrationId2,
     "student_name": IDL2.Text,
+    "mother_name": IDL2.Text,
     "registration_date": IDL2.Int,
     "test_key": IDL2.Text,
+    "aadhaar": IDL2.Text,
+    "parent_mobile": IDL2.Text,
+    "email": IDL2.Text,
+    "district": IDL2.Text,
     "contact_number": IDL2.Text,
     "whatsapp_number": IDL2.Text,
     "exam_group": IDL2.Text,
-    "school_name": IDL2.Text
+    "date_of_birth": IDL2.Text,
+    "choice1": IDL2.Text,
+    "choice2": IDL2.Text,
+    "choice3": IDL2.Text,
+    "school_name": IDL2.Text,
+    "father_name": IDL2.Text
   });
   const http_header2 = IDL2.Record({ "value": IDL2.Text, "name": IDL2.Text });
   const http_request_result2 = IDL2.Record({
@@ -71617,11 +71598,7 @@ const idlFactory = ({ IDL: IDL2 }) => {
   return IDL2.Service({
     "_initializeAccessControl": IDL2.Func([], [], []),
     "addQuestion": IDL2.Func([QuestionDTO2], [QuestionId2], []),
-    "addRegistration": IDL2.Func(
-      [IDL2.Text, IDL2.Text, IDL2.Text, IDL2.Text, IDL2.Text, IDL2.Text],
-      [RegistrationId2],
-      []
-    ),
+    "addRegistration": IDL2.Func([RegistrationInput2], [RegistrationId2], []),
     "assignCallerUserRole": IDL2.Func([IDL2.Principal, UserRole2], [], []),
     "deleteQuestion": IDL2.Func([QuestionId2], [], []),
     "deleteRegistration": IDL2.Func([RegistrationId2], [], []),
@@ -71687,7 +71664,8 @@ const idlFactory = ({ IDL: IDL2 }) => {
     ),
     "listQuizResponses": IDL2.Func([], [IDL2.Vec(QuizResponse2)], ["query"]),
     "listRegistrations": IDL2.Func([], [IDL2.Vec(Registration2)], ["query"]),
-    "sendTestSms": IDL2.Func([IDL2.Text, IDL2.Text], [IDL2.Bool], []),
+    "sendSmsCredentials": IDL2.Func([IDL2.Text, IDL2.Text], [IDL2.Bool], []),
+    "sendTestSms": IDL2.Func([IDL2.Text, IDL2.Text], [IDL2.Bool, IDL2.Text], []),
     "setFast2SmsApiKey": IDL2.Func([IDL2.Text], [], []),
     "submitQuizResponse": IDL2.Func(
       [
@@ -71754,17 +71732,17 @@ class Backend {
       return result;
     }
   }
-  async addRegistration(arg0, arg1, arg2, arg3, arg4, arg5) {
+  async addRegistration(arg0) {
     if (this.processError) {
       try {
-        const result = await this.actor.addRegistration(arg0, arg1, arg2, arg3, arg4, arg5);
+        const result = await this.actor.addRegistration(arg0);
         return result;
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
-      const result = await this.actor.addRegistration(arg0, arg1, arg2, arg3, arg4, arg5);
+      const result = await this.actor.addRegistration(arg0);
       return result;
     }
   }
@@ -72034,18 +72012,38 @@ class Backend {
       return result;
     }
   }
-  async sendTestSms(arg0, arg1) {
+  async sendSmsCredentials(arg0, arg1) {
     if (this.processError) {
       try {
-        const result = await this.actor.sendTestSms(arg0, arg1);
+        const result = await this.actor.sendSmsCredentials(arg0, arg1);
         return result;
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
-      const result = await this.actor.sendTestSms(arg0, arg1);
+      const result = await this.actor.sendSmsCredentials(arg0, arg1);
       return result;
+    }
+  }
+  async sendTestSms(arg0, arg1) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.sendTestSms(arg0, arg1);
+        return [
+          result[0],
+          result[1]
+        ];
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.sendTestSms(arg0, arg1);
+      return [
+        result[0],
+        result[1]
+      ];
     }
   }
   async setFast2SmsApiKey(arg0) {
@@ -72468,8 +72466,7 @@ function printQuestionPaper(questions, testKey) {
 }
 function AdminPage({ lang, setPage }) {
   var _a3, _b3;
-  const { actor: _actor } = useActor(createActor);
-  const actor = _actor;
+  const { actor } = useActor(createActor);
   const [isAuthenticated, setIsAuthenticated] = reactExports.useState(false);
   const [isAdmin, setIsAdmin] = reactExports.useState(false);
   const [loginForm, setLoginForm] = reactExports.useState({ username: "", password: "" });
@@ -72503,17 +72500,9 @@ function AdminPage({ lang, setPage }) {
     num_questions: 10
   });
   const [savingExam, setSavingExam] = reactExports.useState(false);
-  const [smsApiKey, setSmsApiKey] = reactExports.useState("");
-  const [showApiKey, setShowApiKey] = reactExports.useState(false);
-  const [savingApiKey, setSavingApiKey] = reactExports.useState(false);
-  const [testSmsPhone, setTestSmsPhone] = reactExports.useState("");
-  const [sendingTestSms, setSendingTestSms] = reactExports.useState(false);
-  const [smsStats, setSmsStats] = reactExports.useState(null);
-  const [loadingStats, setLoadingStats] = reactExports.useState(false);
   reactExports.useEffect(() => {
     if (!isAdmin || !actor) return;
     loadAllData();
-    loadSmsSettings();
   }, [isAdmin, actor]);
   async function loadAllData() {
     if (!actor) return;
@@ -72530,71 +72519,6 @@ function AdminPage({ lang, setPage }) {
       ue.error("Failed to load data");
     } finally {
       setLoadingData(false);
-    }
-  }
-  async function loadSmsSettings() {
-    if (!actor) return;
-    try {
-      const [key, stats] = await Promise.all([
-        actor.getFast2SmsApiKey(),
-        actor.getSmsStats()
-      ]);
-      setSmsApiKey(key);
-      setSmsStats(stats);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-  async function loadSmsStats() {
-    if (!actor) return;
-    setLoadingStats(true);
-    try {
-      const stats = await actor.getSmsStats();
-      setSmsStats(stats);
-    } catch (err) {
-      console.error(err);
-      ue.error("Failed to load SMS stats");
-    } finally {
-      setLoadingStats(false);
-    }
-  }
-  async function handleSaveApiKey() {
-    if (!actor) return;
-    setSavingApiKey(true);
-    try {
-      await actor.setFast2SmsApiKey(smsApiKey);
-      ue.success("API key saved successfully");
-      await loadSmsStats();
-    } catch (err) {
-      console.error(err);
-      ue.error("Failed to save API key");
-    } finally {
-      setSavingApiKey(false);
-    }
-  }
-  async function handleTestSms() {
-    if (!actor) return;
-    if (!testSmsPhone.trim()) {
-      ue.error("Please enter a phone number");
-      return;
-    }
-    setSendingTestSms(true);
-    try {
-      const success = await actor.sendTestSms(
-        testSmsPhone.trim(),
-        "MKJC Exam Portal: This is a test SMS from your Fast2SMS integration. If you received this, your SMS setup is working correctly."
-      );
-      if (success) {
-        ue.success("Test SMS sent successfully!");
-      } else {
-        ue.error("SMS sending failed. Check your API key.");
-      }
-      await loadSmsStats();
-    } catch (err) {
-      console.error(err);
-      ue.error("Failed to send test SMS");
-    } finally {
-      setSendingTestSms(false);
     }
   }
   const loadQuestions = reactExports.useCallback(async () => {
@@ -72856,7 +72780,9 @@ function AdminPage({ lang, setPage }) {
     ) });
   }
   const filteredRegistrations = registrations.filter((reg) => {
-    const matchesSearch = regSearch.trim() === "" || reg.student_name.toLowerCase().includes(regSearch.toLowerCase()) || reg.school_name.toLowerCase().includes(regSearch.toLowerCase()) || reg.contact_number.includes(regSearch);
+    const q2 = regSearch.trim().toLowerCase();
+    const strMatch = (v2) => v2.toLowerCase().includes(q2);
+    const matchesSearch = q2 === "" || strMatch(reg.student_name) || strMatch(reg.school_name) || reg.contact_number.includes(q2) || strMatch(reg.email) || strMatch(reg.district) || strMatch(reg.father_name) || strMatch(reg.mother_name);
     const matchesExam = regFilterExam === "all" || reg.test_key === regFilterExam;
     return matchesSearch && matchesExam;
   });
@@ -72945,8 +72871,7 @@ function AdminPage({ lang, setPage }) {
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { "data-ocid": "admin.questions.tab", value: "questions", children: lang === "en" ? "Questions" : "கேள்விகள்" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { "data-ocid": "admin.results.tab", value: "results", children: lang === "en" ? "Results" : "முடிவுகள்" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { "data-ocid": "admin.exams.tab", value: "exams", children: lang === "en" ? "Exams" : "தேர்வுகள்" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { "data-ocid": "admin.settings.tab", value: "settings", children: lang === "en" ? "Settings" : "அமைப்புகள்" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { "data-ocid": "admin.exams.tab", value: "exams", children: lang === "en" ? "Exams" : "தேர்வுகள்" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: "registrations", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2 mb-4 items-center", children: [
@@ -72956,7 +72881,7 @@ function AdminPage({ lang, setPage }) {
                 "input",
                 {
                   type: "text",
-                  placeholder: lang === "en" ? "Search by name, school, contact..." : "பெயர், பள்ளி, தொடர்பு...",
+                  placeholder: lang === "en" ? "Search by name, email, mobile, school, district..." : "பெயர், மின்னஞ்சல், மொபைல், பள்ளி, மாவட்டம்...",
                   value: regSearch,
                   onChange: (e) => setRegSearch(e.target.value),
                   className: "w-full pl-9 pr-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-navy/30"
@@ -72983,51 +72908,94 @@ function AdminPage({ lang, setPage }) {
               className: "flex justify-center items-center py-16",
               children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "h-6 w-6 animate-spin text-navy" })
             }
-          ) : /* @__PURE__ */ jsxRuntimeExports.jsxs(Table, { "data-ocid": "admin.registrations.table", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(TableHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(TableRow, { className: "bg-navy/5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy", children: "ID" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy", children: lang === "en" ? "Student Name" : "மாணவர் பெயர்" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy", children: lang === "en" ? "School" : "பள்ளி" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy", children: lang === "en" ? "Exam Group" : "தேர்வு குழு" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy", children: lang === "en" ? "Test" : "தேர்வு" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy", children: lang === "en" ? "Contact" : "தொடர்பு" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "text-right font-semibold text-navy", children: lang === "en" ? "Actions" : "செயல்கள்" })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(TableBody, { children: filteredRegistrations.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(TableRow, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-              TableCell,
-              {
-                colSpan: 7,
-                className: "text-center text-muted-foreground py-8",
-                "data-ocid": "admin.registrations.empty_state",
-                children: lang === "en" ? "No registrations yet." : "இன்னும் பதிவுகள் இல்லை."
-              }
-            ) }) : filteredRegistrations.map((reg, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              TableRow,
-              {
-                "data-ocid": `admin.registration.item.${idx + 1}`,
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "font-mono text-sm", children: reg.id.toString() }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "font-medium", children: reg.student_name }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { children: reg.school_name }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", children: reg.exam_group }) }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "bg-navy/10 text-navy border-0", children: reg.test_key }) }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { children: reg.contact_number }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "text-right", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    Button,
+          ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { overflowX: "auto" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            Table,
+            {
+              "data-ocid": "admin.registrations.table",
+              style: { minWidth: "1800px" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(TableHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(TableRow, { className: "bg-navy/5", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: "ID" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Full Name" : "முழு பெயர்" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Date of Birth" : "பிறந்த தேதி" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Aadhaar" : "ஆதார்" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Email" : "மின்னஞ்சல்" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Mobile" : "மொபைல்" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "WhatsApp" : "வாட்ஸ்அப்" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Father's Name" : "தந்தை பெயர்" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Parent Mobile" : "பெற்றோர் மொபைல்" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Mother's Name" : "தாய் பெயர்" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "School" : "பள்ளி" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "District" : "மாவட்டம்" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "12th Group" : "12ஆம் குழு" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "First Choice" : "முதல் விருப்பம்" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Second Choice" : "இரண்டாம் விருப்பம்" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Third Choice" : "மூன்றாம் விருப்பம்" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Exam" : "தேர்வு" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Date" : "தேதி" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { className: "text-right font-semibold text-navy whitespace-nowrap", children: lang === "en" ? "Actions" : "செயல்கள்" })
+                ] }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(TableBody, { children: filteredRegistrations.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(TableRow, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  TableCell,
+                  {
+                    colSpan: 19,
+                    className: "text-center text-muted-foreground py-8",
+                    "data-ocid": "admin.registrations.empty_state",
+                    children: lang === "en" ? "No registrations yet." : "இன்னும் பதிவுகள் இல்லை."
+                  }
+                ) }) : filteredRegistrations.map((reg, idx) => {
+                  const regDate = reg.registration_date ? new Date(
+                    Number(reg.registration_date) / 1e6
+                  ).toLocaleDateString() : "-";
+                  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    TableRow,
                     {
-                      "data-ocid": `admin.registration.delete_button.${idx + 1}`,
-                      variant: "ghost",
-                      size: "sm",
-                      className: "text-destructive hover:bg-destructive/10",
-                      onClick: () => handleDeleteRegistration(reg.id),
-                      children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { className: "h-4 w-4" })
-                    }
-                  ) })
-                ]
-              },
-              reg.id.toString()
-            )) })
-          ] }) })
+                      "data-ocid": `admin.registration.item.${idx + 1}`,
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "font-mono text-xs whitespace-nowrap", children: reg.id.toString() }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "font-medium whitespace-nowrap min-w-[140px]", children: reg.student_name }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap", children: reg.date_of_birth ?? "-" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "font-mono text-xs whitespace-nowrap", children: reg.aadhaar ?? "-" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap max-w-[160px] truncate", children: reg.email ?? "-" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap", children: reg.contact_number }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap", children: reg.whatsapp_number || "-" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap min-w-[130px]", children: reg.father_name ?? "-" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap", children: reg.parent_mobile ?? "-" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap min-w-[130px]", children: reg.mother_name ?? "-" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap max-w-[160px] truncate", children: reg.school_name }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap", children: reg.district ?? "-" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          Badge,
+                          {
+                            variant: "secondary",
+                            className: "whitespace-nowrap",
+                            children: reg.exam_group
+                          }
+                        ) }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap max-w-[160px] truncate", children: reg.choice1 ?? "-" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap max-w-[160px] truncate", children: reg.choice2 ?? "-" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap max-w-[160px] truncate", children: reg.choice3 ?? "-" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "bg-navy/10 text-navy border-0 whitespace-nowrap", children: reg.test_key }) }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "whitespace-nowrap text-sm", children: regDate }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "text-right whitespace-nowrap", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          Button,
+                          {
+                            "data-ocid": `admin.registration.delete_button.${idx + 1}`,
+                            variant: "ghost",
+                            size: "sm",
+                            className: "text-destructive hover:bg-destructive/10",
+                            onClick: () => handleDeleteRegistration(reg.id),
+                            children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { className: "h-4 w-4" })
+                          }
+                        ) })
+                      ]
+                    },
+                    reg.id.toString()
+                  );
+                }) })
+              ]
+            }
+          ) }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: "questions", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -73385,218 +73353,7 @@ function AdminPage({ lang, setPage }) {
               exam.id
             )) })
           ] }) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "settings", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card rounded-lg shadow-card p-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-2 rounded-full bg-primary/10", children: /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquare, { className: "h-5 w-5 text-primary" }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-foreground", children: lang === "en" ? "Fast2SMS API Key" : "Fast2SMS API கீ" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: lang === "en" ? "Configure your Fast2SMS API key to send SMS notifications to students" : "மாணவர்களுக்கு SMS அனுப்ப உங்கள் Fast2SMS API கீயை உள்ளிடவும்" })
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  Label,
-                  {
-                    htmlFor: "smsApiKeyInput",
-                    className: "text-sm font-medium mb-1 block",
-                    children: lang === "en" ? "API Key" : "API கீ"
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex-1", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      Input,
-                      {
-                        id: "smsApiKeyInput",
-                        "data-ocid": "admin.settings.input",
-                        type: showApiKey ? "text" : "password",
-                        value: smsApiKey,
-                        onChange: (e) => setSmsApiKey(e.target.value),
-                        placeholder: lang === "en" ? "Enter your Fast2SMS API key..." : "Fast2SMS API கீயை உள்ளிடவும்...",
-                        className: "pr-10 font-mono text-sm"
-                      }
-                    ),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      "button",
-                      {
-                        type: "button",
-                        onClick: () => setShowApiKey((v2) => !v2),
-                        className: "absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors",
-                        "data-ocid": "admin.settings.toggle",
-                        children: showApiKey ? /* @__PURE__ */ jsxRuntimeExports.jsx(EyeOff, { className: "h-4 w-4" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "h-4 w-4" })
-                      }
-                    )
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                    Button,
-                    {
-                      "data-ocid": "admin.settings.save_button",
-                      onClick: handleSaveApiKey,
-                      disabled: savingApiKey || !smsApiKey.trim(),
-                      className: "bg-primary text-primary-foreground",
-                      children: [
-                        savingApiKey ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "h-4 w-4 animate-spin mr-1" }) : null,
-                        lang === "en" ? "Save Key" : "சேமி"
-                      ]
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-t pt-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("h4", { className: "text-sm font-semibold text-foreground mb-3 flex items-center gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquare, { className: "h-4 w-4 text-primary" }),
-                  lang === "en" ? "Test SMS" : "சோதனை SMS"
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    Input,
-                    {
-                      "data-ocid": "admin.settings.search_input",
-                      type: "tel",
-                      value: testSmsPhone,
-                      onChange: (e) => setTestSmsPhone(e.target.value),
-                      placeholder: lang === "en" ? "Enter 10-digit mobile number..." : "10 இலக்க மொபைல் எண்...",
-                      className: "max-w-xs",
-                      maxLength: 10
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                    Button,
-                    {
-                      "data-ocid": "admin.settings.secondary_button",
-                      variant: "outline",
-                      onClick: handleTestSms,
-                      disabled: sendingTestSms || !testSmsPhone.trim() || !smsApiKey.trim(),
-                      children: [
-                        sendingTestSms ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "h-4 w-4 animate-spin mr-1" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquare, { className: "h-4 w-4 mr-1" }),
-                        lang === "en" ? "Send Test SMS" : "சோதனை அனுப்பு"
-                      ]
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-2", children: lang === "en" ? "A test message will be sent to verify your API key is working correctly." : "உங்கள் API கீ சரியாக வேலை செய்கிறதா என்பதை சரிபார்க்க சோதனை செய்தி அனுப்பப்படும்." })
-              ] })
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card rounded-lg shadow-card p-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-2 rounded-full bg-primary/10", children: /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquare, { className: "h-5 w-5 text-primary" }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-foreground", children: lang === "en" ? "SMS Statistics & Cost" : "SMS புள்ளிவிவரங்கள் & செலவு" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                Button,
-                {
-                  variant: "outline",
-                  size: "sm",
-                  onClick: loadSmsStats,
-                  disabled: loadingStats,
-                  "data-ocid": "admin.settings.primary_button",
-                  children: [
-                    loadingStats ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "h-4 w-4 animate-spin" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(RefreshCw, { className: "h-4 w-4" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "ml-1 hidden sm:inline", children: lang === "en" ? "Refresh" : "புதுப்பி" })
-                  ]
-                }
-              )
-            ] }),
-            loadingStats && !smsStats ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "div",
-              {
-                "data-ocid": "admin.settings.loading_state",
-                className: "flex items-center justify-center py-8 text-muted-foreground",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "h-6 w-6 animate-spin mr-2" }),
-                  lang === "en" ? "Loading stats..." : "ஏற்றுகிறது..."
-                ]
-              }
-            ) : smsStats ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 lg:grid-cols-4 gap-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted/50 rounded-lg p-4 text-center", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl font-bold text-primary", children: Number(smsStats.total_sent).toLocaleString() }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-muted-foreground mt-1 font-medium uppercase tracking-wide", children: lang === "en" ? "Total SMS Sent" : "மொத்த SMS" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted/50 rounded-lg p-4 text-center", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl font-bold text-destructive", children: Number(smsStats.total_failed).toLocaleString() }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-muted-foreground mt-1 font-medium uppercase tracking-wide", children: lang === "en" ? "Failed SMS" : "தோல்வி SMS" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted/50 rounded-lg p-4 text-center", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center", children: smsStats.api_key_set ? /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { className: "h-8 w-8 text-green-500" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(CircleX, { className: "h-8 w-8 text-destructive" }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "div",
-                  {
-                    className: `text-sm font-semibold mt-1 ${smsStats.api_key_set ? "text-green-600" : "text-destructive"}`,
-                    children: smsStats.api_key_set ? lang === "en" ? "Configured ✓" : "அமைக்கப்பட்டது ✓" : lang === "en" ? "Not Set ✗" : "அமைக்கப்படவில்லை ✗"
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-muted-foreground mt-0.5 uppercase tracking-wide", children: lang === "en" ? "API Key Status" : "API கீ நிலை" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted/50 rounded-lg p-4 text-center", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-3xl font-bold text-amber-600", children: [
-                  "₹",
-                  (Number(smsStats.total_sent) * 0.18).toFixed(2)
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-muted-foreground mt-1 font-medium uppercase tracking-wide", children: lang === "en" ? "Est. Cost" : "மதிப்பீட்டு செலவு" })
-              ] })
-            ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "div",
-              {
-                "data-ocid": "admin.settings.error_state",
-                className: "text-center py-8 text-muted-foreground text-sm",
-                children: lang === "en" ? "No stats available. Save your API key first." : "புள்ளிவிவரங்கள் இல்லை. முதலில் API கீயை சேமிக்கவும்."
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground mt-4 border-t pt-3", children: [
-              "💡",
-              " ",
-              lang === "en" ? "Cost estimate based on Fast2SMS Quick SMS rate (₹0.18/SMS). Actual charges may vary." : "செலவு மதிப்பீடு Fast2SMS Quick SMS விகிதத்தின் அடிப்படையில் (₹0.18/SMS). உண்மையான கட்டணங்கள் மாறுபடலாம்."
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card rounded-lg shadow-card p-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-2 rounded-full bg-amber-500/10", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "h-5 w-5 text-amber-600" }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-foreground", children: lang === "en" ? "Recharge Fast2SMS Account" : "Fast2SMS கணக்கை நிரப்பவும்" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: lang === "en" ? "Click below to visit Fast2SMS and recharge your SMS balance." : "Fast2SMS-ஐ பார்வையிட்டு உங்கள் SMS இருப்பை நிரப்பவும்." })
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                Button,
-                {
-                  "data-ocid": "admin.settings.primary_button",
-                  className: "bg-amber-600 hover:bg-amber-700 text-white font-semibold",
-                  onClick: () => window.open(
-                    "https://www.fast2sms.com/dashboard/wallet",
-                    "_blank",
-                    "noopener,noreferrer"
-                  ),
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "h-4 w-4 mr-2" }),
-                    lang === "en" ? "Go to Fast2SMS Recharge →" : "Fast2SMS நிரப்பலுக்கு செல்லவும் →"
-                  ]
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                Button,
-                {
-                  "data-ocid": "admin.settings.secondary_button",
-                  variant: "outline",
-                  onClick: () => window.open(
-                    "https://www.fast2sms.com/plans",
-                    "_blank",
-                    "noopener,noreferrer"
-                  ),
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "h-4 w-4 mr-2" }),
-                    lang === "en" ? "View Fast2SMS Pricing →" : "Fast2SMS விலை நிர்ணயம் →"
-                  ]
-                }
-              )
-            ] })
-          ] })
-        ] }) })
+        ] })
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -75967,519 +75724,1516 @@ function ExamPage({
     ] }) })
   ] });
 }
-const DEFAULT_EXAMS = [
-  { label: "Mathematics - Test 1", value: "Test1" },
-  { label: "Science - Test 2", value: "Test2" },
-  { label: "General Knowledge - Test 3", value: "Test3" }
+const PROGRAMMES = {
+  Science: [
+    "B.Sc Mathematics",
+    "B.Sc Statistics",
+    "B.Sc Physics",
+    "B.Sc Chemistry",
+    "B.Sc Biochemistry",
+    "B.Sc Biotechnology",
+    "B.Sc Microbiology",
+    "B.Sc Nutrition, FSM & Dietetics",
+    "B.Sc Psychology",
+    "B.Sc Interior Design & Decor",
+    "B.Sc Costume Design & Fashion Technology",
+    "B.Sc Computer Science",
+    "B.C.A",
+    "B.Sc Artificial Intelligence",
+    "B.Sc Data Science"
+  ],
+  Arts: ["B.A English", "B.A Tamil", "B.A Economics"],
+  Management: ["B.B.A"],
+  Commerce: [
+    "B.Com",
+    "B.Com (Computer Applications)",
+    "B.Com (Professional Accounting)"
+  ]
+};
+const DISTRICTS = [
+  "Ariyalur",
+  "Chengalpattu",
+  "Chennai",
+  "Coimbatore",
+  "Cuddalore",
+  "Dharmapuri",
+  "Dindigul",
+  "Erode",
+  "Kallakurichi",
+  "Kancheepuram",
+  "Kanyakumari",
+  "Karur",
+  "Krishnagiri",
+  "Madurai",
+  "Mayiladuthurai",
+  "Nagapattinam",
+  "Namakkal",
+  "Nilgiris",
+  "Perambalur",
+  "Pudukkottai",
+  "Ramanathapuram",
+  "Ranipet",
+  "Salem",
+  "Sivaganga",
+  "Tenkasi",
+  "Thanjavur",
+  "Theni",
+  "Thoothukudi",
+  "Tiruchirappalli",
+  "Tirunelveli",
+  "Tirupathur",
+  "Tiruppur",
+  "Tiruvallur",
+  "Tiruvannamalai",
+  "Tiruvarur",
+  "Vellore",
+  "Viluppuram",
+  "Virudhunagar"
 ];
-function HomePage({ setPage, lang, setLang }) {
-  const { actor } = useActor(createActor);
-  const [examTests, setExamTests] = reactExports.useState(() => {
-    const custom = getExams();
-    const customItems = custom.map((e) => ({
-      label: e.exam_name,
-      value: e.id
-    }));
-    return [...DEFAULT_EXAMS, ...customItems];
-  });
+const GROUPS = [
+  {
+    value: "Group I",
+    label: "Group I (Science): Physics, Chemistry, Mathematics, Computer Science/Biology"
+  },
+  {
+    value: "Group II",
+    label: "Group II (Bio-Maths): Mathematics, Physics, Chemistry, Biology"
+  },
+  {
+    value: "Group III",
+    label: "Group III: Physics, Chemistry, Botany, Zoology"
+  },
+  {
+    value: "Group IV",
+    label: "Group IV (Commerce): Commerce, Accountancy, Economics"
+  }
+];
+const WHY_ITEMS = [
+  { main: "32 Years of Educational Excellence", sub: "" },
+  { main: "No.1 Women's Institution", sub: "" },
+  { main: "NAAC A+ Accreditation", sub: "" },
+  { main: "Autonomous Institution", sub: "" },
+  { main: "Best College Award", sub: "from Thiruvalluvar University" },
+  { main: "IIC 4 Star Rated", sub: "" },
+  { main: "100% Placements", sub: "Top companies campus placement" },
+  { main: "Excellent Infrastructure", sub: "" },
+  { main: "Industry Aligned Curriculum", sub: "" },
+  { main: "Sports Facilities", sub: "Indoor & outdoor sports infrastructure" },
+  { main: "Digital Library", sub: "DELNET INFLIBNET e-resources" },
+  { main: "NCC / NSS", sub: "Leadership & community service" },
+  { main: "Hygienic Hostel", sub: "Secure women's hostel" },
+  { main: "Bus Facility", sub: "51 College buses" },
+  { main: "Scholarships", sub: "Government & Institutional aid available" }
+];
+const SYL_GROUPS = [
+  {
+    name: "Group I",
+    tooltip: "Pattern 1: English - 14 | Physics - 12 | Chemistry - 12 | Mathematics - 12"
+  },
+  {
+    name: "Group II",
+    tooltip: "Pattern 2: English - 14 | Physics - 12 | Chemistry - 12 | Biology - 12 [Botany - 6, Zoology - 6]"
+  },
+  {
+    name: "Group IV",
+    tooltip: "Pattern 3: English - 14 | Commerce - 12 | Accountancy - 12 | Economics - 12 | General Knowledge - 6"
+  }
+];
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+const DAYS_SHORT = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+const STYLES = `
+.mkjc-body { font-family: 'Segoe UI', Arial, sans-serif; background: #0d1b3e; color: #fff; min-height: 100vh; overflow-x: auto; }
+.mkjc-header { text-align: center; padding: 26px 16px 16px; background: #0d1b3e; position: relative; }
+.mkjc-header h1 { font-size: 1.44rem; font-weight: 900; letter-spacing: 2px; color: #f5c518; text-transform: uppercase; line-height: 1.3; margin: 0; }
+.mkjc-header-btns { position: absolute; top: 12px; right: 16px; display: flex; gap: 8px; align-items: center; }
+.mkjc-header-admin-btn { background: #fff; color: #1a3acc; border: 1.5px solid #1a3acc; border-radius: 6px; padding: 6px 14px; font-size: 0.78rem; font-weight: 700; cursor: pointer; letter-spacing: 0.3px; transition: background .2s, color .2s; }
+.mkjc-header-admin-btn:hover { background: #e8edff; }
+.mkjc-header-student-btn { background: #1a3acc; color: #fff; border: 1.5px solid #1a3acc; border-radius: 6px; padding: 6px 14px; font-size: 0.78rem; font-weight: 700; cursor: pointer; letter-spacing: 0.3px; transition: background .2s; }
+.mkjc-header-student-btn:hover { background: #1430aa; }
+.mkjc-national { font-size: 0.7rem; letter-spacing: 4px; color: #f5c518; margin: 4px 0 6px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.mkjc-national::before, .mkjc-national::after { content: ''; display: inline-block; width: 58px; height: 1px; background: #f5c518; }
+.mkjc-accred { color: #c8a84b; font-size: 0.72rem; margin: 2px 0; letter-spacing: 0.01em; font-style: italic; }
+.mkjc-header h2 { font-size: 1.5rem; font-weight: 700; color: #fff; letter-spacing: 1px; margin: 6px 0 0; }
+.mkjc-header p { font-size: 0.82rem; color: #7eb3f5; margin-top: 4px; }
+.mkjc-gold { color: #f5c518; font-weight: 800; text-transform: uppercase; }
+.mkjc-grid { display: grid; grid-template-columns: 232px 1fr 242px; gap: 16px; max-width: 1152px; margin: 0 auto; padding: 0 12px 28px; min-width: 840px; }
+.mkjc-panel { background: #0d1b3e; border-radius: 8px; padding: 0 13px 16px; margin-bottom: 14px; border: 1.5px solid #1e2e5a; overflow: hidden; }
+.mkjc-panel-title { background: #f5c518; color: #0d1b3e; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-align: center; padding: 9px 10px; margin: 0 -13px 13px -13px; text-transform: uppercase; }
+.mkjc-prog-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 5px; margin-bottom: 12px; text-align: center; }
+.mkjc-prog-stat-box { background: #1a2750; border-radius: 5px; padding: 6px 4px; }
+.mkjc-prog-stat-num { font-size: 1.2rem; font-weight: 900; color: #f5c518; line-height: 1; }
+.mkjc-prog-stat-label { font-size: 0.68rem; color: #fff; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+.mkjc-prog-cat { font-size: 0.82rem; font-weight: 800; letter-spacing: 1.5px; color: #f5c518; text-transform: uppercase; margin: 10px 0 5px; }
+.mkjc-prog-list { list-style: none; padding: 0; margin: 0; }
+.mkjc-prog-list li { font-size: 0.85rem; color: #d4e4ff; padding: 1px 0; line-height: 1.4; }
+.mkjc-prog-list li::before { content: '> '; color: #f5c518; font-weight: 700; }
+.mkjc-why-list { list-style: none; padding: 0; margin: 0; }
+.mkjc-why-item { padding: 5px 0; border-bottom: 1px solid #1e2e5a; }
+.mkjc-why-item:last-child { border-bottom: none; }
+.mkjc-why-main { font-size: 0.88rem; font-weight: 700; color: #fff; display: flex; align-items: flex-start; gap: 5px; }
+.mkjc-why-main::before { content: '•'; color: #f5c518; flex-shrink: 0; font-size: 1rem; margin-top: 0; }
+.mkjc-why-sub { font-size: 0.76rem; color: #d4e4ff; padding-left: 15px; margin-top: 1px; }
+.mkjc-exam-card { background: #0d1b3e; border: 1.5px solid #1e2e5a; border-radius: 7px; overflow: hidden; }
+.mkjc-exam-title { font-size: 0.85rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #0d1b3e; background: #f5c518; text-align: center; margin: 0; padding: 8px 14px; }
+.mkjc-exam-list { padding: 0 14px; margin: 12px 0 14px; list-style: none; }
+.mkjc-exam-list li { font-size: 0.82rem; color: #d4e4ff; padding: 5px 0; border-bottom: 1px solid #1e2e5a; line-height: 1.5; }
+.mkjc-exam-list li:last-child { border-bottom: none; }
+.mkjc-exam-label { font-weight: 700; color: #f5c518; }
+.mkjc-prohibited { color: #ff8a8a !important; }
+.mkjc-prohibited .mkjc-exam-label { color: #ff5c5c; }
+.mkjc-form-card { background: #1a2d6b; border-radius: 12px; overflow: hidden; }
+.mkjc-form-header { background: #1a3acc; padding: 11px; text-align: center; font-size: 1.1rem; font-weight: 800; letter-spacing: 2.5px; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; color: #fff; }
+.mkjc-form-body { padding: 16px 16px 0; }
+.mkjc-section-heading { font-size: 0.74rem; font-weight: 800; letter-spacing: 1.2px; color: #f5c518; text-transform: uppercase; margin: 17px 0 10px; display: flex; align-items: center; gap: 8px; }
+.mkjc-section-heading::after { content: ''; flex: 1; height: 1px; background: #2a3e7a; }
+.mkjc-form-group { margin-bottom: 12px; }
+.mkjc-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mkjc-field-label { font-size: 0.7rem; color: #d4e4ff; display: block; margin-bottom: 4px; }
+.mkjc-req { color: #e03030; }
+.mkjc-field-hint { font-size: 0.6rem; color: #7eb3f5; margin-top: 1px; }
+.mkjc-field-wrap { position: relative; }
+.mkjc-field-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #6a82b5; font-size: 0.82rem; pointer-events: none; }
+.mkjc-input { width: 100%; background: #fff; color: #222; border: 1.8px solid #3a5ab5; border-radius: 6px; padding: 8px 10px 8px 32px; font-size: 0.82rem; outline: none; transition: border-color .2s; font-family: inherit; box-sizing: border-box; }
+.mkjc-input:focus { border-color: #f5c518; }
+.mkjc-input-no-icon { padding-left: 10px !important; }
+.mkjc-select { width: 100%; background: #fff; color: #222; border: 1.8px solid #3a5ab5; border-radius: 6px; padding: 8px 10px; font-size: 0.82rem; outline: none; transition: border-color .2s; font-family: inherit; box-sizing: border-box; cursor: pointer; }
+.mkjc-select:focus { border-color: #f5c518; }
+.mkjc-field-err { font-size: 0.62rem; color: #e03030; margin-top: 2px; }
+.mkjc-divider { border: none; border-top: 1px solid #2a3e7a; margin: 12px 0; }
+.mkjc-submit-btn { width: 100%; background: #1a3acc; color: #fff; border: none; border-radius: 7px; padding: 13px; font-size: 0.96rem; font-weight: 800; letter-spacing: 2px; cursor: pointer; text-transform: uppercase; transition: background .2s; margin: 16px 0; display: block; }
+.mkjc-submit-btn:hover { background: #1430aa; }
+.mkjc-submit-btn:disabled { background: #3a5ab5; cursor: not-allowed; opacity: 0.7; }
+.mkjc-dob-wrap { display: flex; gap: 6px; align-items: center; position: relative; }
+.mkjc-dob-wrap .mkjc-input { flex: 1; }
+.mkjc-cal-btn { background: #1a3acc; border: none; border-radius: 6px; padding: 0 10px; height: 36px; cursor: pointer; color: #fff; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .2s; }
+.mkjc-cal-btn:hover { background: #f5c518; color: #0d1b3e; }
+.mkjc-cal-popup { position: fixed; background: #fff; border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); z-index: 5000; width: 280px; overflow: hidden; font-family: 'Segoe UI', Arial, sans-serif; }
+.mkjc-cal-head { background: #1a3acc; color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; }
+.mkjc-cal-head button { background: none; border: none; color: #fff; font-size: 1.1rem; cursor: pointer; padding: 2px 7px; border-radius: 4px; transition: background .15s; }
+.mkjc-cal-head button:hover { background: rgba(255,255,255,0.2); }
+.mkjc-cal-my { font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px; cursor: pointer; padding: 4px 8px; border-radius: 4px; transition: background .15s; background: none; border: none; color: #fff; }
+.mkjc-cal-my:hover { background: rgba(255,255,255,0.15); }
+.mkjc-cal-grid { display: grid; grid-template-columns: repeat(7,1fr); padding: 8px 10px 10px; gap: 2px; }
+.mkjc-cal-dow { text-align: center; font-size: 0.65rem; font-weight: 700; color: #6a82b5; padding: 4px 0; text-transform: uppercase; }
+.mkjc-cal-day { text-align: center; padding: 6px 0; border-radius: 50%; font-size: 0.8rem; color: #222; cursor: pointer; transition: background .15s, color .15s; user-select: none; background: none; border: none; width: 100%; }
+.mkjc-cal-day:hover { background: #dde7ff; }
+.mkjc-cal-day.today { border: 2px solid #1a3acc; font-weight: 700; }
+.mkjc-cal-day.selected { background: #1a3acc; color: #fff; font-weight: 700; }
+.mkjc-ym-picker { padding: 10px; max-height: 220px; overflow-y: auto; }
+.mkjc-ym-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-top: 6px; }
+.mkjc-ym-item { text-align: center; padding: 6px 4px; border-radius: 6px; font-size: 0.78rem; cursor: pointer; color: #222; transition: background .15s; background: none; border: none; width: 100%; }
+.mkjc-ym-item:hover { background: #dde7ff; }
+.mkjc-ym-item.selected { background: #1a3acc; color: #fff; font-weight: 700; }
+.mkjc-ym-label { font-size: 0.7rem; font-weight: 700; color: #6a82b5; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.mkjc-toast { position: fixed; top: 22px; right: 22px; padding: 13px 22px; border-radius: 8px; font-weight: 700; font-size: 0.87rem; z-index: 9999; opacity: 0; transform: translateY(-18px); transition: opacity .3s, transform .3s; pointer-events: none; max-width: 320px; color: #fff; }
+.mkjc-toast.show { opacity: 1; transform: translateY(0); }
+.mkjc-toast.success { background: #0fa88a; }
+.mkjc-toast.error { background: #e03030; }
+.mkjc-admin-modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.72); z-index: 8000; display: flex; align-items: center; justify-content: center; border: none; padding: 0; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; }
+.mkjc-admin-modal { background: #10203e; border: 2px solid #f5c518; border-radius: 12px; padding: 28px 26px 22px; width: 420px; max-width: 96vw; }
+.mkjc-admin-modal h3 { color: #f5c518; margin: 0 0 14px; font-size: 1rem; letter-spacing: 1.5px; }
+.mkjc-admin-label { font-size: 0.75rem; color: #d4e4ff; display: block; margin-bottom: 4px; margin-top: 12px; }
+.mkjc-admin-input { width: 100%; background: #fff; color: #222; border: 1.5px solid #3a5ab5; border-radius: 6px; padding: 8px 10px; font-size: 0.82rem; box-sizing: border-box; }
+.mkjc-code-block { background: #0a1525; border: 1px solid #2a3e7a; border-radius: 6px; padding: 12px; font-family: 'Courier New', monospace; font-size: 0.62rem; color: #a8d0ff; overflow-x: auto; max-height: 220px; overflow-y: auto; margin-top: 10px; white-space: pre; }
+.mkjc-admin-note { font-size: 0.68rem; color: #7eb3f5; margin-top: 14px; line-height: 1.6; }
+.mkjc-copy-btn { background: #2a3e7a; color: #fff; border: none; border-radius: 5px; padding: 5px 12px; font-size: 0.72rem; cursor: pointer; margin-top: 8px; transition: background .2s; }
+.mkjc-copy-btn:hover { background: #f5c518; color: #0d1b3e; }
+.mkjc-copy-btn.copied { background: #0fa88a; }
+.mkjc-admin-btns { display: flex; gap: 10px; margin-top: 18px; }
+.mkjc-admin-btns button { flex: 1; padding: 9px; border-radius: 6px; border: none; font-weight: 700; font-size: 0.82rem; cursor: pointer; }
+.mkjc-btn-save { background: #f5c518; color: #0d1b3e; }
+.mkjc-btn-cancel { background: #2a3e7a; color: #fff; }
+.mkjc-success-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9000; display: flex; align-items: center; justify-content: center; animation: mkjcFadeIn .3s ease; border: none; padding: 0; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; }
+@keyframes mkjcFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.mkjc-success-modal { background: #1a2d6b; border: 3px solid #0fa88a; border-radius: 14px; padding: 36px 32px; width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; box-shadow: 0 12px 48px rgba(0,0,0,0.5); animation: mkjcSlideUp .3s ease; }
+@keyframes mkjcSlideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.mkjc-success-header { text-align: center; margin-bottom: 28px; border-bottom: 2px solid #0fa88a; padding-bottom: 16px; }
+.mkjc-check-icon { font-size: 3.5rem; color: #0fa88a; margin-bottom: 12px; display: block; animation: mkjcBounce .6s ease; }
+@keyframes mkjcBounce { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+.mkjc-success-header h2 { color: #0fa88a; font-size: 1.6rem; margin: 0; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
+.mkjc-success-header p { color: #7eb3f5; font-size: 0.9rem; margin-top: 6px; }
+.mkjc-success-details { background: #0d1b3e; border-radius: 10px; padding: 20px; margin-bottom: 24px; }
+.mkjc-detail-section { margin-bottom: 18px; }
+.mkjc-detail-section:last-child { margin-bottom: 0; }
+.mkjc-detail-title { color: #f5c518; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.mkjc-detail-title::before { content: 'check'; font-family: 'Material Icons', serif; color: #0fa88a; speak: none; }
+.mkjc-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mkjc-detail-item { background: #1a2750; padding: 12px; border-radius: 6px; }
+.mkjc-detail-item.full { grid-column: 1 / -1; }
+.mkjc-detail-label { color: #7eb3f5; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+.mkjc-detail-value { color: #fff; font-size: 0.9rem; font-weight: 600; word-break: break-word; }
+.mkjc-success-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mkjc-success-actions button { padding: 14px; border: none; border-radius: 8px; font-weight: 800; font-size: 0.9rem; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; transition: all .2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.mkjc-btn-download { background: #0fa88a; color: #0d1b3e; }
+.mkjc-btn-download:hover { background: #0d9e7f; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(15,168,138,0.4); }
+.mkjc-btn-new { background: #3a5ab5; color: #fff; }
+.mkjc-btn-new:hover { background: #2a45a0; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(58,90,181,0.4); }
+.mkjc-footer { background: #5a0000; color: #fff; text-align: center; padding: 12px 16px; font-size: 0.72rem; }
+
+.mkjc-syl-group { display: inline-block; color: #f5d77a; font-weight: 700; cursor: pointer; border-bottom: 1px dashed #c8a84b; position: relative; background: none; border-left: none; border-right: none; border-top: none; padding: 0; font-size: inherit; font-family: inherit; }
+.mkjc-syl-tooltip { position: fixed; background: #f5d77a; border: 1px solid #0d1b3e; border-radius: 8px; padding: 10px 34px 10px 14px; font-size: 0.85rem; color: #0d1b3e; font-weight: 600; white-space: nowrap; z-index: 1000; box-shadow: 0 4px 18px rgba(0,0,0,0.5); animation: mkjcFadeIn .2s ease; top: 50%; left: 50%; transform: translate(-50%,-50%); min-width: 280px; }
+.mkjc-syl-close { position: absolute; top: 5px; right: 9px; background: none; border: none; color: #0d1b3e; font-size: 1.1rem; font-weight: 900; line-height: 1; cursor: pointer; padding: 0; opacity: 0.6; }
+.mkjc-syl-close:hover { opacity: 1; }
+`;
+function HomePage({
+  startExam: _startExam,
+  setPage
+}) {
+  const { actor, isFetching: actorLoading } = useActor(createActor);
   reactExports.useEffect(() => {
-    function refresh() {
-      const custom = getExams();
-      const customItems = custom.map((e) => ({
-        label: e.exam_name,
-        value: e.id
-      }));
-      setExamTests([...DEFAULT_EXAMS, ...customItems]);
+    const id2 = "mkjc-styles";
+    if (!document.getElementById(id2)) {
+      const style2 = document.createElement("style");
+      style2.id = id2;
+      style2.textContent = STYLES;
+      document.head.appendChild(style2);
     }
-    window.addEventListener("focus", refresh);
-    return () => window.removeEventListener("focus", refresh);
   }, []);
-  const [form, setForm] = reactExports.useState({
-    student_name: "",
-    school_name: "",
-    exam_group: "",
-    contact_number: "",
-    whatsapp_number: "",
-    test_key: ""
-  });
-  const [loading, setLoading] = reactExports.useState(false);
-  const [credentials, setCredentials] = reactExports.useState(null);
-  const [copied, setCopied] = reactExports.useState(false);
-  function handleChange(field, value) {
-    setForm((prev) => ({ ...prev, [field]: value }));
+  const emptyForm = {
+    fullName: "",
+    dob: "",
+    aadhaar: "",
+    email: "",
+    mobile: "",
+    whatsapp: "",
+    fatherName: "",
+    parentMobile: "",
+    motherName: "",
+    school12: "",
+    district: "",
+    group12: "",
+    choice1: "",
+    choice2: "",
+    choice3: ""
+  };
+  const [form, setForm] = reactExports.useState(emptyForm);
+  const [errors, setErrors] = reactExports.useState({});
+  const [submitting, setSubmitting] = reactExports.useState(false);
+  const [successData, setSuccessData] = reactExports.useState(null);
+  const [studentCredentials, setStudentCredentials] = reactExports.useState(null);
+  const [toast, setToast] = reactExports.useState(null);
+  const toastTimer = reactExports.useRef(null);
+  function showToast(msg, type = "success") {
+    setToast({ msg, type });
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    toastTimer.current = setTimeout(() => setToast(null), 3500);
   }
-  async function handleStart(e) {
-    e.preventDefault();
-    if (!actor) {
-      ue.error(lang === "en" ? "Backend not ready" : "பின்தளம் தயாராக இல்லை");
-      return;
+  const calBtnRef = reactExports.useRef(null);
+  const calPopupRef = reactExports.useRef(null);
+  const [calIsOpen, setCalIsOpen] = reactExports.useState(false);
+  const [calYear, setCalYear] = reactExports.useState(() => (/* @__PURE__ */ new Date()).getFullYear() - 17);
+  const [calMonth, setCalMonth] = reactExports.useState(() => (/* @__PURE__ */ new Date()).getMonth());
+  const [calSelY, setCalSelY] = reactExports.useState(null);
+  const [calSelM, setCalSelM] = reactExports.useState(null);
+  const [calSelD, setCalSelD] = reactExports.useState(null);
+  const [calYmMode, setCalYmMode] = reactExports.useState(false);
+  const [calPos, setCalPos] = reactExports.useState({ top: 0, left: 0 });
+  function openCal() {
+    const val = form.dob.trim();
+    if (/^\d{2}\/\d{2}\/\d{4}$/.test(val)) {
+      const [d2, m2, y2] = val.split("/").map(Number);
+      setCalSelD(d2);
+      setCalSelM(m2 - 1);
+      setCalSelY(y2);
+      setCalYear(y2);
+      setCalMonth(m2 - 1);
     }
-    if (!form.student_name || !form.test_key) {
-      ue.error(
-        lang === "en" ? "Please fill in required fields" : "தேவையான புலங்களை பூர்த்தி செய்யுங்கள்"
-      );
-      return;
+    if (calBtnRef.current) {
+      const rect = calBtnRef.current.getBoundingClientRect();
+      setCalPos({
+        top: rect.bottom + 6,
+        left: Math.max(0, Math.min(rect.right - 280, window.innerWidth - 292))
+      });
     }
-    setLoading(true);
-    try {
-      const regId = await actor.addRegistration(
-        form.student_name,
-        form.school_name,
-        form.contact_number,
-        form.whatsapp_number,
-        form.exam_group,
-        form.test_key
-      );
-      let creds = { user_id: "", password: "" };
-      try {
-        creds = await actor.generateStudentCredentials(
-          regId,
-          form.contact_number
-        );
-      } catch (credErr) {
-        console.error("Credentials generation error:", credErr);
-        creds = {
-          user_id: `STU${String(regId).padStart(6, "0")}`,
-          password: "Check SMS"
-        };
+    setCalYmMode(false);
+    setCalIsOpen(true);
+  }
+  reactExports.useEffect(() => {
+    if (!calIsOpen) return;
+    function handler(e) {
+      var _a3;
+      if (calPopupRef.current && !calPopupRef.current.contains(e.target) && !((_a3 = calBtnRef.current) == null ? void 0 : _a3.contains(e.target))) {
+        setCalIsOpen(false);
       }
-      setCredentials(creds);
-      ue.success(
-        lang === "en" ? "Registration Successful!" : "பதிவு வெற்றிகரமானது!"
+    }
+    const id2 = setTimeout(() => {
+      document.addEventListener("click", handler);
+    }, 0);
+    return () => {
+      clearTimeout(id2);
+      document.removeEventListener("click", handler);
+    };
+  }, [calIsOpen]);
+  function calSelectDay(day) {
+    const newDob = `${String(day).padStart(2, "0")}/${String(calMonth + 1).padStart(2, "0")}/${calYear}`;
+    setForm((p2) => ({ ...p2, dob: newDob }));
+    setCalSelD(day);
+    setCalSelM(calMonth);
+    setCalSelY(calYear);
+    setErrors(
+      (p2) => Object.fromEntries(Object.entries(p2).filter(([key]) => key !== "dob"))
+    );
+    setCalIsOpen(false);
+  }
+  function renderCalDays() {
+    const today = /* @__PURE__ */ new Date();
+    const firstDay = new Date(calYear, calMonth, 1).getDay();
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    const cells = [];
+    for (const d2 of DAYS_SHORT) {
+      cells.push(
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-cal-dow", children: d2 }, `dow-${d2}`)
       );
-    } catch (err) {
-      console.error(err);
-      ue.error(
-        lang === "en" ? "Registration failed. Please try again." : "பதிவு தோல்வியடைந்தது."
+    }
+    for (let i = 0; i < firstDay; i++) cells.push(/* @__PURE__ */ jsxRuntimeExports.jsx("div", {}, `e${i}`));
+    for (let day = 1; day <= daysInMonth; day++) {
+      const isToday = day === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear();
+      const isSel = calSelD === day && calSelM === calMonth && calSelY === calYear;
+      const dayNum = day;
+      cells.push(
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "button",
+            className: `mkjc-cal-day${isToday ? " today" : ""}${isSel ? " selected" : ""}`,
+            onClick: () => calSelectDay(dayNum),
+            "aria-label": `Select day ${day}`,
+            children: day
+          },
+          day
+        )
       );
-    } finally {
-      setLoading(false);
+    }
+    return cells;
+  }
+  function calPrev() {
+    if (calYmMode) return;
+    if (calMonth === 0) {
+      setCalMonth(11);
+      setCalYear((y2) => y2 - 1);
+    } else setCalMonth((m2) => m2 - 1);
+  }
+  function calNext() {
+    if (calYmMode) return;
+    if (calMonth === 11) {
+      setCalMonth(0);
+      setCalYear((y2) => y2 + 1);
+    } else setCalMonth((m2) => m2 + 1);
+  }
+  const [activeSyl, setActiveSyl] = reactExports.useState(null);
+  function setField(k2, v2) {
+    setForm((p2) => ({ ...p2, [k2]: v2 }));
+  }
+  function clearErr(k2) {
+    setErrors(
+      (p2) => Object.fromEntries(Object.entries(p2).filter(([key]) => key !== k2))
+    );
+  }
+  function handleAadhaarInput(raw) {
+    const digits = raw.replace(/\D/g, "").slice(0, 12);
+    let out = "";
+    for (let i = 0; i < digits.length; i++) {
+      if (i > 0 && i % 4 === 0) out += " ";
+      out += digits[i];
+    }
+    setField("aadhaar", out);
+  }
+  function handleDobInput(raw) {
+    const digits = raw.replace(/\D/g, "");
+    let fmt = "";
+    if (digits.length <= 2) fmt = digits;
+    else if (digits.length <= 4)
+      fmt = `${digits.slice(0, 2)}/${digits.slice(2)}`;
+    else
+      fmt = `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4, 8)}`;
+    setField("dob", fmt);
+  }
+  function handleDobKeyDown(e) {
+    if (e.key === "Backspace") {
+      const inp = e.currentTarget;
+      const pos = inp.selectionStart ?? 0;
+      if (pos > 0 && form.dob[pos - 1] === "/") {
+        e.preventDefault();
+        const newVal = form.dob.slice(0, pos - 1) + form.dob.slice(pos);
+        setField("dob", newVal);
+        requestAnimationFrame(() => inp.setSelectionRange(pos - 1, pos - 1));
+      }
     }
   }
-  function handleCopyCredentials() {
-    if (!credentials) return;
-    const text = `User ID: ${credentials.user_id}
-Password: ${credentials.password}`;
-    navigator.clipboard.writeText(text).then(() => {
-      setCopied(true);
-      ue.success(
-        lang === "en" ? "Credentials copied!" : "நற்சான்றிதழ்கள் நகலெடுக்கப்பட்டன!"
-      );
-      setTimeout(() => setCopied(false), 2e3);
-    }).catch(() => {
-      ue.error(lang === "en" ? "Failed to copy" : "நகலெடுக்க முடியவில்லை");
-    });
+  function validate() {
+    const errs = {};
+    if (!form.fullName.trim()) errs.fullName = "Full Name is required";
+    if (!form.dob.trim()) errs.dob = "Date of Birth is required";
+    else if (!/^\d{2}\/\d{2}\/\d{4}$/.test(form.dob.trim()))
+      errs.dob = "Enter date in DD/MM/YYYY format";
+    const aadhaarDigits = form.aadhaar.replace(/\s/g, "");
+    if (!aadhaarDigits) errs.aadhaar = "Aadhaar Number is required";
+    else if (aadhaarDigits.length !== 12)
+      errs.aadhaar = "Enter valid 12-digit Aadhaar";
+    if (form.email.trim() && !/^[^@]+@[^@]+\.[^@]+$/.test(form.email.trim()))
+      errs.email = "Enter a valid email";
+    if (!form.mobile.trim()) errs.mobile = "Mobile Number is required";
+    else if (!/^[6-9]\d{9}$/.test(form.mobile.trim()))
+      errs.mobile = "Enter valid 10-digit mobile";
+    if (!form.fatherName.trim()) errs.fatherName = "Father's Name is required";
+    if (!form.parentMobile.trim())
+      errs.parentMobile = "Parent Mobile is required";
+    else if (!/^[6-9]\d{9}$/.test(form.parentMobile.trim()))
+      errs.parentMobile = "Enter valid 10-digit mobile";
+    if (!form.motherName.trim()) errs.motherName = "Mother's Name is required";
+    if (!form.district) errs.district = "District is required";
+    if (!form.group12) errs.group12 = "12th Group is required";
+    if (!form.choice1) errs.choice1 = "First Choice is required";
+    if (!form.choice2) errs.choice2 = "Second Choice is required";
+    if (!form.choice3) errs.choice3 = "Third Choice is required";
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
   }
-  if (credentials) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "div",
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!validate()) {
+      showToast("Please fill all required fields correctly.", "error");
+      return;
+    }
+    if (!actor || actorLoading) {
+      showToast(
+        "Connecting to backend, please try again in a moment.",
+        "error"
+      );
+      return;
+    }
+    setSubmitting(true);
+    showToast("Submitting registration...");
+    const payload = {
+      ...form,
+      aadhaar: form.aadhaar.replace(/\s/g, "").trim()
+    };
+    try {
+      const registrationId = await actor.addRegistration({
+        student_name: payload.fullName,
+        date_of_birth: payload.dob,
+        aadhaar: payload.aadhaar,
+        email: payload.email,
+        contact_number: payload.mobile,
+        whatsapp_number: payload.whatsapp,
+        father_name: payload.fatherName,
+        parent_mobile: payload.parentMobile,
+        mother_name: payload.motherName,
+        school_name: payload.school12,
+        district: payload.district,
+        exam_group: payload.group12,
+        choice1: payload.choice1,
+        choice2: payload.choice2,
+        choice3: payload.choice3,
+        test_key: ""
+      });
+      let credentials = null;
+      try {
+        credentials = await actor.generateStudentCredentials(
+          registrationId,
+          payload.mobile
+        );
+      } catch {
+      }
+      setSuccessData({ ...payload });
+      if (credentials) {
+        setStudentCredentials(credentials);
+      }
+      setForm(emptyForm);
+      showToast("Registration submitted successfully! ✓");
+    } catch (err) {
+      console.error("Registration error:", err);
+      showToast("Registration failed. Please try again.", "error");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+  function downloadPDF() {
+    if (!successData) return;
+    const win = window.open("", "_blank", "width=800,height=600");
+    if (!win) return;
+    const ts = (/* @__PURE__ */ new Date()).toLocaleString();
+    const rid = `MKJC-${Date.now()}`;
+    const sd = successData;
+    win.document.write(`<!DOCTYPE html><html><head><title>MKJC Registration - ${sd.fullName}</title>
+    <style>body{font-family:Arial,sans-serif;margin:20px;color:#333;line-height:1.6;background:#fff}.header{text-align:center;border-bottom:2px solid #f5c518;padding-bottom:20px;margin-bottom:30px}.college-name{font-size:20px;font-weight:bold;color:#1a2d6b;margin-bottom:10px}.location{font-size:16px;color:#666;margin-bottom:10px}.accred{font-size:11px;color:#777;line-height:1.4;margin-bottom:15px}.exam-title{font-size:18px;font-weight:bold;color:#f5c518;text-transform:uppercase;margin-bottom:10px}.form-title{font-size:14px;color:#666;font-weight:bold}.meta{display:flex;justify-content:space-between;margin-bottom:20px;font-size:12px;color:#666;border-bottom:1px solid #ddd;padding-bottom:10px}.section{margin-bottom:25px;border:1px solid #ddd;padding:15px;border-radius:5px}.section-title{font-size:16px;font-weight:bold;color:#1a2d6b;margin-bottom:15px;border-bottom:1px solid #f5c518;padding-bottom:5px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.item{background:#f9f9f9;padding:10px;border-radius:4px;border-left:3px solid #f5c518}.lbl{font-size:11px;font-weight:bold;color:#666;text-transform:uppercase;margin-bottom:5px}.val{font-size:14px;color:#333;font-weight:500}.full{grid-column:1/-1}.footer-p{margin-top:40px;padding-top:20px;border-top:1px solid #ddd;text-align:center;font-size:11px;color:#666}@media print{body{margin:0}.no-print{display:none}}</style></head>
+    <body><div class="header"><div style="font-size:36px;margin-bottom:15px">&#127963;</div><div class="college-name">MARUDHAR KESARI JAIN COLLEGE FOR WOMEN (AUTONOMOUS)</div><div class="location">VANIYAMBADI</div><div class="accred">Recognized u/s 2(f)&amp;12(B) by UGG Act 1956 | Permanently affiliated to Thiruvalluvar University<br>Accredited with A+ Grade by NAAC (4th cycle) | Supported by DST FIST</div><div class="exam-title">MKJC SCHOLARSHIP EXAM 2026</div><div class="form-title">REGISTRATION FORM</div></div>
+    <div class="meta"><div>Submitted on: ${ts}</div><div>Registration ID: ${rid}</div></div>
+    <div class="section"><div class="section-title">Personal Information</div><div class="grid"><div class="item full"><div class="lbl">Full Name</div><div class="val">${sd.fullName || "-"}</div></div><div class="item"><div class="lbl">Date of Birth</div><div class="val">${sd.dob || "-"}</div></div><div class="item"><div class="lbl">Aadhaar Number</div><div class="val">${sd.aadhaar || "-"}</div></div></div></div>
+    <div class="section"><div class="section-title">Contact Details</div><div class="grid"><div class="item"><div class="lbl">Email</div><div class="val">${sd.email || "-"}</div></div><div class="item"><div class="lbl">Mobile</div><div class="val">${sd.mobile || "-"}</div></div><div class="item"><div class="lbl">WhatsApp</div><div class="val">${sd.whatsapp || "-"}</div></div></div></div>
+    <div class="section"><div class="section-title">Parent / Guardian Details</div><div class="grid"><div class="item full"><div class="lbl">Father's Name</div><div class="val">${sd.fatherName || "-"}</div></div><div class="item"><div class="lbl">Parent Mobile</div><div class="val">${sd.parentMobile || "-"}</div></div><div class="item full"><div class="lbl">Mother's Name</div><div class="val">${sd.motherName || "-"}</div></div></div></div>
+    <div class="section"><div class="section-title">Academic Details</div><div class="grid"><div class="item full"><div class="lbl">School Name (12th)</div><div class="val">${sd.school12 || "-"}</div></div><div class="item"><div class="lbl">District</div><div class="val">${sd.district || "-"}</div></div><div class="item"><div class="lbl">12th Group</div><div class="val">${sd.group12 || "-"}</div></div></div></div>
+    <div class="section"><div class="section-title">Course Preferences</div><div class="grid"><div class="item full"><div class="lbl">First Choice</div><div class="val">${sd.choice1 || "-"}</div></div><div class="item full"><div class="lbl">Second Choice</div><div class="val">${sd.choice2 || "-"}</div></div><div class="item full"><div class="lbl">Third Choice</div><div class="val">${sd.choice3 || "-"}</div></div></div></div>
+    <div class="footer-p"><div style="margin-bottom:8px">Marudhar Kesari Jain College for Women (Autonomous), Vaniyambadi</div><div>Mobile: +91 88258 87756 | Email: principal@mkjc.in | Website: www.mkjc.in</div></div>
+    <div class="no-print" style="text-align:center;margin-top:30px;padding:20px;background:#f0f0f0;border-radius:5px"><p style="margin:0;color:#666">Use your browser's print function (Ctrl+P) and select "Save as PDF" to download.</p></div>
+    </body></html>`);
+    win.document.close();
+    win.onload = () => {
+      setTimeout(() => win.print(), 500);
+    };
+    showToast('Print dialog opened! Select "Save as PDF" to download. ✓');
+  }
+  function ProgrammeSelect({
+    id: id2,
+    value,
+    onChange,
+    ocid
+  }) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "select",
       {
-        className: "min-h-screen flex items-center justify-center px-4 py-10",
-        style: {
-          background: "linear-gradient(135deg, #0B2B4B 0%, #163d6a 60%, #1a4a7e 100%)"
-        },
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card rounded-2xl shadow-2xl w-full max-w-md p-8 border border-border", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              className: "rounded-xl px-4 py-3 mb-6 flex items-center gap-3",
-              style: { background: "linear-gradient(90deg, #0B2B4B, #1a4a7e)" },
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "div",
-                  {
-                    className: "w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0",
-                    style: { background: "#B88D2A", color: "#0B2B4B" },
-                    children: "MK"
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-bold text-sm", style: { color: "#B88D2A" }, children: "MKJC Scholarship Exam Portal" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs", style: { color: "rgba(255,255,255,0.7)" }, children: lang === "en" ? "Student Registration" : "மாணவர் பதிவு" })
-                ] })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "div",
-              {
-                className: "w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3",
-                style: { background: "oklch(0.95 0.05 145)" },
-                children: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheckBig, { className: "h-9 w-9", style: { color: "#16a34a" } })
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-bold text-2xl", style: { color: "#0B2B4B" }, children: lang === "en" ? "Registration Successful!" : "பதிவு வெற்றிகரமானது!" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mt-1", children: lang === "en" ? "Save your credentials to log in for the exam" : "தேர்வுக்கு உள்நுழைய உங்கள் நற்சான்றிதழ்களை சேமிக்கவும்" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              className: "rounded-xl p-5 mb-5 border-2",
-              style: { background: "#f8f5ec", borderColor: "#B88D2A" },
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "p",
-                  {
-                    className: "text-xs font-semibold uppercase tracking-wide mb-3",
-                    style: { color: "#B88D2A" },
-                    children: lang === "en" ? "Your Login Credentials" : "உங்கள் உள்நுழைவு நற்சான்றிதழ்கள்"
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card rounded-lg p-3 border border-border", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground font-medium", children: [
-                      lang === "en" ? "User ID" : "பயனர் ID",
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "ml-2 text-muted-foreground/60 text-xs", children: lang === "en" ? "(பயனர் ID)" : "(User ID)" })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      "p",
-                      {
-                        "data-ocid": "home.credentials.user_id",
-                        className: "font-mono font-bold text-lg tracking-widest mt-0.5",
-                        style: { color: "#0B2B4B" },
-                        children: credentials.user_id
-                      }
-                    )
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card rounded-lg p-3 border border-border", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground font-medium", children: [
-                      lang === "en" ? "Password" : "கடவுச்சொல்",
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "ml-2 text-muted-foreground/60 text-xs", children: lang === "en" ? "(கடவுச்சொல்)" : "(Password)" })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      "p",
-                      {
-                        "data-ocid": "home.credentials.password",
-                        className: "font-mono font-bold text-lg tracking-widest mt-0.5",
-                        style: { color: "#0B2B4B" },
-                        children: credentials.password
-                      }
-                    )
-                  ] })
-                ] })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              className: "rounded-xl p-3 mb-6 flex gap-2 border",
-              style: { background: "#fffbeb", borderColor: "#fde68a" },
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg", children: "📱" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm", style: { color: "#92400e" }, children: lang === "en" ? "Your credentials have been sent to your registered mobile number via SMS." : "உங்கள் நற்சான்றிதழ்கள் உங்கள் பதிவு செய்யப்பட்ட மொபைல் எண்ணுக்கு SMS மூலம் அனுப்பப்பட்டுள்ளன." })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Button,
-              {
-                "data-ocid": "home.proceed_to_login.button",
-                className: "w-full h-12 rounded-xl font-bold text-base transition-smooth",
-                style: { background: "#0B2B4B", color: "#fff" },
-                onMouseEnter: (e) => {
-                  e.currentTarget.style.background = "#163d6a";
-                },
-                onMouseLeave: (e) => {
-                  e.currentTarget.style.background = "#0B2B4B";
-                },
-                onClick: () => setPage("student-login"),
-                children: lang === "en" ? "Proceed to Login →" : "உள்நுழைவுக்கு தொடரவும் →"
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Button,
-              {
-                "data-ocid": "home.copy_credentials.button",
-                variant: "outline",
-                className: "w-full h-12 rounded-xl font-semibold transition-smooth",
-                style: { borderColor: "#B88D2A", color: "#B88D2A" },
-                onClick: handleCopyCredentials,
-                children: copied ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    CircleCheckBig,
-                    {
-                      className: "mr-2 h-4 w-4",
-                      style: { color: "#16a34a" }
-                    }
-                  ),
-                  lang === "en" ? "Copied!" : "நகலெடுக்கப்பட்டது!"
-                ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(ClipboardCopy, { className: "mr-2 h-4 w-4" }),
-                  lang === "en" ? "Copy Credentials" : "நற்சான்றிதழ்களை நகலெடுக்கவும்"
-                ] })
-              }
-            )
-          ] })
-        ] })
+        id: id2,
+        "data-ocid": ocid,
+        className: "mkjc-select",
+        value,
+        onChange: (e) => onChange(e.target.value),
+        "aria-label": id2,
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "Select Programme" }),
+          Object.entries(PROGRAMMES).map(([group, items]) => /* @__PURE__ */ jsxRuntimeExports.jsx("optgroup", { label: `-- ${group.toUpperCase()} --`, children: items.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: item, children: item }, item)) }, group))
+        ]
       }
     );
   }
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "div",
-    {
-      className: "min-h-screen flex items-center justify-center px-4 py-10",
-      style: {
-        background: "linear-gradient(135deg, #0B2B4B 0%, #163d6a 60%, #1a4a7e 100%)"
-      },
-      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card rounded-2xl shadow-2xl w-full max-w-md border border-border overflow-hidden", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            className: "px-8 py-6",
-            style: { background: "linear-gradient(90deg, #0B2B4B, #1a4a7e)" },
-            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-body", children: [
+    toast && /* @__PURE__ */ jsxRuntimeExports.jsx("output", { className: `mkjc-toast ${toast.type} show`, "aria-live": "polite", children: toast.msg }),
+    calIsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        ref: calPopupRef,
+        className: "mkjc-cal-popup",
+        style: { top: calPos.top, left: calPos.left },
+        onClick: (e) => e.stopPropagation(),
+        onMouseDown: (e) => e.stopPropagation(),
+        onKeyDown: (e) => e.stopPropagation(),
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-cal-head", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "button", onClick: calPrev, "aria-label": "Previous month", children: "‹" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                type: "button",
+                className: "mkjc-cal-my",
+                onClick: () => setCalYmMode((m2) => !m2),
+                "aria-label": "Toggle month/year picker",
+                children: [
+                  MONTHS[calMonth],
+                  " ",
+                  calYear
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "button", onClick: calNext, "aria-label": "Next month", children: "›" })
+          ] }),
+          calYmMode ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-ym-picker", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-ym-label", children: "Month" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-ym-grid", children: MONTHS.map((m2, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                type: "button",
+                className: `mkjc-ym-item${i === calMonth ? " selected" : ""}`,
+                onClick: () => {
+                  setCalMonth(i);
+                  setCalYmMode(false);
+                },
+                children: m2.slice(0, 3)
+              },
+              m2
+            )) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-ym-label", style: { marginTop: 10 }, children: "Year" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-ym-grid", children: Array.from({ length: 16 }, (_2, i) => calYear - 10 + i).map(
+              (yr) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "button",
+                {
+                  type: "button",
+                  className: `mkjc-ym-item${yr === calYear ? " selected" : ""}`,
+                  onClick: () => {
+                    setCalYear(yr);
+                    setCalYmMode(false);
+                  },
+                  children: yr
+                },
+                yr
+              )
+            ) })
+          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-cal-grid", children: renderCalDays() })
+        ]
+      }
+    ),
+    successData && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "dialog",
+      {
+        open: true,
+        className: "mkjc-success-bg",
+        "aria-label": "Registration Successful",
+        onClick: (e) => {
+          if (e.target === e.currentTarget) {
+            setSuccessData(null);
+            setStudentCredentials(null);
+          }
+        },
+        onKeyDown: (e) => {
+          if (e.key === "Escape") {
+            setSuccessData(null);
+            setStudentCredentials(null);
+          }
+        },
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-success-modal", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-success-header", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-check-icon", "aria-hidden": "true", children: "✓" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Registration Successful!" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Your registration has been submitted successfully" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-success-details", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-section", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-title", children: "Personal Information" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-grid", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item full", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "Full Name" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.fullName || "-" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "Date of Birth" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.dob || "-" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "Aadhaar Number" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.aadhaar || "-" })
+                ] })
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-section", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-title", children: "Contact Details" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-grid", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "Email" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.email || "-" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "Mobile" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.mobile || "-" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "WhatsApp" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.whatsapp || "-" })
+                ] })
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-section", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-title", children: "Parent / Guardian Details" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-grid", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item full", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "Father's Name" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.fatherName || "-" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "Parent Mobile" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.parentMobile || "-" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item full", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "Mother's Name" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.motherName || "-" })
+                ] })
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-section", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-title", children: "Academic Details" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-grid", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item full", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "School Name (12th)" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.school12 || "-" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "District" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.district || "-" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "12th Group" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.group12 || "-" })
+                ] })
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-section", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-title", children: "Course Preferences" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-grid", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item full", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "First Choice" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.choice1 || "-" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item full", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "Second Choice" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.choice2 || "-" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-detail-item full", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-label", children: "Third Choice" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-detail-value", children: successData.choice3 || "-" })
+                ] })
+              ] })
+            ] })
+          ] }),
+          studentCredentials && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              style: {
+                background: "#0d3a2e",
+                border: "2px solid #0fa88a",
+                borderRadius: "10px",
+                padding: "16px 20px",
+                margin: "0 0 16px"
+              },
+              children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "div",
                   {
-                    className: "w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0",
-                    style: { background: "#B88D2A", color: "#0B2B4B" },
-                    children: "MK"
+                    style: {
+                      color: "#0fa88a",
+                      fontWeight: 800,
+                      fontSize: "0.85rem",
+                      textTransform: "uppercase",
+                      letterSpacing: "1.2px",
+                      marginBottom: "10px"
+                    },
+                    children: "🔐 Your Login Credentials"
                   }
                 ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "h1",
-                    {
-                      className: "font-bold text-lg leading-tight",
-                      style: { color: "#B88D2A" },
-                      children: "MKJC"
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "p",
-                    {
-                      className: "text-xs",
-                      style: { color: "rgba(255,255,255,0.75)" },
-                      children: lang === "en" ? "Scholarship Exam Portal" : "உதவித்தொகை தேர்வு"
-                    }
-                  )
-                ] })
-              ] }),
-              setLang && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "button",
-                {
-                  "data-ocid": "home.lang_toggle.toggle",
-                  type: "button",
-                  onClick: () => setLang(lang === "en" ? "ta" : "en"),
-                  className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-smooth",
-                  style: {
-                    background: "rgba(184,141,42,0.2)",
-                    color: "#B88D2A",
-                    border: "1px solid rgba(184,141,42,0.4)"
-                  },
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(Globe, { className: "h-3.5 w-3.5" }),
-                    lang === "en" ? "தமிழ்" : "English"
-                  ]
-                }
-              )
-            ] })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-8 py-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-5 text-center", children: lang === "en" ? "Fill in your details to register for the exam" : "தேர்வுக்கு பதிவு செய்ய உங்கள் விவரங்களை பூர்த்தி செய்யுங்கள்" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleStart, className: "space-y-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "label",
-                {
-                  htmlFor: "student_name",
-                  className: "text-xs font-semibold text-muted-foreground mb-1.5 block",
-                  children: lang === "en" ? "Student Name *" : "மாணவர் பெயர் *"
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                Input,
-                {
-                  id: "student_name",
-                  "data-ocid": "home.student_name.input",
-                  value: form.student_name,
-                  onChange: (e) => handleChange("student_name", e.target.value),
-                  placeholder: lang === "en" ? "Enter full name" : "முழு பெயரை உள்ளிடுக",
-                  className: "rounded-xl h-11 border-input focus-visible:ring-2",
-                  style: {
-                    fontFamily: "'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif"
-                  },
-                  required: true
-                }
-              )
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "label",
-                {
-                  htmlFor: "school_name",
-                  className: "text-xs font-semibold text-muted-foreground mb-1.5 block",
-                  children: lang === "en" ? "School Name" : "பள்ளி பெயர்"
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                Input,
-                {
-                  id: "school_name",
-                  "data-ocid": "home.school_name.input",
-                  value: form.school_name,
-                  onChange: (e) => handleChange("school_name", e.target.value),
-                  placeholder: lang === "en" ? "Enter school name" : "பள்ளி பெயரை உள்ளிடுக",
-                  className: "rounded-xl h-11 border-input",
-                  style: {
-                    fontFamily: "'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif"
-                  }
-                }
-              )
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "label",
-                {
-                  htmlFor: "exam_group",
-                  className: "text-xs font-semibold text-muted-foreground mb-1.5 block",
-                  children: lang === "en" ? "12th Group Studied" : "12ஆம் வகுப்பு பிரிவு"
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                Input,
-                {
-                  id: "exam_group",
-                  "data-ocid": "home.exam_group.input",
-                  value: form.exam_group,
-                  onChange: (e) => handleChange("exam_group", e.target.value),
-                  placeholder: lang === "en" ? "e.g. Science, Commerce, Arts" : "எ.கா. அறிவியல், வணிகம், கலை",
-                  className: "rounded-xl h-11 border-input",
-                  style: {
-                    fontFamily: "'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif"
-                  }
-                }
-              )
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "label",
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
                   {
-                    htmlFor: "contact_number",
-                    className: "text-xs font-semibold text-muted-foreground mb-1.5 block",
-                    children: lang === "en" ? "Contact Number" : "தொலைபேசி எண்"
+                    style: {
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr",
+                      gap: "10px",
+                      marginBottom: "10px"
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "div",
+                        {
+                          style: {
+                            background: "#1a2750",
+                            padding: "10px 12px",
+                            borderRadius: "6px"
+                          },
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "div",
+                              {
+                                style: {
+                                  color: "#7eb3f5",
+                                  fontSize: "0.68rem",
+                                  fontWeight: 700,
+                                  textTransform: "uppercase",
+                                  marginBottom: "4px"
+                                },
+                                children: "User ID"
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "div",
+                              {
+                                style: {
+                                  color: "#fff",
+                                  fontSize: "1rem",
+                                  fontWeight: 700,
+                                  fontFamily: "monospace"
+                                },
+                                children: studentCredentials.user_id
+                              }
+                            )
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "div",
+                        {
+                          style: {
+                            background: "#1a2750",
+                            padding: "10px 12px",
+                            borderRadius: "6px"
+                          },
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "div",
+                              {
+                                style: {
+                                  color: "#7eb3f5",
+                                  fontSize: "0.68rem",
+                                  fontWeight: 700,
+                                  textTransform: "uppercase",
+                                  marginBottom: "4px"
+                                },
+                                children: "Password"
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "div",
+                              {
+                                style: {
+                                  color: "#fff",
+                                  fontSize: "1rem",
+                                  fontWeight: 700,
+                                  fontFamily: "monospace"
+                                },
+                                children: studentCredentials.password
+                              }
+                            )
+                          ]
+                        }
+                      )
+                    ]
                   }
                 ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: "0.72rem", color: "#7eb3f5" }, children: "⚠️ Please save these credentials. You will need them to log in and take your exam." }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  Input,
+                  "button",
                   {
-                    id: "contact_number",
-                    "data-ocid": "home.contact_number.input",
-                    value: form.contact_number,
-                    onChange: (e) => handleChange("contact_number", e.target.value),
-                    placeholder: lang === "en" ? "Mobile no." : "மொபைல் எண்",
-                    type: "tel",
-                    className: "rounded-xl h-11 border-input"
+                    type: "button",
+                    style: {
+                      marginTop: "10px",
+                      background: "#1a3acc",
+                      border: "none",
+                      borderRadius: "6px",
+                      color: "#fff",
+                      padding: "7px 14px",
+                      fontSize: "0.78rem",
+                      fontWeight: 700,
+                      cursor: "pointer"
+                    },
+                    "data-ocid": "home.copy_credentials.button",
+                    onClick: () => {
+                      navigator.clipboard.writeText(
+                        `User ID: ${studentCredentials.user_id}
+Password: ${studentCredentials.password}`
+                      ).catch(() => {
+                      });
+                      showToast("Credentials copied to clipboard! ✓");
+                    },
+                    children: "📋 Copy Credentials"
                   }
                 )
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "label",
-                  {
-                    htmlFor: "whatsapp_number",
-                    className: "text-xs font-semibold text-muted-foreground mb-1.5 block",
-                    children: lang === "en" ? "WhatsApp Number" : "வாட்ஸ்அப் எண்"
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  Input,
-                  {
-                    id: "whatsapp_number",
-                    "data-ocid": "home.whatsapp_number.input",
-                    value: form.whatsapp_number,
-                    onChange: (e) => handleChange("whatsapp_number", e.target.value),
-                    placeholder: lang === "en" ? "WhatsApp no." : "வாட்ஸ்அப்",
-                    type: "tel",
-                    className: "rounded-xl h-11 border-input"
-                  }
-                )
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "label",
-                {
-                  htmlFor: "test_key_trigger",
-                  className: "text-xs font-semibold text-muted-foreground mb-1.5 block",
-                  children: lang === "en" ? "Select Exam *" : "தேர்வை தேர்ந்தெடுக்கவும் *"
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                Select,
-                {
-                  value: form.test_key,
-                  onValueChange: (v2) => handleChange("test_key", v2),
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      SelectTrigger,
-                      {
-                        id: "test_key_trigger",
-                        "data-ocid": "home.test_key.select",
-                        className: "rounded-xl h-11 border-input",
-                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          SelectValue,
-                          {
-                            placeholder: lang === "en" ? "Choose an exam..." : "தேர்வை தேர்ந்தெடுக்கவும்..."
-                          }
-                        )
-                      }
-                    ),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: examTests.map((t2) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: t2.value, children: t2.label }, t2.value)) })
-                  ]
-                }
-              )
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Button,
-              {
-                type: "submit",
-                "data-ocid": "home.start_now.button",
-                disabled: loading,
-                className: "w-full h-12 rounded-xl font-bold text-base mt-2 transition-smooth",
-                style: { background: "#B88D2A", color: "#0B2B4B" },
-                onMouseEnter: (e) => {
-                  if (!loading)
-                    e.currentTarget.style.background = "#a07825";
-                },
-                onMouseLeave: (e) => {
-                  if (!loading)
-                    e.currentTarget.style.background = "#B88D2A";
-                },
-                children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "mr-2 h-4 w-4 animate-spin" }),
-                  lang === "en" ? "Registering..." : "பதிவு செய்கிறது..."
-                ] }) : lang === "en" ? "Start Now" : "இப்போது தொடங்குங்கள்"
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 my-1", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 h-px bg-border" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground", children: "or" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 h-px bg-border" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Button,
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-success-actions", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
               {
                 type: "button",
-                "data-ocid": "home.staff_login.button",
-                variant: "outline",
-                className: "w-full h-11 rounded-xl font-semibold transition-smooth",
-                style: { borderColor: "#0B2B4B", color: "#0B2B4B" },
-                onClick: () => setPage("admin"),
-                children: lang === "en" ? "Staff Login" : "ஊழியர் உள்நுழைவு"
+                className: "mkjc-btn-download",
+                "data-ocid": "home.download_pdf.button",
+                onClick: downloadPDF,
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "aria-hidden": "true", children: "📥" }),
+                  " Download PDF"
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                type: "button",
+                className: "mkjc-btn-new",
+                "data-ocid": "home.new_registration.button",
+                onClick: () => {
+                  setSuccessData(null);
+                  setStudentCredentials(null);
+                },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "aria-hidden": "true", children: "➕" }),
+                  " New Registration"
+                ]
               }
             )
           ] })
         ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-header", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "img",
+        {
+          src: "https://www.mkjc.in/download/downloads/2003261054101332.png",
+          alt: "Marudhar Kesari Jain College Logo",
+          style: {
+            height: 76,
+            marginBottom: 10,
+            display: "block",
+            marginLeft: "auto",
+            marginRight: "auto"
+          }
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { children: [
+        "MARUDHAR KESARI JAIN COLLEGE",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "FOR WOMEN (AUTONOMOUS)"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-national", children: "VANIYAMBADI" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-accred", children: "Recognized u/s 2(f)&12(B) by UGG Act 1956 | Permanently affiliated to Thiruvalluvar University" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-accred", children: "Accredited with A+ Grade by NAAC (4th cycle) | Supported by DST FIST" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "MKJC Online Examination Portal" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "A great opportunity to step into one of the",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-gold", children: "Best Women's College" }),
+        " with an attractive ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-gold", children: "FEE CONCESSION" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-header-btns", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "button",
+            className: "mkjc-header-admin-btn",
+            "data-ocid": "home.admin_button",
+            onClick: () => setPage("admin"),
+            "aria-label": "Go to Admin Panel",
+            children: "⚙ Admin"
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "button",
+            className: "mkjc-header-student-btn",
+            "data-ocid": "home.student_login_button",
+            onClick: () => setPage("student-login"),
+            "aria-label": "Student Login",
+            children: "Student Login"
+          }
+        )
       ] })
-    }
-  );
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-grid", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-panel", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-panel-title", children: "Programmes Offered" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-prog-stats", children: [
+          { n: "22", l: "UG" },
+          { n: "15", l: "PG" },
+          { n: "10", l: "Ph.D" },
+          { n: "04", l: "Diploma" }
+        ].map((s2) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-prog-stat-box", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-prog-stat-num", children: s2.n }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-prog-stat-label", children: s2.l })
+        ] }, s2.l)) }),
+        Object.entries(PROGRAMMES).map(([cat, items]) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-prog-cat", children: cat }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mkjc-prog-list", children: items.map((i) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: i }, i)) })
+        ] }, cat))
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-card", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-header", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "svg",
+            {
+              width: "17",
+              height: "17",
+              fill: "none",
+              viewBox: "0 0 24 24",
+              "aria-hidden": "true",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "12", cy: "8", r: "4", fill: "#fff" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "path",
+                  {
+                    d: "M4 20c0-4 3.6-7 8-7s8 3 8 7",
+                    stroke: "#fff",
+                    strokeWidth: "2",
+                    strokeLinecap: "round"
+                  }
+                )
+              ]
+            }
+          ),
+          "REGISTRATION FORM"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-form-body", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "regForm", onSubmit: handleSubmit, noValidate: true, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-section-heading", children: "Personal Information" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mkjc-field-label", htmlFor: "fullName", children: [
+              "Full Name",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-req", "aria-hidden": "true", children: "*" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                id: "fullName",
+                "data-ocid": "home.full_name.input",
+                type: "text",
+                className: "mkjc-input mkjc-input-no-icon",
+                placeholder: "As per school records",
+                value: form.fullName,
+                onChange: (e) => {
+                  setField("fullName", e.target.value);
+                  clearErr("fullName");
+                },
+                "aria-required": "true",
+                "aria-describedby": errors.fullName ? "err-fullName" : void 0
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-field-hint", children: "As per school records" }),
+            errors.fullName && /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "div",
+              {
+                id: "err-fullName",
+                className: "mkjc-field-err",
+                role: "alert",
+                children: errors.fullName
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mkjc-field-label", htmlFor: "dob", children: [
+              "Date of Birth",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-req", "aria-hidden": "true", children: "*" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-dob-wrap", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  id: "dob",
+                  "data-ocid": "home.dob.input",
+                  type: "text",
+                  className: "mkjc-input mkjc-input-no-icon",
+                  placeholder: "DD/MM/YYYY",
+                  maxLength: 10,
+                  autoComplete: "off",
+                  value: form.dob,
+                  onChange: (e) => {
+                    handleDobInput(e.target.value);
+                    clearErr("dob");
+                  },
+                  onKeyDown: handleDobKeyDown,
+                  "aria-required": "true"
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "button",
+                {
+                  type: "button",
+                  ref: calBtnRef,
+                  className: "mkjc-cal-btn",
+                  "aria-label": "Open date picker",
+                  "data-ocid": "home.cal_toggle.button",
+                  onMouseDown: (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  },
+                  onClick: (e) => {
+                    e.stopPropagation();
+                    calIsOpen ? setCalIsOpen(false) : openCal();
+                  },
+                  children: "📅"
+                }
+              )
+            ] }),
+            errors.dob && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "err-dob", className: "mkjc-field-err", role: "alert", children: errors.dob })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mkjc-field-label", htmlFor: "aadhaar", children: [
+              "Aadhaar Number",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-req", "aria-hidden": "true", children: "*" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                id: "aadhaar",
+                "data-ocid": "home.aadhaar.input",
+                type: "text",
+                className: "mkjc-input mkjc-input-no-icon",
+                placeholder: "XXXX XXXX XXXX",
+                maxLength: 14,
+                value: form.aadhaar,
+                onChange: (e) => {
+                  handleAadhaarInput(e.target.value);
+                  clearErr("aadhaar");
+                },
+                "aria-required": "true"
+              }
+            ),
+            errors.aadhaar && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-field-err", role: "alert", children: errors.aadhaar })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("hr", { className: "mkjc-divider" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-section-heading", children: "Contact Details" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "mkjc-field-label", htmlFor: "email", children: "Email Address" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-field-wrap", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-field-icon", "aria-hidden": "true", children: "✉" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  id: "email",
+                  "data-ocid": "home.email.input",
+                  type: "email",
+                  className: "mkjc-input",
+                  placeholder: "student@example.com",
+                  value: form.email,
+                  onChange: (e) => {
+                    setField("email", e.target.value);
+                    clearErr("email");
+                  }
+                }
+              )
+            ] }),
+            errors.email && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-field-err", role: "alert", children: errors.email })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-row", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mkjc-field-label", htmlFor: "mobile", children: [
+                "Mobile Number",
+                " ",
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-req", "aria-hidden": "true", children: "*" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-field-wrap", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-field-icon", "aria-hidden": "true", children: "📞" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "input",
+                  {
+                    id: "mobile",
+                    "data-ocid": "home.mobile.input",
+                    type: "tel",
+                    className: "mkjc-input",
+                    placeholder: "10-digit mobile",
+                    maxLength: 10,
+                    value: form.mobile,
+                    onChange: (e) => {
+                      setField("mobile", e.target.value);
+                      clearErr("mobile");
+                    },
+                    "aria-required": "true"
+                  }
+                )
+              ] }),
+              errors.mobile && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-field-err", role: "alert", children: errors.mobile })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "mkjc-field-label", htmlFor: "whatsapp", children: "WhatsApp Number" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-field-wrap", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-field-icon", "aria-hidden": "true", children: "💬" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "input",
+                  {
+                    id: "whatsapp",
+                    "data-ocid": "home.whatsapp.input",
+                    type: "tel",
+                    className: "mkjc-input",
+                    placeholder: "10-digit mobile",
+                    maxLength: 10,
+                    value: form.whatsapp,
+                    onChange: (e) => setField("whatsapp", e.target.value)
+                  }
+                )
+              ] })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("hr", { className: "mkjc-divider" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-section-heading", children: "Parent / Guardian Details" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mkjc-field-label", htmlFor: "fatherName", children: [
+              "Father's Name",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-req", "aria-hidden": "true", children: "*" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                id: "fatherName",
+                "data-ocid": "home.father_name.input",
+                type: "text",
+                className: "mkjc-input mkjc-input-no-icon",
+                placeholder: "Father's Name",
+                value: form.fatherName,
+                onChange: (e) => {
+                  setField("fatherName", e.target.value);
+                  clearErr("fatherName");
+                },
+                "aria-required": "true"
+              }
+            ),
+            errors.fatherName && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-field-err", role: "alert", children: errors.fatherName })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mkjc-field-label", htmlFor: "parentMobile", children: [
+              "Parent Mobile",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-req", "aria-hidden": "true", children: "*" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-field-wrap", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-field-icon", "aria-hidden": "true", children: "📞" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  id: "parentMobile",
+                  "data-ocid": "home.parent_mobile.input",
+                  type: "tel",
+                  className: "mkjc-input",
+                  placeholder: "10-digit mobile",
+                  maxLength: 10,
+                  value: form.parentMobile,
+                  onChange: (e) => {
+                    setField("parentMobile", e.target.value);
+                    clearErr("parentMobile");
+                  },
+                  "aria-required": "true"
+                }
+              )
+            ] }),
+            errors.parentMobile && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-field-err", role: "alert", children: errors.parentMobile })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mkjc-field-label", htmlFor: "motherName", children: [
+              "Mother's Name",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-req", "aria-hidden": "true", children: "*" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                id: "motherName",
+                "data-ocid": "home.mother_name.input",
+                type: "text",
+                className: "mkjc-input mkjc-input-no-icon",
+                placeholder: "Mother's Name",
+                value: form.motherName,
+                onChange: (e) => {
+                  setField("motherName", e.target.value);
+                  clearErr("motherName");
+                },
+                "aria-required": "true"
+              }
+            ),
+            errors.motherName && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-field-err", role: "alert", children: errors.motherName })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("hr", { className: "mkjc-divider" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-section-heading", children: "Academic Details" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-row", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "mkjc-field-label", htmlFor: "school12", children: "12th School Name" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  id: "school12",
+                  "data-ocid": "home.school12.input",
+                  type: "text",
+                  className: "mkjc-input mkjc-input-no-icon",
+                  placeholder: "School Name",
+                  value: form.school12,
+                  onChange: (e) => setField("school12", e.target.value)
+                }
+              )
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mkjc-field-label", htmlFor: "district", children: [
+                "District",
+                " ",
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-req", "aria-hidden": "true", children: "*" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "select",
+                {
+                  id: "district",
+                  "data-ocid": "home.district.select",
+                  className: "mkjc-select",
+                  value: form.district,
+                  onChange: (e) => {
+                    setField("district", e.target.value);
+                    clearErr("district");
+                  },
+                  "aria-required": "true",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "Select District" }),
+                    DISTRICTS.map((d2) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: d2, children: d2 }, d2))
+                  ]
+                }
+              ),
+              errors.district && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-field-err", role: "alert", children: errors.district })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mkjc-field-label", htmlFor: "group12", children: [
+              "12th Group",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-req", "aria-hidden": "true", children: "*" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "select",
+              {
+                id: "group12",
+                "data-ocid": "home.group12.select",
+                className: "mkjc-select",
+                value: form.group12,
+                onChange: (e) => {
+                  setField("group12", e.target.value);
+                  clearErr("group12");
+                },
+                "aria-required": "true",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "Select Group" }),
+                  GROUPS.map((g2) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: g2.value, children: g2.label }, g2.value))
+                ]
+              }
+            ),
+            errors.group12 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-field-err", role: "alert", children: errors.group12 })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("hr", { className: "mkjc-divider" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-section-heading", children: "Course Preferred in MKJC" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mkjc-field-label", htmlFor: "choice1", children: [
+              "First Choice",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-req", "aria-hidden": "true", children: "*" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              ProgrammeSelect,
+              {
+                id: "choice1",
+                value: form.choice1,
+                onChange: (v2) => {
+                  setField("choice1", v2);
+                  clearErr("choice1");
+                },
+                ocid: "home.choice1.select"
+              }
+            ),
+            errors.choice1 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-field-err", role: "alert", children: errors.choice1 })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mkjc-field-label", htmlFor: "choice2", children: [
+              "Second Choice",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-req", "aria-hidden": "true", children: "*" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              ProgrammeSelect,
+              {
+                id: "choice2",
+                value: form.choice2,
+                onChange: (v2) => {
+                  setField("choice2", v2);
+                  clearErr("choice2");
+                },
+                ocid: "home.choice2.select"
+              }
+            ),
+            errors.choice2 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-field-err", role: "alert", children: errors.choice2 })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-form-group", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mkjc-field-label", htmlFor: "choice3", children: [
+              "Third Choice",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-req", "aria-hidden": "true", children: "*" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              ProgrammeSelect,
+              {
+                id: "choice3",
+                value: form.choice3,
+                onChange: (v2) => {
+                  setField("choice3", v2);
+                  clearErr("choice3");
+                },
+                ocid: "home.choice3.select"
+              }
+            ),
+            errors.choice3 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-field-err", role: "alert", children: errors.choice3 })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "submit",
+              className: "mkjc-submit-btn",
+              "data-ocid": "home.submit.button",
+              disabled: submitting,
+              children: submitting ? "SUBMITTING..." : "SUBMIT REGISTRATION"
+            }
+          )
+        ] }) })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-panel", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-panel-title", children: "Why Choose MKJC?" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mkjc-why-list", children: WHY_ITEMS.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "mkjc-why-item", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-why-main", children: item.main }),
+            item.sub && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-why-sub", children: item.sub })
+          ] }, item.main)) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mkjc-exam-card", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mkjc-exam-title", children: "Examination Instructions" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "mkjc-exam-list", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-exam-label", children: "Format:" }),
+              " 50 MCQs"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-exam-label", children: "Duration:" }),
+              " 1 hour (60 minutes)"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-exam-label", children: "Syllabus:" }),
+              " Questions cover",
+              " ",
+              SYL_GROUPS.map((sg, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+                i > 0 && ", ",
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "button",
+                  {
+                    type: "button",
+                    className: "mkjc-syl-group",
+                    onClick: () => setActiveSyl(activeSyl === sg.name ? null : sg.name),
+                    children: sg.name
+                  }
+                ),
+                activeSyl === sg.name && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "mkjc-syl-tooltip", role: "tooltip", children: [
+                  sg.tooltip,
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "button",
+                    {
+                      type: "button",
+                      className: "mkjc-syl-close",
+                      "aria-label": "Close syllabus tooltip",
+                      onClick: (e) => {
+                        e.stopPropagation();
+                        setActiveSyl(null);
+                      },
+                      children: "×"
+                    }
+                  )
+                ] })
+              ] }, sg.name))
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "mkjc-prohibited", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mkjc-exam-label", children: "Prohibited Items:" }),
+              " ",
+              "Mobile phones, smartwatches, and programmable calculators are strictly prohibited"
+            ] })
+          ] })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: "mkjc-footer", children: [
+      "Marudhar Kesari Jain College for Women (Autonomous), Vaniyambadi",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      "Mobile: +91 88258 87756  |  Email: principal@mkjc.in  |  Website:",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "http://www.mkjc.in", style: { color: "#ffd700" }, children: "www.mkjc.in" })
+    ] })
+  ] });
 }
 const PASS_THRESHOLD = 50;
 const t = {
@@ -76905,7 +77659,7 @@ function StudentLoginPage({
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-primary text-sm font-medium mt-1", children: lang === "en" ? "Student Exam Login" : "மாணவர் தேர்வு உள்நுழைவு" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-8 py-7", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-muted border border-border rounded-xl p-3 mb-6 text-sm text-muted-foreground leading-relaxed", children: lang === "en" ? "Use the User ID and Password sent to your registered mobile number via SMS." : "உங்கள் பதிவு செய்யப்பட்ட மொபைல் எண்ணுக்கு SMS வழி அனுப்பப்பட்ட பயனர் ID மற்றும் கடவுச்சொல்லை பயன்படுத்தவும்." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-muted border border-border rounded-xl p-3 mb-6 text-sm text-muted-foreground leading-relaxed", children: lang === "en" ? "Use the User ID and Password shown after registration to log in." : "பதிவு செய்த பிறகு காட்டப்பட்ட பயனர் ID மற்றும் கடவுச்சொல்லை பயன்படுத்தி உள்நுழையவும்." }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleLogin, className: "space-y-5", noValidate: true, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1.5", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(

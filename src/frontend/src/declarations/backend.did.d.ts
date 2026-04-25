@@ -51,14 +51,42 @@ export type QuizResponseId = bigint;
 export interface Registration {
   'id' : RegistrationId,
   'student_name' : string,
+  'mother_name' : string,
   'registration_date' : bigint,
   'test_key' : string,
+  'aadhaar' : string,
+  'parent_mobile' : string,
+  'email' : string,
+  'district' : string,
   'contact_number' : string,
   'whatsapp_number' : string,
   'exam_group' : string,
+  'date_of_birth' : string,
+  'choice1' : string,
+  'choice2' : string,
+  'choice3' : string,
   'school_name' : string,
+  'father_name' : string,
 }
 export type RegistrationId = bigint;
+export interface RegistrationInput {
+  'student_name' : string,
+  'mother_name' : string,
+  'test_key' : string,
+  'aadhaar' : string,
+  'parent_mobile' : string,
+  'email' : string,
+  'district' : string,
+  'contact_number' : string,
+  'whatsapp_number' : string,
+  'exam_group' : string,
+  'date_of_birth' : string,
+  'choice1' : string,
+  'choice2' : string,
+  'choice3' : string,
+  'school_name' : string,
+  'father_name' : string,
+}
 export interface StudentCredentials {
   'password' : string,
   'user_id' : string,
@@ -87,10 +115,7 @@ export interface http_request_result {
 export interface _SERVICE {
   '_initializeAccessControl' : ActorMethod<[], undefined>,
   'addQuestion' : ActorMethod<[QuestionDTO], QuestionId>,
-  'addRegistration' : ActorMethod<
-    [string, string, string, string, string, string],
-    RegistrationId
-  >,
+  'addRegistration' : ActorMethod<[RegistrationInput], RegistrationId>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
   'deleteQuestion' : ActorMethod<[QuestionId], undefined>,
   'deleteRegistration' : ActorMethod<[RegistrationId], undefined>,
@@ -119,7 +144,8 @@ export interface _SERVICE {
   'listQuestions' : ActorMethod<[string, boolean], Array<QuestionDTO>>,
   'listQuizResponses' : ActorMethod<[], Array<QuizResponse>>,
   'listRegistrations' : ActorMethod<[], Array<Registration>>,
-  'sendTestSms' : ActorMethod<[string, string], boolean>,
+  'sendSmsCredentials' : ActorMethod<[string, string], boolean>,
+  'sendTestSms' : ActorMethod<[string, string], [boolean, string]>,
   'setFast2SmsApiKey' : ActorMethod<[string], undefined>,
   'submitQuizResponse' : ActorMethod<
     [

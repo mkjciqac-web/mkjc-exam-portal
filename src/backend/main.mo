@@ -14,9 +14,8 @@ import SmsApiMixin "mixins/sms-api";
 
 
 actor {
-  // Access control state
+  // Access control state (required by authorization mixin)
   let accessControlState = AccessControl.initState();
-  include MixinAuthorization(accessControlState);
 
   // Registration state
   let registrations = Map.empty<RegTypes.RegistrationId, RegTypes.Registration>();
@@ -38,6 +37,7 @@ actor {
   let smsTotalFailed = { var val : Nat = 0 };
 
   // Mixin inclusions
+  include MixinAuthorization(accessControlState);
   include RegistrationApiMixin(registrations, nextRegistrationId, credentials, credentialsByRegId);
   include QuestionApiMixin(questions, nextQuestionId);
   include QuizApiMixin(quizResponses, registrations, nextQuizResponseId);

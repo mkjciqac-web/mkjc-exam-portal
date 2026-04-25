@@ -95,14 +95,24 @@ export default function RegisterPage({ setPage, lang }: RegisterPageProps) {
     }
     setLoading(true);
     try {
-      const id = await actor.addRegistration(
-        form.student_name,
-        form.school_name,
-        form.contact_number,
-        form.whatsapp_number,
-        form.exam_group,
-        form.test_key,
-      );
+      const id = await actor.addRegistration({
+        student_name: form.student_name,
+        school_name: form.school_name,
+        contact_number: form.contact_number,
+        whatsapp_number: form.whatsapp_number,
+        exam_group: form.exam_group,
+        test_key: form.test_key,
+        date_of_birth: "",
+        aadhaar: "",
+        email: "",
+        father_name: "",
+        parent_mobile: "",
+        mother_name: "",
+        district: "",
+        choice1: "",
+        choice2: "",
+        choice3: "",
+      });
       setRegistrationId(id);
       toast.success(
         lang === "en"

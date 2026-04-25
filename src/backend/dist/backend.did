@@ -34,12 +34,41 @@ type StudentCredentials =
    registration_id: RegistrationId;
    user_id: text;
  };
+type RegistrationInput = 
+ record {
+   aadhaar: text;
+   choice1: text;
+   choice2: text;
+   choice3: text;
+   contact_number: text;
+   date_of_birth: text;
+   district: text;
+   email: text;
+   exam_group: text;
+   father_name: text;
+   mother_name: text;
+   parent_mobile: text;
+   school_name: text;
+   student_name: text;
+   test_key: text;
+   whatsapp_number: text;
+ };
 type RegistrationId = nat;
 type Registration = 
  record {
+   aadhaar: text;
+   choice1: text;
+   choice2: text;
+   choice3: text;
    contact_number: text;
+   date_of_birth: text;
+   district: text;
+   email: text;
    exam_group: text;
+   father_name: text;
    id: RegistrationId;
+   mother_name: text;
+   parent_mobile: text;
    registration_date: int;
    school_name: text;
    student_name: text;
@@ -92,9 +121,7 @@ type QuestionDTO =
 service : {
   _initializeAccessControl: () -> ();
   addQuestion: (dto: QuestionDTO) -> (QuestionId);
-  addRegistration: (student_name: text, school_name: text, contact_number:
-   text, whatsapp_number: text, exam_group: text, test_key: text) ->
-   (RegistrationId);
+  addRegistration: (input: RegistrationInput) -> (RegistrationId);
   assignCallerUserRole: (user: principal, role: UserRole) -> ();
   deleteQuestion: (question_id: QuestionId) -> ();
   deleteRegistration: (id: RegistrationId) -> ();
@@ -126,7 +153,8 @@ service : {
    (vec QuestionDTO) query;
   listQuizResponses: () -> (vec QuizResponse) query;
   listRegistrations: () -> (vec Registration) query;
-  sendTestSms: (phone: text, message: text) -> (bool);
+  sendSmsCredentials: (phone: text, message: text) -> (bool);
+  sendTestSms: (phone: text, message: text) -> (bool, text);
   setFast2SmsApiKey: (key: text) -> ();
   submitQuizResponse: (registration_id: RegistrationId, question_index: 
    nat, question_text: text, student_answer: text, correct_answer: text,

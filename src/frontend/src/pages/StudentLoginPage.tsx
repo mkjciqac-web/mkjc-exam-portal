@@ -91,8 +91,8 @@ export default function StudentLoginPage({
           {/* Info banner */}
           <div className="bg-muted border border-border rounded-xl p-3 mb-6 text-sm text-muted-foreground leading-relaxed">
             {lang === "en"
-              ? "Use the User ID and Password sent to your registered mobile number via SMS."
-              : "உங்கள் பதிவு செய்யப்பட்ட மொபைல் எண்ணுக்கு SMS வழி அனுப்பப்பட்ட பயனர் ID மற்றும் கடவுச்சொல்லை பயன்படுத்தவும்."}
+              ? "Use the User ID and Password shown after registration to log in."
+              : "பதிவு செய்த பிறகு காட்டப்பட்ட பயனர் ID மற்றும் கடவுச்சொல்லை பயன்படுத்தி உள்நுழையவும்."}
           </div>
 
           <form onSubmit={handleLogin} className="space-y-5" noValidate>

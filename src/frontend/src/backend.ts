@@ -89,44 +89,31 @@ export class ExternalBlob {
         return this;
     }
 }
-export interface http_request_result {
-    status: bigint;
-    body: Uint8Array;
-    headers: Array<http_header>;
-}
-export interface QuizResponse {
-    id: QuizResponseId;
-    question_text: string;
-    is_correct: boolean;
-    correct_answer: string;
-    time_taken: bigint;
-    score: bigint;
-    question_index: bigint;
-    student_answer: string;
-    registration_id: RegistrationId;
-    total_questions: bigint;
-    percentage: number;
-    submitted_at: bigint;
-}
 export interface TransformationOutput {
     status: bigint;
     body: Uint8Array;
     headers: Array<http_header>;
 }
 export type QuizResponseId = bigint;
-export interface TransformationInput {
-    context: Uint8Array;
-    response: http_request_result;
-}
 export interface Registration {
     id: RegistrationId;
     student_name: string;
+    mother_name: string;
     registration_date: bigint;
     test_key: string;
+    aadhaar: string;
+    parent_mobile: string;
+    email: string;
+    district: string;
     contact_number: string;
     whatsapp_number: string;
     exam_group: string;
+    date_of_birth: string;
+    choice1: string;
+    choice2: string;
+    choice3: string;
     school_name: string;
+    father_name: string;
 }
 export type QuestionId = bigint;
 export type RegistrationId = bigint;
@@ -154,12 +141,53 @@ export interface http_header {
     value: string;
     name: string;
 }
+export interface http_request_result {
+    status: bigint;
+    body: Uint8Array;
+    headers: Array<http_header>;
+}
+export interface RegistrationInput {
+    student_name: string;
+    mother_name: string;
+    test_key: string;
+    aadhaar: string;
+    parent_mobile: string;
+    email: string;
+    district: string;
+    contact_number: string;
+    whatsapp_number: string;
+    exam_group: string;
+    date_of_birth: string;
+    choice1: string;
+    choice2: string;
+    choice3: string;
+    school_name: string;
+    father_name: string;
+}
+export interface QuizResponse {
+    id: QuizResponseId;
+    question_text: string;
+    is_correct: boolean;
+    correct_answer: string;
+    time_taken: bigint;
+    score: bigint;
+    question_index: bigint;
+    student_answer: string;
+    registration_id: RegistrationId;
+    total_questions: bigint;
+    percentage: number;
+    submitted_at: bigint;
+}
 export interface StudentCredentials {
     password: string;
     user_id: string;
     contact_number: string;
     is_active: boolean;
     registration_id: RegistrationId;
+}
+export interface TransformationInput {
+    context: Uint8Array;
+    response: http_request_result;
 }
 export enum QuestionType {
     text = "text",
@@ -173,7 +201,7 @@ export enum UserRole {
 export interface backendInterface {
     _initializeAccessControl(): Promise<void>;
     addQuestion(dto: QuestionDTO): Promise<QuestionId>;
-    addRegistration(student_name: string, school_name: string, contact_number: string, whatsapp_number: string, exam_group: string, test_key: string): Promise<RegistrationId>;
+    addRegistration(input: RegistrationInput): Promise<RegistrationId>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     deleteQuestion(question_id: QuestionId): Promise<void>;
     deleteRegistration(id: RegistrationId): Promise<void>;
@@ -200,7 +228,8 @@ export interface backendInterface {
     listQuestions(test_key: string, activeOnly: boolean): Promise<Array<QuestionDTO>>;
     listQuizResponses(): Promise<Array<QuizResponse>>;
     listRegistrations(): Promise<Array<Registration>>;
-    sendTestSms(phone: string, message: string): Promise<boolean>;
+    sendSmsCredentials(phone: string, message: string): Promise<boolean>;
+    sendTestSms(phone: string, message: string): Promise<[boolean, string]>;
     setFast2SmsApiKey(key: string): Promise<void>;
     submitQuizResponse(registration_id: RegistrationId, question_index: bigint, question_text: string, student_answer: string, correct_answer: string, is_correct: boolean, score: bigint, total_questions: bigint, percentage: number, time_taken: bigint): Promise<QuizResponseId>;
     toggleQuestionActive(question_id: QuestionId): Promise<void>;
@@ -241,17 +270,17 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async addRegistration(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string, arg5: string): Promise<RegistrationId> {
+    async addRegistration(arg0: RegistrationInput): Promise<RegistrationId> {
         if (this.processError) {
             try {
-                const result = await this.actor.addRegistration(arg0, arg1, arg2, arg3, arg4, arg5);
+                const result = await this.actor.addRegistration(arg0);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.addRegistration(arg0, arg1, arg2, arg3, arg4, arg5);
+            const result = await this.actor.addRegistration(arg0);
             return result;
         }
     }
@@ -528,18 +557,38 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async sendTestSms(arg0: string, arg1: string): Promise<boolean> {
+    async sendSmsCredentials(arg0: string, arg1: string): Promise<boolean> {
         if (this.processError) {
             try {
-                const result = await this.actor.sendTestSms(arg0, arg1);
+                const result = await this.actor.sendSmsCredentials(arg0, arg1);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.sendTestSms(arg0, arg1);
+            const result = await this.actor.sendSmsCredentials(arg0, arg1);
             return result;
+        }
+    }
+    async sendTestSms(arg0: string, arg1: string): Promise<[boolean, string]> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.sendTestSms(arg0, arg1);
+                return [
+                    result[0],
+                    result[1]
+                ];
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.sendTestSms(arg0, arg1);
+            return [
+                result[0],
+                result[1]
+            ];
         }
     }
     async setFast2SmsApiKey(arg0: string): Promise<void> {

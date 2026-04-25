@@ -11,22 +11,12 @@ mixin (
 ) {
 
   public shared func addRegistration(
-    student_name : Text,
-    school_name : Text,
-    contact_number : Text,
-    whatsapp_number : Text,
-    exam_group : Text,
-    test_key : Text,
+    input : RegTypes.RegistrationInput,
   ) : async RegTypes.RegistrationId {
     RegLib.add(
       registrations,
       nextRegistrationId,
-      student_name,
-      school_name,
-      contact_number,
-      whatsapp_number,
-      exam_group,
-      test_key,
+      input,
     );
   };
 

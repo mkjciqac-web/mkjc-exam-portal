@@ -27,29 +27,22 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useActor } from "@caffeineai/core-infrastructure";
 import {
-  CheckCircle2,
   Download,
   Edit,
-  ExternalLink,
-  Eye,
-  EyeOff,
   FileDown,
   FileUp,
   Image as ImageIcon,
   Loader2,
   LogIn,
   LogOut,
-  MessageSquare,
   Plus,
   Printer,
-  RefreshCw,
   Search,
   ToggleLeft,
   ToggleRight,
   Trash2,
   Type,
   Wrench,
-  XCircle,
 } from "lucide-react";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -58,15 +51,8 @@ import { toast } from "sonner";
 import * as XLSX from "xlsx";
 import type { Lang } from "../App";
 import { createActor } from "../backend";
-import type {
-  backendInterface as BackendWithSms,
-  QuestionDTO,
-  QuizResponse,
-  Registration,
-} from "../backend.d";
+import type { QuestionDTO, QuizResponse, Registration } from "../backend.d";
 import { QuestionType } from "../backend.d";
-
-type SmsStats = Awaited<ReturnType<BackendWithSms["getSmsStats"]>>;
 import {
   type CustomExam,
   addExam,
@@ -300,8 +286,7 @@ function printQuestionPaper(questions: QuestionDTO[], testKey: string) {
 
 // ── Component ──────────────────────────────────────────────────────────────────
 export default function AdminPage({ lang, setPage }: AdminPageProps) {
-  const { actor: _actor } = useActor(createActor);
-  const actor = _actor as BackendWithSms | null;
+  const { actor } = useActor(createActor);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
@@ -351,19 +336,9 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
   });
   const [savingExam, setSavingExam] = useState(false);
 
-  // SMS Settings state
-  const [smsApiKey, setSmsApiKey] = useState("");
-  const [showApiKey, setShowApiKey] = useState(false);
-  const [savingApiKey, setSavingApiKey] = useState(false);
-  const [testSmsPhone, setTestSmsPhone] = useState("");
-  const [sendingTestSms, setSendingTestSms] = useState(false);
-  const [smsStats, setSmsStats] = useState<SmsStats | null>(null);
-  const [loadingStats, setLoadingStats] = useState(false);
-
   useEffect(() => {
     if (!isAdmin || !actor) return;
     loadAllData();
-    loadSmsSettings();
   }, [isAdmin, actor]);
 
   async function loadAllData() {
@@ -381,75 +356,6 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
       toast.error("Failed to load data");
     } finally {
       setLoadingData(false);
-    }
-  }
-
-  async function loadSmsSettings() {
-    if (!actor) return;
-    try {
-      const [key, stats] = await Promise.all([
-        actor.getFast2SmsApiKey(),
-        actor.getSmsStats(),
-      ]);
-      setSmsApiKey(key);
-      setSmsStats(stats);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  async function loadSmsStats() {
-    if (!actor) return;
-    setLoadingStats(true);
-    try {
-      const stats = await actor.getSmsStats();
-      setSmsStats(stats);
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to load SMS stats");
-    } finally {
-      setLoadingStats(false);
-    }
-  }
-
-  async function handleSaveApiKey() {
-    if (!actor) return;
-    setSavingApiKey(true);
-    try {
-      await actor.setFast2SmsApiKey(smsApiKey);
-      toast.success("API key saved successfully");
-      await loadSmsStats();
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to save API key");
-    } finally {
-      setSavingApiKey(false);
-    }
-  }
-
-  async function handleTestSms() {
-    if (!actor) return;
-    if (!testSmsPhone.trim()) {
-      toast.error("Please enter a phone number");
-      return;
-    }
-    setSendingTestSms(true);
-    try {
-      const success = await actor.sendTestSms(
-        testSmsPhone.trim(),
-        "MKJC Exam Portal: This is a test SMS from your Fast2SMS integration. If you received this, your SMS setup is working correctly.",
-      );
-      if (success) {
-        toast.success("Test SMS sent successfully!");
-      } else {
-        toast.error("SMS sending failed. Check your API key.");
-      }
-      await loadSmsStats();
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to send test SMS");
-    } finally {
-      setSendingTestSms(false);
     }
   }
 
@@ -743,11 +649,17 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
 
   // Derived filtered registrations
   const filteredRegistrations = registrations.filter((reg) => {
+    const q = regSearch.trim().toLowerCase();
+    const strMatch = (v: string) => v.toLowerCase().includes(q);
     const matchesSearch =
-      regSearch.trim() === "" ||
-      reg.student_name.toLowerCase().includes(regSearch.toLowerCase()) ||
-      reg.school_name.toLowerCase().includes(regSearch.toLowerCase()) ||
-      reg.contact_number.includes(regSearch);
+      q === "" ||
+      strMatch(reg.student_name) ||
+      strMatch(reg.school_name) ||
+      reg.contact_number.includes(q) ||
+      strMatch(reg.email) ||
+      strMatch(reg.district) ||
+      strMatch(reg.father_name) ||
+      strMatch(reg.mother_name);
     const matchesExam =
       regFilterExam === "all" || reg.test_key === regFilterExam;
     return matchesSearch && matchesExam;
@@ -857,9 +769,6 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
             <TabsTrigger data-ocid="admin.exams.tab" value="exams">
               {lang === "en" ? "Exams" : "தேர்வுகள்"}
             </TabsTrigger>
-            <TabsTrigger data-ocid="admin.settings.tab" value="settings">
-              {lang === "en" ? "Settings" : "அமைப்புகள்"}
-            </TabsTrigger>
           </TabsList>
 
           {/* ── Registrations tab ── */}
@@ -871,8 +780,8 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
                   type="text"
                   placeholder={
                     lang === "en"
-                      ? "Search by name, school, contact..."
-                      : "பெயர், பள்ளி, தொடர்பு..."
+                      ? "Search by name, email, mobile, school, district..."
+                      : "பெயர், மின்னஞ்சல், மொபைல், பள்ளி, மாவட்டம்..."
                   }
                   value={regSearch}
                   onChange={(e) => setRegSearch(e.target.value)}
@@ -903,83 +812,178 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
                   <Loader2 className="h-6 w-6 animate-spin text-navy" />
                 </div>
               ) : (
-                <Table data-ocid="admin.registrations.table">
-                  <TableHeader>
-                    <TableRow className="bg-navy/5">
-                      <TableHead className="font-semibold text-navy">
-                        ID
-                      </TableHead>
-                      <TableHead className="font-semibold text-navy">
-                        {lang === "en" ? "Student Name" : "மாணவர் பெயர்"}
-                      </TableHead>
-                      <TableHead className="font-semibold text-navy">
-                        {lang === "en" ? "School" : "பள்ளி"}
-                      </TableHead>
-                      <TableHead className="font-semibold text-navy">
-                        {lang === "en" ? "Exam Group" : "தேர்வு குழு"}
-                      </TableHead>
-                      <TableHead className="font-semibold text-navy">
-                        {lang === "en" ? "Test" : "தேர்வு"}
-                      </TableHead>
-                      <TableHead className="font-semibold text-navy">
-                        {lang === "en" ? "Contact" : "தொடர்பு"}
-                      </TableHead>
-                      <TableHead className="text-right font-semibold text-navy">
-                        {lang === "en" ? "Actions" : "செயல்கள்"}
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredRegistrations.length === 0 ? (
-                      <TableRow>
-                        <TableCell
-                          colSpan={7}
-                          className="text-center text-muted-foreground py-8"
-                          data-ocid="admin.registrations.empty_state"
-                        >
-                          {lang === "en"
-                            ? "No registrations yet."
-                            : "இன்னும் பதிவுகள் இல்லை."}
-                        </TableCell>
+                <div style={{ overflowX: "auto" }}>
+                  <Table
+                    data-ocid="admin.registrations.table"
+                    style={{ minWidth: "1800px" }}
+                  >
+                    <TableHeader>
+                      <TableRow className="bg-navy/5">
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          ID
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Full Name" : "முழு பெயர்"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Date of Birth" : "பிறந்த தேதி"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Aadhaar" : "ஆதார்"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Email" : "மின்னஞ்சல்"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Mobile" : "மொபைல்"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "WhatsApp" : "வாட்ஸ்அப்"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Father's Name" : "தந்தை பெயர்"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Parent Mobile" : "பெற்றோர் மொபைல்"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Mother's Name" : "தாய் பெயர்"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "School" : "பள்ளி"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "District" : "மாவட்டம்"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "12th Group" : "12ஆம் குழு"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "First Choice" : "முதல் விருப்பம்"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Second Choice" : "இரண்டாம் விருப்பம்"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Third Choice" : "மூன்றாம் விருப்பம்"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Exam" : "தேர்வு"}
+                        </TableHead>
+                        <TableHead className="font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Date" : "தேதி"}
+                        </TableHead>
+                        <TableHead className="text-right font-semibold text-navy whitespace-nowrap">
+                          {lang === "en" ? "Actions" : "செயல்கள்"}
+                        </TableHead>
                       </TableRow>
-                    ) : (
-                      filteredRegistrations.map((reg, idx) => (
-                        <TableRow
-                          key={reg.id.toString()}
-                          data-ocid={`admin.registration.item.${idx + 1}`}
-                        >
-                          <TableCell className="font-mono text-sm">
-                            {reg.id.toString()}
-                          </TableCell>
-                          <TableCell className="font-medium">
-                            {reg.student_name}
-                          </TableCell>
-                          <TableCell>{reg.school_name}</TableCell>
-                          <TableCell>
-                            <Badge variant="secondary">{reg.exam_group}</Badge>
-                          </TableCell>
-                          <TableCell>
-                            <Badge className="bg-navy/10 text-navy border-0">
-                              {reg.test_key}
-                            </Badge>
-                          </TableCell>
-                          <TableCell>{reg.contact_number}</TableCell>
-                          <TableCell className="text-right">
-                            <Button
-                              data-ocid={`admin.registration.delete_button.${idx + 1}`}
-                              variant="ghost"
-                              size="sm"
-                              className="text-destructive hover:bg-destructive/10"
-                              onClick={() => handleDeleteRegistration(reg.id)}
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredRegistrations.length === 0 ? (
+                        <TableRow>
+                          <TableCell
+                            colSpan={19}
+                            className="text-center text-muted-foreground py-8"
+                            data-ocid="admin.registrations.empty_state"
+                          >
+                            {lang === "en"
+                              ? "No registrations yet."
+                              : "இன்னும் பதிவுகள் இல்லை."}
                           </TableCell>
                         </TableRow>
-                      ))
-                    )}
-                  </TableBody>
-                </Table>
+                      ) : (
+                        filteredRegistrations.map((reg, idx) => {
+                          const regDate = reg.registration_date
+                            ? new Date(
+                                Number(reg.registration_date) / 1_000_000,
+                              ).toLocaleDateString()
+                            : "-";
+                          return (
+                            <TableRow
+                              key={reg.id.toString()}
+                              data-ocid={`admin.registration.item.${idx + 1}`}
+                            >
+                              <TableCell className="font-mono text-xs whitespace-nowrap">
+                                {reg.id.toString()}
+                              </TableCell>
+                              <TableCell className="font-medium whitespace-nowrap min-w-[140px]">
+                                {reg.student_name}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap">
+                                {reg.date_of_birth ?? "-"}
+                              </TableCell>
+                              <TableCell className="font-mono text-xs whitespace-nowrap">
+                                {reg.aadhaar ?? "-"}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap max-w-[160px] truncate">
+                                {reg.email ?? "-"}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap">
+                                {reg.contact_number}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap">
+                                {reg.whatsapp_number || "-"}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap min-w-[130px]">
+                                {reg.father_name ?? "-"}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap">
+                                {reg.parent_mobile ?? "-"}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap min-w-[130px]">
+                                {reg.mother_name ?? "-"}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap max-w-[160px] truncate">
+                                {reg.school_name}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap">
+                                {reg.district ?? "-"}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap">
+                                <Badge
+                                  variant="secondary"
+                                  className="whitespace-nowrap"
+                                >
+                                  {reg.exam_group}
+                                </Badge>
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap max-w-[160px] truncate">
+                                {reg.choice1 ?? "-"}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap max-w-[160px] truncate">
+                                {reg.choice2 ?? "-"}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap max-w-[160px] truncate">
+                                {reg.choice3 ?? "-"}
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap">
+                                <Badge className="bg-navy/10 text-navy border-0 whitespace-nowrap">
+                                  {reg.test_key}
+                                </Badge>
+                              </TableCell>
+                              <TableCell className="whitespace-nowrap text-sm">
+                                {regDate}
+                              </TableCell>
+                              <TableCell className="text-right whitespace-nowrap">
+                                <Button
+                                  data-ocid={`admin.registration.delete_button.${idx + 1}`}
+                                  variant="ghost"
+                                  size="sm"
+                                  className="text-destructive hover:bg-destructive/10"
+                                  onClick={() =>
+                                    handleDeleteRegistration(reg.id)
+                                  }
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })
+                      )}
+                    </TableBody>
+                  </Table>
+                </div>
               )}
             </div>
           </TabsContent>
@@ -1454,296 +1458,6 @@ export default function AdminPage({ lang, setPage }: AdminPageProps) {
                   )}
                 </TableBody>
               </Table>
-            </div>
-          </TabsContent>
-
-          {/* ── Settings tab ── */}
-          <TabsContent value="settings">
-            <div className="space-y-6">
-              {/* SMS API Key Card */}
-              <div className="bg-card rounded-lg shadow-card p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-full bg-primary/10">
-                    <MessageSquare className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {lang === "en" ? "Fast2SMS API Key" : "Fast2SMS API கீ"}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {lang === "en"
-                        ? "Configure your Fast2SMS API key to send SMS notifications to students"
-                        : "மாணவர்களுக்கு SMS அனுப்ப உங்கள் Fast2SMS API கீயை உள்ளிடவும்"}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <Label
-                      htmlFor="smsApiKeyInput"
-                      className="text-sm font-medium mb-1 block"
-                    >
-                      {lang === "en" ? "API Key" : "API கீ"}
-                    </Label>
-                    <div className="flex gap-2">
-                      <div className="relative flex-1">
-                        <Input
-                          id="smsApiKeyInput"
-                          data-ocid="admin.settings.input"
-                          type={showApiKey ? "text" : "password"}
-                          value={smsApiKey}
-                          onChange={(e) => setSmsApiKey(e.target.value)}
-                          placeholder={
-                            lang === "en"
-                              ? "Enter your Fast2SMS API key..."
-                              : "Fast2SMS API கீயை உள்ளிடவும்..."
-                          }
-                          className="pr-10 font-mono text-sm"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowApiKey((v) => !v)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                          data-ocid="admin.settings.toggle"
-                        >
-                          {showApiKey ? (
-                            <EyeOff className="h-4 w-4" />
-                          ) : (
-                            <Eye className="h-4 w-4" />
-                          )}
-                        </button>
-                      </div>
-                      <Button
-                        data-ocid="admin.settings.save_button"
-                        onClick={handleSaveApiKey}
-                        disabled={savingApiKey || !smsApiKey.trim()}
-                        className="bg-primary text-primary-foreground"
-                      >
-                        {savingApiKey ? (
-                          <Loader2 className="h-4 w-4 animate-spin mr-1" />
-                        ) : null}
-                        {lang === "en" ? "Save Key" : "சேமி"}
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="border-t pt-4">
-                    <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-                      <MessageSquare className="h-4 w-4 text-primary" />
-                      {lang === "en" ? "Test SMS" : "சோதனை SMS"}
-                    </h4>
-                    <div className="flex gap-2">
-                      <Input
-                        data-ocid="admin.settings.search_input"
-                        type="tel"
-                        value={testSmsPhone}
-                        onChange={(e) => setTestSmsPhone(e.target.value)}
-                        placeholder={
-                          lang === "en"
-                            ? "Enter 10-digit mobile number..."
-                            : "10 இலக்க மொபைல் எண்..."
-                        }
-                        className="max-w-xs"
-                        maxLength={10}
-                      />
-                      <Button
-                        data-ocid="admin.settings.secondary_button"
-                        variant="outline"
-                        onClick={handleTestSms}
-                        disabled={
-                          sendingTestSms ||
-                          !testSmsPhone.trim() ||
-                          !smsApiKey.trim()
-                        }
-                      >
-                        {sendingTestSms ? (
-                          <Loader2 className="h-4 w-4 animate-spin mr-1" />
-                        ) : (
-                          <MessageSquare className="h-4 w-4 mr-1" />
-                        )}
-                        {lang === "en" ? "Send Test SMS" : "சோதனை அனுப்பு"}
-                      </Button>
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-2">
-                      {lang === "en"
-                        ? "A test message will be sent to verify your API key is working correctly."
-                        : "உங்கள் API கீ சரியாக வேலை செய்கிறதா என்பதை சரிபார்க்க சோதனை செய்தி அனுப்பப்படும்."}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* SMS Stats Card */}
-              <div className="bg-card rounded-lg shadow-card p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-full bg-primary/10">
-                      <MessageSquare className="h-5 w-5 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {lang === "en"
-                        ? "SMS Statistics & Cost"
-                        : "SMS புள்ளிவிவரங்கள் & செலவு"}
-                    </h3>
-                  </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={loadSmsStats}
-                    disabled={loadingStats}
-                    data-ocid="admin.settings.primary_button"
-                  >
-                    {loadingStats ? (
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                    ) : (
-                      <RefreshCw className="h-4 w-4" />
-                    )}
-                    <span className="ml-1 hidden sm:inline">
-                      {lang === "en" ? "Refresh" : "புதுப்பி"}
-                    </span>
-                  </Button>
-                </div>
-
-                {loadingStats && !smsStats ? (
-                  <div
-                    data-ocid="admin.settings.loading_state"
-                    className="flex items-center justify-center py-8 text-muted-foreground"
-                  >
-                    <Loader2 className="h-6 w-6 animate-spin mr-2" />
-                    {lang === "en" ? "Loading stats..." : "ஏற்றுகிறது..."}
-                  </div>
-                ) : smsStats ? (
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                    {/* Total Sent */}
-                    <div className="bg-muted/50 rounded-lg p-4 text-center">
-                      <div className="text-3xl font-bold text-primary">
-                        {Number(smsStats.total_sent).toLocaleString()}
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1 font-medium uppercase tracking-wide">
-                        {lang === "en" ? "Total SMS Sent" : "மொத்த SMS"}
-                      </div>
-                    </div>
-
-                    {/* Failed */}
-                    <div className="bg-muted/50 rounded-lg p-4 text-center">
-                      <div className="text-3xl font-bold text-destructive">
-                        {Number(smsStats.total_failed).toLocaleString()}
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1 font-medium uppercase tracking-wide">
-                        {lang === "en" ? "Failed SMS" : "தோல்வி SMS"}
-                      </div>
-                    </div>
-
-                    {/* API Key Status */}
-                    <div className="bg-muted/50 rounded-lg p-4 text-center">
-                      <div className="flex justify-center">
-                        {smsStats.api_key_set ? (
-                          <CheckCircle2 className="h-8 w-8 text-green-500" />
-                        ) : (
-                          <XCircle className="h-8 w-8 text-destructive" />
-                        )}
-                      </div>
-                      <div
-                        className={`text-sm font-semibold mt-1 ${smsStats.api_key_set ? "text-green-600" : "text-destructive"}`}
-                      >
-                        {smsStats.api_key_set
-                          ? lang === "en"
-                            ? "Configured ✓"
-                            : "அமைக்கப்பட்டது ✓"
-                          : lang === "en"
-                            ? "Not Set ✗"
-                            : "அமைக்கப்படவில்லை ✗"}
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-0.5 uppercase tracking-wide">
-                        {lang === "en" ? "API Key Status" : "API கீ நிலை"}
-                      </div>
-                    </div>
-
-                    {/* Estimated Cost */}
-                    <div className="bg-muted/50 rounded-lg p-4 text-center">
-                      <div className="text-3xl font-bold text-amber-600">
-                        ₹{(Number(smsStats.total_sent) * 0.18).toFixed(2)}
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1 font-medium uppercase tracking-wide">
-                        {lang === "en" ? "Est. Cost" : "மதிப்பீட்டு செலவு"}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                    data-ocid="admin.settings.error_state"
-                    className="text-center py-8 text-muted-foreground text-sm"
-                  >
-                    {lang === "en"
-                      ? "No stats available. Save your API key first."
-                      : "புள்ளிவிவரங்கள் இல்லை. முதலில் API கீயை சேமிக்கவும்."}
-                  </div>
-                )}
-
-                <p className="text-xs text-muted-foreground mt-4 border-t pt-3">
-                  💡{" "}
-                  {lang === "en"
-                    ? "Cost estimate based on Fast2SMS Quick SMS rate (₹0.18/SMS). Actual charges may vary."
-                    : "செலவு மதிப்பீடு Fast2SMS Quick SMS விகிதத்தின் அடிப்படையில் (₹0.18/SMS). உண்மையான கட்டணங்கள் மாறுபடலாம்."}
-                </p>
-              </div>
-
-              {/* Recharge Card */}
-              <div className="bg-card rounded-lg shadow-card p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-full bg-amber-500/10">
-                    <ExternalLink className="h-5 w-5 text-amber-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {lang === "en"
-                        ? "Recharge Fast2SMS Account"
-                        : "Fast2SMS கணக்கை நிரப்பவும்"}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {lang === "en"
-                        ? "Click below to visit Fast2SMS and recharge your SMS balance."
-                        : "Fast2SMS-ஐ பார்வையிட்டு உங்கள் SMS இருப்பை நிரப்பவும்."}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-3">
-                  <Button
-                    data-ocid="admin.settings.primary_button"
-                    className="bg-amber-600 hover:bg-amber-700 text-white font-semibold"
-                    onClick={() =>
-                      window.open(
-                        "https://www.fast2sms.com/dashboard/wallet",
-                        "_blank",
-                        "noopener,noreferrer",
-                      )
-                    }
-                  >
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    {lang === "en"
-                      ? "Go to Fast2SMS Recharge →"
-                      : "Fast2SMS நிரப்பலுக்கு செல்லவும் →"}
-                  </Button>
-                  <Button
-                    data-ocid="admin.settings.secondary_button"
-                    variant="outline"
-                    onClick={() =>
-                      window.open(
-                        "https://www.fast2sms.com/plans",
-                        "_blank",
-                        "noopener,noreferrer",
-                      )
-                    }
-                  >
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    {lang === "en"
-                      ? "View Fast2SMS Pricing →"
-                      : "Fast2SMS விலை நிர்ணயம் →"}
-                  </Button>
-                </div>
-              </div>
             </div>
           </TabsContent>
         </Tabs>
